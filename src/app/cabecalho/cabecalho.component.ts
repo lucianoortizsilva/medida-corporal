@@ -9,6 +9,7 @@ import { Pagina } from '../model';
 export class CabecalhoComponent implements OnInit {
 
   exibirMenu = false;
+  titulo = 'Medida Atual';
 
   @Output() paginaSelecionadaEventEmitter = new EventEmitter<Pagina>();
 
@@ -16,7 +17,7 @@ export class CabecalhoComponent implements OnInit {
   
   ngOnInit(){}
 
-  public onclickMenu(): void {
+  redimensionarMenu(): void {
     const element = this.elementRef.nativeElement.querySelector('.hamburguer-icone');
     this.exibirMenu = !this.exibirMenu;
     if (this.exibirMenu) {
@@ -28,6 +29,22 @@ export class CabecalhoComponent implements OnInit {
 
   selecionarPagina(paginaSelecionada: any): void {
     this.paginaSelecionadaEventEmitter.emit(paginaSelecionada);
+    this.redimensionarMenu();
+    this.setTitulo(paginaSelecionada);
+  }
+
+  setTitulo(paginaSelecionada: Pagina): void {
+    switch (paginaSelecionada) {
+      case Pagina.medida_cadastro: 
+        this.titulo = 'Cadastrar Medida';
+      break;
+      case Pagina.medida_progresso: 
+        this.titulo = 'Progresso';    
+      break;
+      default: 
+        this.titulo = 'Medida Atual';
+      break;
+    }  
   }
 
 }
