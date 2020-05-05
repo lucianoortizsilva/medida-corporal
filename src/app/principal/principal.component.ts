@@ -8,7 +8,7 @@ import { Pagina } from '../model';
 })
 export class PrincipalComponent implements OnInit {
 
-  paginaSelecionada = Pagina.medida_atual;
+  paginaSelecionada = Pagina.medida_progresso;
 
   constructor() { }
   

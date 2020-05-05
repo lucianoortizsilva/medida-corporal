@@ -15,7 +15,8 @@ import { MedidaAtualComponent } from './medida-atual/medida-atual.component';
     PrincipalComponent,
     MedidaCadastroComponent,
     MedidaProgressoComponent,
-    MedidaAtualComponent
+    MedidaAtualComponent,
+    
   ],
   imports: [
     BrowserModule

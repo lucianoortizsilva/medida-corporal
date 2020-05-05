@@ -9,7 +9,7 @@ import { Pagina } from '../model';
 export class CabecalhoComponent implements OnInit {
 
   exibirMenu = false;
-  titulo = 'Medida Atual';
+  titulo = 'Progresso';
 
   @Output() paginaSelecionadaEventEmitter = new EventEmitter<Pagina>();
 
