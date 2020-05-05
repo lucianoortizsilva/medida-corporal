@@ -1,0 +1,39 @@
+<nav class="navbar navbar-dark bg-primary">
+  
+  <div class="hamburguer-icone" (click)="onclickMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div [hidden]="!exibirMenu" class="navbar-collapse">
+    <a class="navbar-brand">MENU</a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      
+      <li class="nav-item active">
+        <a class="nav-link" (click)="selecionarPagina('medida_cadastro')">
+          <i class="fas fa-plus"></i>
+          Cadastrar Medida 
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" (click)="selecionarPagina('medida_progresso')">
+          <i class="fas fa-chart-line"></i>
+          Progresso
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <!--class="nav-link disabled" tabindex="-1" aria-disabled="true"-->
+        <a class="nav-link" (click)="selecionarPagina('medida_atual')">
+          <i class="fas fa-weight"></i>
+          Medida Atual
+        </a>
+      </li>
+
+    </ul>
+  </div>
+
+</nav>
+

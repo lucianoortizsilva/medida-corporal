@@ -1,0 +1,15 @@
+<header>
+    <app-cabecalho (paginaSelecionadaEventEmitter)="setPagina($event)"></app-cabecalho>
+</header>
+
+<main>   
+    <div class="container" [ngSwitch]="paginaSelecionada">    
+        <app-medida-cadastro  *ngSwitchCase="'medida_cadastro'"></app-medida-cadastro>
+        <app-medida-progresso *ngSwitchCase="'medida_progresso'"></app-medida-progresso>
+        <app-medida-atual *ngSwitchDefault></app-medida-atual>
+    </div>
+</main>
+
+<footer>
+
+</footer>
