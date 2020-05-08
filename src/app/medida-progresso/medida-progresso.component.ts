@@ -48,6 +48,7 @@ export class MedidaProgressoComponent implements OnInit {
     });
 
     const ctx = this.element.nativeElement.querySelector('.grafico');
+    /*
     this.grafico = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -117,6 +118,7 @@ export class MedidaProgressoComponent implements OnInit {
           },          
         }
       });
+      */
   }
 
   addDays(date: Date, days: number): Date {

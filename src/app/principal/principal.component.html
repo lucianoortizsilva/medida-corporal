@@ -1,7 +1,73 @@
-<header>
+<div class="w3-light-grey w3-content">
+    <!--
     <app-cabecalho (paginaSelecionadaEventEmitter)="setPagina($event)"></app-cabecalho>
-</header>
+    -->
 
+  <!-- Conteudo do menu -->
+  <nav id="menu-conteudo" class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;"><br>
+    <div class="w3-container">
+      <a href="#" (click)="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+        <i class="fas fa-times"></i>
+      </a>
+      <img src="../../assets/img/foto.jpg" style="width:45%;" class="w3-round"><br><br>
+      <h4><b>Luciano Ortiz</b></h4>
+      <p class="w3-text-grey">Controle De Medidas</p>
+    </div>
+    <div class="w3-bar-block">
+      <a (click)="selecionarPagina('medida_cadastro')" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-plus fa-fw w3-margin-right"></i>NOVO</a> 
+      <a (click)="selecionarPagina('medida_progresso')" class="w3-bar-item w3-button w3-padding"><i class="fas fa-chart-line fa-fw w3-margin-right"></i>PROGRESSO</a> 
+      <a (click)="selecionarPagina('medida_atual')" class="w3-bar-item w3-button w3-padding"><i class="fas fa-weight fa-fw w3-margin-right"></i>ATUAL</a>
+    </div>
+  </nav>
+
+  <!-- Add efeito com sobra no fundo -->
+  <div id="menu-sombra-fundo" class="w3-overlay w3-hide-large w3-animate-opacity" (click)="w3_close()" style="cursor:pointer" title="close side menu"></div>
+
+  <!-- Barra de menu -->
+    <div class="w3-main" style="margin-left:300px">
+    <header id="portfolio">
+      <!-- Botao de menu> -->
+        <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" (click)="w3_open()">
+            <i class="fa fa-bars"></i>
+        </span>
+        <div class="w3-container">
+            
+            <app-barra-titulo [pagina]="paginaSelecionada"></app-barra-titulo>
+            
+            <!--
+            <div class="w3-section w3-bottombar w3-padding-16">
+                <span class="w3-margin-right">Filter:</span> 
+                <button class="w3-button w3-black">ALL</button>
+                <button class="w3-button w3-white"><i class="fa fa-diamond w3-margin-right"></i>Design</button>
+                <button class="w3-button w3-white w3-hide-small"><i class="fa fa-photo w3-margin-right"></i>Photos</button>
+                <button class="w3-button w3-white w3-hide-small"><i class="fa fa-map-pin w3-margin-right"></i>Art</button>
+            </div>
+            -->
+            <div class="container" [ngSwitch]="paginaSelecionada">    
+                <app-medida-cadastro  *ngSwitchCase="'medida_cadastro'"></app-medida-cadastro>
+                <app-medida-progresso *ngSwitchCase="'medida_progresso'"></app-medida-progresso>
+                <app-medida-atual *ngSwitchDefault></app-medida-atual>
+            </div>
+          </div>
+      </header>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
 <main>   
     <div class="container" [ngSwitch]="paginaSelecionada">    
         <app-medida-cadastro  *ngSwitchCase="'medida_cadastro'"></app-medida-cadastro>
@@ -13,3 +79,4 @@
 <footer>
 
 </footer>
+-->

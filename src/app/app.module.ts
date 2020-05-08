@@ -7,6 +7,7 @@ import { PrincipalComponent } from './principal/principal.component';
 import { MedidaCadastroComponent } from './medida-cadastro/medida-cadastro.component';
 import { MedidaProgressoComponent } from './medida-progresso/medida-progresso.component';
 import { MedidaAtualComponent } from './medida-atual/medida-atual.component';
+import { BarraTituloComponent } from './barra-titulo/barra-titulo.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { MedidaAtualComponent } from './medida-atual/medida-atual.component';
     MedidaCadastroComponent,
     MedidaProgressoComponent,
     MedidaAtualComponent,
-    
+    BarraTituloComponent,        
   ],
   imports: [
     BrowserModule

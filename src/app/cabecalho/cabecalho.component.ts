@@ -17,19 +17,9 @@ export class CabecalhoComponent implements OnInit {
   
   ngOnInit(){}
 
-  redimensionarMenu(): void {
-    const element = this.elementRef.nativeElement.querySelector('.hamburguer-icone');
-    this.exibirMenu = !this.exibirMenu;
-    if (this.exibirMenu) {
-      this.renderer.addClass(element, 'open');
-    } else {
-      this.renderer.removeClass(element, 'open');
-    }
-  }
-
   selecionarPagina(paginaSelecionada: any): void {
     this.paginaSelecionadaEventEmitter.emit(paginaSelecionada);
-    this.redimensionarMenu();
+    this.w3_close();
     this.setTitulo(paginaSelecionada);
   }
 
@@ -47,4 +37,19 @@ export class CabecalhoComponent implements OnInit {
     }  
   }
 
+  w3_open(): void {
+    const mySidebar = this.elementRef.nativeElement.querySelector('#menu-conteudo');
+    const myOverlay = this.elementRef.nativeElement.querySelector('#menu-sombra-fundo');
+    this.renderer.setStyle(mySidebar, 'display', 'block');
+    this.renderer.setStyle(myOverlay, 'display', 'block');
+  }
+
+  w3_close(): void{
+    const mySidebar = this.elementRef.nativeElement.querySelector('#menu-conteudo');
+    const myOverlay = this.elementRef.nativeElement.querySelector('#menu-sombra-fundo');
+    this.renderer.setStyle(mySidebar, 'display', 'none');
+    this.renderer.setStyle(myOverlay, 'display', 'none');
+  }
+
 }
+
