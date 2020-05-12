@@ -9,6 +9,7 @@ import { MedidaProgressoComponent } from './medida-progresso/medida-progresso.co
 import { MedidaAtualComponent } from './medida-atual/medida-atual.component';
 import { BarraTituloComponent } from './barra-titulo/barra-titulo.component';
 import { GraficoComponent } from './grafico/grafico.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,10 +20,12 @@ import { GraficoComponent } from './grafico/grafico.component';
     MedidaProgressoComponent,
     MedidaAtualComponent,
     BarraTituloComponent,
-    GraficoComponent,        
+    GraficoComponent,    
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule    
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,9 +4,12 @@ export enum Pagina {
     medida_atual = 'medida_atual'
 }
 
-export class Medida {
- 
+export class Medida { 
     dtCriacao: Date;
     parametros: [{descricao: string, valor: number}]
+}
 
+export class FiltroMedida { 
+    codigo: number;
+    descricao: string;
 }
