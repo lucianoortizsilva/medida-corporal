@@ -1,22 +1,101 @@
-<!--
-    
-    https://www.w3schools.com/w3css/tryw3css_templates_portfolio.htm
-
-<div class="w3-container w3-padding-large w3-grey">
-    <form>
-        <div class="w3-section">
-            <label>Name</label>
-            <input class="w3-input w3-border" type="text" name="Name" required>
-        </div>
-        <div class="w3-section">
-            <label>Email</label>
-            <input class="w3-input w3-border" type="text" name="Email" required>
-        </div>
-        <div class="w3-section">
-            <label>Message</label>
-            <input class="w3-input w3-border" type="text" name="Message" required>
-        </div>
-        <button type="submit" class="w3-button w3-black w3-margin-bottom"><i class="fa fa-paper-plane w3-margin-right"></i>Send Message</button>
-    </form>
-</div>
+<!-- 
+    novalidate: remove as mensagens padrões dos browsers, quanto a validações
 -->
+<form id="formCadastroID" class="needs-validation" novalidate>
+    
+    <div class="form-row">            
+        <!-- PESO -->
+        <div class="col-12 col-md-5 col-lg-4 col-xl-4 mb-3">
+            <label for="pesoID" class="text-uppercase font-weight-bold">Peso</label><span>* (kg)</span>
+            <div class="input-group">
+                <input id="pesoID" type="text" class="form-control" aria-describedby="inputGroupPrepend" required placeholder="exemplo: 82,1" maxlength="5">
+                <div class="invalid-feedback">
+                    Preenchimento Obrigatório.
+                </div>
+                <div class="valid-feedback">
+                    ok
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">            
+        <!-- TÓRAX -->
+        <div class="col-12 col-md-5 col-lg-4 col-xl-4 mb-3">
+            <label for="toraxID" class="text-uppercase font-weight-bold">Tórax</label><span> (cm)</span>
+            <div class="input-group">
+                <input id="toraxID" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 110,4" maxlength="5">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">            
+        <!-- BICEPS ESQUERDO -->
+        <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
+            <label for="bicepsEsquerdoID" class="text-uppercase font-weight-bold">Bíceps Esquerdo</label><span> (cm)</span>
+            <div class="input-group">
+                <input id="bicepsEsquerdoID" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 44,1" maxlength="5">
+            </div>
+        </div>
+         
+        <!-- BICEPS DIREITO -->
+        <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
+            <label for="bicepsDireitoID" class="text-uppercase font-weight-bold">Bíceps Direito</label><span> (cm)</span>
+            <div class="input-group">
+                <input id="bicepsDireitoID" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 42,9" maxlength="5">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">            
+        <!-- ANTEBRACO ESQUERDO -->
+        <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
+            <label for="antebracoEsquerdoID" class="text-uppercase font-weight-bold">Antebraço Esquerdo</label><span> (cm)</span>
+            <div class="input-group">
+                <input id="antebracoEsquerdoID" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 44,1" maxlength="5">
+            </div>
+        </div>
+         
+        <!-- ANTEBRACO DIREITO -->
+        <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
+            <label for="antebracoDireitoID" class="text-uppercase font-weight-bold">Antebraço Direito</label><span> (cm)</span>
+            <div class="input-group">
+                <input id="antebracoDireitoID" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 42,9" maxlength="5">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">            
+        <!-- COXA ESQUERDO -->
+        <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
+            <label for="coxaEsquerdoID" class="text-uppercase font-weight-bold">Coxa Esquerdo</label><span> (cm)</span>
+            <div class="input-group">
+                <input id="coxaEsquerdoID" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 66,1" maxlength="5">
+            </div>
+        </div>
+         
+        <!-- COXA DIREITO -->
+        <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
+            <label for="coxaDireitoID" class="text-uppercase font-weight-bold">Coxa Direito</label><span> (cm)</span>
+            <div class="input-group">
+                <input id="coxaDireitoID" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 65,9" maxlength="5">
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <!--
+        https://getbootstrap.com/docs/4.0/utilities/display/
+    -->
+    <div class="row">
+        <div class="col-12">
+            <p class="d-block d-sm-none obs-xs">* Valores obrigatórios. Necessários para calcular % de gordura.</p><!-- XS -->
+            <p class="d-none d-sm-block d-md-none obs-sm">* Valores obrigatórios. Necessários para calcular % de gordura.</p><!-- SM -->
+            <p class="d-none d-md-block d-lg-none obs-md">* Valores obrigatórios. Necessários para calcular % de gordura.</p><!-- MD -->
+            <p class="d-none d-lg-block d-xl-none obs-lg">* Valores obrigatórios. Necessários para calcular % de gordura.</p><!-- LG -->
+            <p class="d-none d-xl-block obs-xl">* Valores obrigatórios. Necessários para calcular % de gordura.</p><!-- XL -->
+        </div>
+    </div>
+    <button class="btn btn-success btn-lg btn-block" type="submit">salvar</button>
+</form>

@@ -8,6 +8,7 @@ import { MedidaCadastroComponent } from './medida-cadastro/medida-cadastro.compo
 import { MedidaProgressoComponent } from './medida-progresso/medida-progresso.component';
 import { MedidaAtualComponent } from './medida-atual/medida-atual.component';
 import { BarraTituloComponent } from './barra-titulo/barra-titulo.component';
+import { GraficoComponent } from './grafico/grafico.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { BarraTituloComponent } from './barra-titulo/barra-titulo.component';
     MedidaCadastroComponent,
     MedidaProgressoComponent,
     MedidaAtualComponent,
-    BarraTituloComponent,        
+    BarraTituloComponent,
+    GraficoComponent,        
   ],
   imports: [
     BrowserModule

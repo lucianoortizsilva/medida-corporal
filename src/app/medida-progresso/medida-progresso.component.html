@@ -1,9 +1,11 @@
-<!--
-<div class="row">
-    <div class="col-12">
-        <canvas class="grafico" width="300" height="300">
-            {{ grafico }}
-        </canvas>
-    </div>
-</div>
--->
+<app-grafico [dados]="dadosPeso"
+        [descricoes]="descricoesPeso"
+           [legenda]="'Peso'"
+     [unidadeMedida]="'kg'">
+</app-grafico>
+
+<app-grafico [dados]="dadosTorax"
+        [descricoes]="descricoesTorax"
+           [legenda]="'Tórax'"
+     [unidadeMedida]="'cm'">
+</app-grafico>

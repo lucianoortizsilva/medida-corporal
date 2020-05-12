@@ -10,9 +10,18 @@
         <i class="fas fa-times"></i>
       </a>
       <img src="../../assets/img/foto.jpg" style="width:45%;" class="w3-round"><br><br>
+      <!--
+      <i class="fas fa-female"></i>
+      -->
       <h4><b>Luciano Ortiz</b></h4>
       <p class="w3-text-grey">Controle De Medidas</p>
+      <h6><i class="fas fa-male"></i> Masculino</h6>
+      <h6><i class="fas fa-text-height"></i> 1,68 Altura</h6>
+      <h6><i class="fab fa-gripfire"></i> 23,7 % Gordura</h6>
     </div>
+    
+    <hr class="w3-opacity">
+
     <div class="w3-bar-block">
       <a (click)="selecionarPagina('medida_cadastro')" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-plus fa-fw w3-margin-right"></i>NOVO</a> 
       <a (click)="selecionarPagina('medida_progresso')" class="w3-bar-item w3-button w3-padding"><i class="fas fa-chart-line fa-fw w3-margin-right"></i>PROGRESSO</a> 
@@ -30,53 +39,27 @@
         <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" (click)="w3_open()">
             <i class="fa fa-bars"></i>
         </span>
-        <div class="w3-container">
+        <div class="w3-container mt-2">
             
             <app-barra-titulo [pagina]="paginaSelecionada"></app-barra-titulo>
             
-            <!--
-            <div class="w3-section w3-bottombar w3-padding-16">
-                <span class="w3-margin-right">Filter:</span> 
-                <button class="w3-button w3-black">ALL</button>
-                <button class="w3-button w3-white"><i class="fa fa-diamond w3-margin-right"></i>Design</button>
-                <button class="w3-button w3-white w3-hide-small"><i class="fa fa-photo w3-margin-right"></i>Photos</button>
-                <button class="w3-button w3-white w3-hide-small"><i class="fa fa-map-pin w3-margin-right"></i>Art</button>
-            </div>
-            -->
-            <div class="container" [ngSwitch]="paginaSelecionada">    
-                <app-medida-cadastro  *ngSwitchCase="'medida_cadastro'"></app-medida-cadastro>
+            <div [ngSwitch]="paginaSelecionada">    
+              <app-medida-cadastro  *ngSwitchCase="'medida_cadastro'"></app-medida-cadastro>
                 <app-medida-progresso *ngSwitchCase="'medida_progresso'"></app-medida-progresso>
                 <app-medida-atual *ngSwitchDefault></app-medida-atual>
-            </div>
+              </div>
           </div>
-      </header>
-    </div>
+        </header>
+      </div>
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-<main>   
-    <div class="container" [ngSwitch]="paginaSelecionada">    
-        <app-medida-cadastro  *ngSwitchCase="'medida_cadastro'"></app-medida-cadastro>
-        <app-medida-progresso *ngSwitchCase="'medida_progresso'"></app-medida-progresso>
-        <app-medida-atual *ngSwitchDefault></app-medida-atual>
-    </div>
-</main>
-
-<footer>
-
-</footer>
+<!-- IDEIAS DE FILTRO
+<div class="w3-section w3-bottombar w3-padding-16">
+    <span class="w3-margin-right">Filter:</span> 
+    <button class="w3-button w3-black">ALL</button>
+    <button class="w3-button w3-white"><i class="fa fa-diamond w3-margin-right"></i>Design</button>
+    <button class="w3-button w3-white w3-hide-small"><i class="fa fa-photo w3-margin-right"></i>Photos</button>
+    <button class="w3-button w3-white w3-hide-small"><i class="fa fa-map-pin w3-margin-right"></i>Art</button>
+</div>
 -->

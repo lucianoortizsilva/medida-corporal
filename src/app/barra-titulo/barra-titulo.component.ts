@@ -11,7 +11,9 @@ export class BarraTituloComponent implements OnChanges {
   @Input() pagina: Pagina;
   titulo: string;
 
-  constructor(private elementRef: ElementRef, private rendered2: Renderer2) { }
+  constructor(private elementRef: ElementRef, private rendered2: Renderer2) { 
+    console.log();
+  }
 
   ngOnChanges(): void {
     this.setTituloAndIcone();
