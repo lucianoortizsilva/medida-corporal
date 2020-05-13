@@ -1,4 +1,5 @@
 import { Component, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
+import { MedidaService } from '../medida.service';
 
 @Component({
   selector: 'app-medida-cadastro',
@@ -7,12 +8,27 @@ import { Component, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
 })
 export class MedidaCadastroComponent implements AfterViewInit {
 
-  constructor(private elementRef: ElementRef, private rendered2: Renderer2) { }
+  constructor(private elementRef: ElementRef, 
+               private rendered2: Renderer2,
+               private medidaService: MedidaService) { }
   
   save(): void{
-    //const element = this.elementRef.nativeElement.querySelector('#formCadastroID');
-    //this.rendered2.addClass(element, 'was-validated');
-    console.log('Save ok');
+    const medida = {
+      dtCriacao: 	new Date(),
+      parametros: [
+          { codigo: 1, 
+            descricao: 'Peso', 
+            valor: 99.3 
+          },
+          { codigo: 2, 
+            descricao: 'Tórax', 
+            valor: 108.2 
+          }		
+      ]
+  };
+
+  //this.medidaService.save();
+
   }
  
   ngAfterViewInit(): void {

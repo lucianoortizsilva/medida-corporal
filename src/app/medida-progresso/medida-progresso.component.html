@@ -11,14 +11,15 @@
       </div>
 </div>
 
-<app-grafico   *ngIf="dadosPeso"
+<app-grafico   *ngIf="dadosPeso.length > 0"
              [dados]="dadosPeso"
         [descricoes]="descricoesPeso"
            [legenda]="'Peso'"
      [unidadeMedida]="'kg'">
 </app-grafico>
 
-<app-grafico [dados]="dadosTorax"
+<app-grafico   *ngIf="dadosTorax.length > 0"  
+             [dados]="dadosTorax"
         [descricoes]="descricoesTorax"
            [legenda]="'Tórax'"
      [unidadeMedida]="'cm'">

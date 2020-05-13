@@ -1,7 +1,9 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FiltroMedida } from '../model';
+import { FiltroMedida, Medida } from '../model';
 import { MedidaService } from '../medida.service';
+import { DatePipe } from '@angular/common';
+
 
 /**
  * 
@@ -24,37 +26,46 @@ export class MedidaProgressoComponent implements OnInit {
   dadosTorax = new Array<number>();
   descricoesTorax = new Array<string>();
   
-  medidas = [
-    { dtCriacao: this.addDays(new Date(), 1), codigo: 1, descricao: 'Peso', valor: 99.3 },
-    { dtCriacao: this.addDays(new Date(), 1), codigo: 1, descricao: 'Peso', valor: 98.2 },
-    { dtCriacao: this.addDays(new Date(), 1), codigo: 1, descricao: 'Peso', valor: 91.7 },
-    { dtCriacao: this.addDays(new Date(), 1), codigo: 1, descricao: 'Peso', valor: 91.4 },
-    { dtCriacao: this.addDays(new Date(), 1), codigo: 1, descricao: 'Peso', valor: 87.0 },
-    { dtCriacao: this.addDays(new Date(), 1), codigo: 2, descricao: 'Tórax', valor: 85.9 },
-    { dtCriacao: this.addDays(new Date(), 1), codigo: 1, descricao: 'Peso', valor: 85.4 },
-    { dtCriacao: this.addDays(new Date(), 1), codigo: 1, descricao: 'Peso', valor: 84.0 },
-    { dtCriacao: this.addDays(new Date(), 1), codigo: 1, descricao: 'Peso', valor: 83.1 },
-    { dtCriacao: this.addDays(new Date(), 1), codigo: 2, descricao: 'Tórax', valor: 82.8 },
-    { dtCriacao: this.addDays(new Date(), 1), codigo: 1, descricao: 'Peso', valor: 82.8 },
-    { dtCriacao: this.addDays(new Date(), 1), codigo: 1, descricao: 'Peso', valor: 82.2 },    
-  ];
-
-  constructor(private element: ElementRef, private medidaService: MedidaService) { }
+  medidas = [];
+    
+  constructor(private element: ElementRef, public datepipe: DatePipe, private medidaService: MedidaService) { }
 
   ngOnInit(): void {
     this.loadFiltros();
-    this.onChangeFiltroPesquisa();
+    this.onChangeFiltroPesquisa();  
+    this.loadMedidas();  
+  }
     
-    this.medidas.forEach(data => {      
-      const codigo = data.codigo;
+  loadMedidas(){
+    this.medidaService.getMedidas().subscribe( response => {
+
+      console.log('pega essaaaaaaa: ', response);
+      /*
+     for (let m of response['medidas']) {
+        this.medidas.push(m);
+      }
+      this.processar();
+    }, err =>{
+      console.log('Ocorreu um erro inesperado: ', err);
+    });      
+    */
+    
+    });
+  }
+
+  processar(): void {
+    this.medidas.forEach(m => {   
+      console.log(m.dtCriacao);
+      const codigo = m.codigo;
+      const descricao = this.datepipe.transform(m.dtCriacao, 'dd/MM/yyyy');
       switch (codigo) {        
         case 1:
-          this.dadosPeso.push(data.valor);
-          this.descricoesPeso.push(data.dtCriacao.toLocaleDateString());
+          this.dadosPeso.push(m.valor);
+          this.descricoesPeso.push(descricao);
           break;
         default:
-          this.dadosTorax.push(data.valor);
-          this.descricoesTorax.push(data.dtCriacao.toLocaleDateString());
+          this.dadosTorax.push(m.valor);
+          this.descricoesTorax.push(descricao);
           break;
       }
     });
