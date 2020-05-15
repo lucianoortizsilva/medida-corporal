@@ -5,30 +5,12 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 /**
- * 
- * https://developer.mongodb.com/quickstart/node-crud-tutorial
- * https://docs.mongodb.com/guides/server/drivers/
- * 
- */
-const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://localhost';
-var db = null;
-MongoClient.connect(url, function(err, client) {
-    db = client.db("db_medida_corporal");
-});            
+  * Path da aplicação angular em produção
+  */
+app.use(express.static(__dirname + '/dist/medida-corporal'));
 
 /**
- * 
- * Path da aplicação angular em produção
- * 
- */
-//app.use(express.static(__dirname + '/dist/medida-corporal'));
-//app.get('/*', (req, res) => res.sendFile(path.join(__dirname)));
-
-/**
- * 
  * CORS
- * 
  */
 app.use(function (req, res, next) {
     // Add permissão para um determinado domínio acessar esse servidor
@@ -44,23 +26,37 @@ app.use(function (req, res, next) {
     next();
 });
 
-
-
 /**
  * 
- * inicio das API's 
+ * https://developer.mongodb.com/quickstart/node-crud-tutorial
+ * https://docs.mongodb.com/guides/server/drivers/
  * 
  */
+const MongoClient = require('mongodb').MongoClient;
+const url = 'mongodb://localhost';
+var db = null;
+MongoClient.connect(url, function(err, client) {
+    db = client.db("db_medida_corporal");
+});            
+
+app.get('/*', (req, res) => res.sendFile(path.join(__dirname)));
+
 app.get('/medidas', (req, res) => {       
-    findAllMedidas(req, res);    
+    findMedidas(req, res);    
 });
 
+app.get('/medidas/:query', (req, res) => { 
+    findMedidas(req, res);    
+});
 
-
-
-async function findAllMedidas(req, res) {
+async function findMedidas(req, res) {
+    var query = req.params.query;     
+    console.log('query: ', query);
+    if(query === undefined){
+        query = {};
+    }
     var collection = db.collection('Medida');
-    var cursor = collection.find({});
+    var cursor = collection.find(query);
     var medidas = new Array();    
     await cursor.forEach(function(result, err) {
         if (result !== null) {
@@ -73,4 +69,5 @@ async function findAllMedidas(req, res) {
 
 
 const server = http.createServer(app);
+
 server.listen(port, ()=> console.log('Rodando... porta: ', port));

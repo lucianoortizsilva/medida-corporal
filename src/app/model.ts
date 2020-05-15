@@ -4,11 +4,9 @@ export enum Pagina {
     medida_atual = 'medida_atual'
 }
 
-export class Medida { 
-    codigo: number;
+export interface Medida { 
     dtCriacao: Date;
-    descricao: string;
-    valor: number;
+    parametros: [{codigo: number, descricao: string; valor: number;}]    
 }
 
 export class FiltroMedida { 
