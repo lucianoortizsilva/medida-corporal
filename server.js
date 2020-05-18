@@ -3,11 +3,18 @@ const http = require('http');
 const path = require('path');
 const app = express();
 const port = process.env.PORT || 3001;
+bodyParser = require('body-parser');
 
 /**
   * Path da aplicação angular em produção
   */
 app.use(express.static(__dirname + '/dist/medida-corporal'));
+
+// support parsing of application/json type post data
+app.use(bodyParser.json());
+
+//support parsing of application/x-www-form-urlencoded post data
+app.use(bodyParser.urlencoded({ extended: true }));
 
 /**
  * CORS
@@ -41,32 +48,102 @@ MongoClient.connect(url, function(err, client) {
 
 app.get('/*', (req, res) => res.sendFile(path.join(__dirname)));
 
-app.get('/medidas', (req, res) => {       
+app.get('/medidas', (req, res) => {   
+    findAllMedidas(req, res);    
+});
+
+app.get('/medidas/:codigo', (req, res) => { 
     findMedidas(req, res);    
 });
 
-app.get('/medidas/:query', (req, res) => { 
-    findMedidas(req, res);    
-});
+
 
 async function findMedidas(req, res) {
-    var query = req.params.query;     
-    console.log('query: ', query);
-    if(query === undefined){
-        query = {};
-    }
-    var collection = db.collection('Medida');
-    var cursor = collection.find(query);
+    var codigo = req.params.codigo;  
+    var collection = db.collection('Medida');   
+    var cursor = collection.find({
+        'codigo' : { $eq : Number(codigo) } 
+    });       
     var medidas = new Array();    
     await cursor.forEach(function(result, err) {
         if (result !== null) {
-            medidas.push(JSON.stringify(result));
+            medidas.push(result);
         }
     });
     res.type('application/json');
-    res.send({medidas});
+    res.send(medidas);
 }
 
+
+
+async function findAllMedidas(req, res) {    
+    var collection = db.collection('Medida');
+    var cursor = collection.find({});
+    var medidas = new Array();    
+    await cursor.forEach(function(result, err) {
+        if (result !== null) {
+            medidas.push(result);
+        }
+    });
+    res.status(200);
+    res.type('application/json');
+    res.send(medidas);
+}
+
+
+
+async function save(req, res) {
+    await db.collection('Medida').insertMany([
+        {
+            dtCriacao: '2019-10-01T20:48:52.565Z',
+            codigo: 1,
+            descricao: 'Peso',
+            valor: 83.3
+        },          
+        {
+            dtCriacao: '2019-10-01T20:48:52.565Z',
+            codigo: 2,
+            descricao: 'Tórax',
+            valor: 104
+        },                  
+        {
+            dtCriacao: '2019-11-01T20:48:52.565Z',
+            codigo: 1,
+            descricao: 'Peso',
+            valor: 82.3
+        },          
+        {
+            dtCriacao: '2019-11-01T20:48:52.565Z',
+            codigo: 2,
+            descricao: 'Tórax',
+            valor: 105
+        },                  
+        {
+            dtCriacao: '2019-12-01T20:48:52.565Z',
+            codigo: 1,
+            descricao: 'Peso',
+            valor: 81.3
+        },          
+        {
+            dtCriacao: '2019-12-01T20:48:52.565Z',
+            codigo: 2,
+            descricao: 'Tórax',
+            valor: 108
+        },
+        {
+            dtCriacao: '2020-01-01T20:48:52.565Z',
+            codigo: 1,
+            descricao: 'Peso',
+            valor: 80.1
+        },          
+        {
+            dtCriacao: '2020-01-01T20:48:52.565Z',
+            codigo: 2,
+            descricao: 'Tórax',
+            valor: 106.5
+        },                                    
+    ]);    
+}
 
 const server = http.createServer(app);
 

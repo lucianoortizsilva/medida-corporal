@@ -83,6 +83,7 @@ export class GraficoComponent implements OnInit, OnChanges {
             yAxes: [{
               display: true,               
               ticks: {
+                beginAtZero: true,
                 fontColor: '#000',
                 fontSize: 13,
                 fontStyle	: 'bold',

@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FiltroMedida, Medida } from '../model';
+import { FiltroMedida, Medida, MedidaEnum } from '../model';
 import { MedidaService } from '../medida.service';
 import { DatePipe } from '@angular/common';
 
@@ -21,85 +21,82 @@ export class MedidaProgressoComponent implements OnInit {
   filtros: FiltroMedida[];
   listaPesos = new Array();
   grafico = [];
-  dadosPeso = new Array<number>();
-  descricoesPeso = new Array<string>();
-  dadosTorax = new Array<number>();
-  descricoesTorax = new Array<string>();
   
-  medidas = new Array<Medida>();
+  dadosPeso = new Array<number>();
+  dadosTorax = new Array<number>();
+  descricoesPeso = new Array<string>();
+  descricoesTorax = new Array<string>();
     
   constructor(private element: ElementRef, public datepipe: DatePipe, private medidaService: MedidaService) { }
 
   ngOnInit(): void {
     this.loadFiltros();
     this.onChangeFiltroPesquisa();  
-    this.loadMedidas();  
+    this.loadAllGraficos();
   }
-
-  loadMedidas(){
-    this.medidaService.getMedidas().subscribe( obj => {
-    for (let index = 0; index < obj['medidas'].length; index++) {
-      const json = obj['medidas'][index];
-      let medidaJSON: any = JSON.parse(json); 
-      let medida: Medida = <Medida>medidaJSON;
-      this.medidas.push(medida);
-    }  
-    this.processar();
-    }, err =>{
-      console.log('Ocorreu um erro inesperado: ', err);
-    });      
-  };
   
-  processar(): void {
-    for (let medida of this.medidas) {
-      const descricao = this.datepipe.transform(medida.dtCriacao, 'dd/MM/yyyy');
-      medida.parametros.forEach(param =>{
-        switch (param.codigo) {        
-          case 1:
-            this.dadosPeso.push(param.valor);
-            this.descricoesPeso.push(descricao);
-            break;
-          default:
-            this.dadosTorax.push(param.valor);
-            this.descricoesTorax.push(descricao);
-            break;
-        }
-      });
-     }
+  private loadAllGraficos(): void {
+    this.loadGraficoPesos();
+    this.loadGraficosTorax();
   }
 
-  addDays(date: Date, days: number): Date {
-    date.setDate(date.getDate() + days);
-    return date;
+  private loadGraficoPesos(): void {
+    this.medidaService.getMedidasByID(MedidaEnum.PESO).subscribe(medidas => {
+      medidas.forEach(m => {
+        const descricao = this.formatarDate(m.dtCriacao);
+        this.dadosPeso.push(m.valor);
+        this.descricoesPeso.push(descricao);
+      })
+    });
   }
 
-  loadFiltros(): void {
-    this.filtros = [{codigo: 0, descricao: 'Todas medidas'},{codigo: 1, descricao: 'Peso'},{codigo: 2, descricao: 'Tórax'}];
+  private loadGraficosTorax(): void {
+    this.medidaService.getMedidasByID(MedidaEnum.TORAX).subscribe(medidas => {
+      medidas.forEach(m => {
+        const descricao = this.formatarDate(m.dtCriacao);
+        this.dadosTorax.push(m.valor);
+        this.descricoesTorax.push(descricao);
+      })
+    });
   }
 
-  filtrar(filtro: FiltroMedida): void {    
+  private loadFiltros(): void {
+    this.filtros = [
+      {codigo: null, descricao: 'Todas medidas'},
+      {codigo: MedidaEnum.PESO, descricao: 'Peso'},
+      {codigo: MedidaEnum.TORAX, descricao: 'Tórax'}
+    ];
+  }
+
+  private filtrar(filtro: FiltroMedida): void {    
     this.limparGraficos();
-    this.medidaService.getMedidasBy(filtro).subscribe(obj => {
-      for (let index = 0; index < obj['medidas'].length; index++) {
-        const json = obj['medidas'][index];
-        let medidaJSON: any = JSON.parse(json); 
-        let medida: Medida = <Medida>medidaJSON;
-        this.medidas.push(medida);
-      }  
-      this.processar();
-    });    
+    switch (filtro.codigo) {
+      case MedidaEnum.PESO:
+        this.loadGraficoPesos();
+        break;
+      case MedidaEnum.TORAX:
+          this.loadGraficosTorax();
+          break;          
+      default:
+          this.loadGraficoPesos();
+          this.loadGraficosTorax();
+        break;
+    }
   }
 
-  onChangeFiltroPesquisa(): void {
+  private onChangeFiltroPesquisa(): void {
     this.filtroControl.valueChanges.subscribe(data =>{this.filtrar(data);})
   }
 
-  limparGraficos(): void {
-    this.medidas = new Array();
+  private limparGraficos(): void {
     this.dadosPeso = new Array();
     this.dadosTorax= new Array();
     this.descricoesPeso = new Array();
     this.descricoesTorax = new Array();
+  }
+
+  private formatarDate(dt: Date): string {
+    return this.datepipe.transform(dt, 'dd/MM/yyyy');      ;
   }
 
 }
