@@ -1,34 +1,42 @@
-import { Component, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, Renderer2, AfterViewInit, OnInit } from '@angular/core';
 import { MedidaService } from '../medida.service';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-medida-cadastro',
   templateUrl: './medida-cadastro.component.html',
   styleUrls: ['./medida-cadastro.component.scss']
 })
-export class MedidaCadastroComponent implements AfterViewInit {
+export class MedidaCadastroComponent implements OnInit, AfterViewInit {
+
+  formulario: FormGroup;
 
   constructor(private elementRef: ElementRef, 
                private rendered2: Renderer2,
-               private medidaService: MedidaService) { }
+               private medidaService: MedidaService,
+               private formBuilder: FormBuilder) { }
   
-  save(): void{
-    const medida = {
-      dtCriacao: 	new Date(),
-      parametros: [
-          { codigo: 1, 
-            descricao: 'Peso', 
-            valor: 99.3 
-          },
-          { codigo: 2, 
-            descricao: 'Tórax', 
-            valor: 108.2 
-          }		
-      ]
-  };
+  ngOnInit(){
+    this.formulario = this.formBuilder.group({
+      peso: [null],
+      pescoco: [null],
+      torax: [null],
+      cintura: [null],
+      quadril: [null],
+      bicepsE: [null],
+      bicepsD: [null],
+      antebracoE: [null],
+      antebracoD: [null],
+      coxaE: [null],
+      coxaD: [null],
+      panturrilhaE: [null],
+      panturrilhaD: [null]
+    });
 
-  //this.medidaService.save();
+  }
 
+  onSubmit(): void{
+    console.log(JSON.stringify(this.formulario.value));
   }
  
   ngAfterViewInit(): void {

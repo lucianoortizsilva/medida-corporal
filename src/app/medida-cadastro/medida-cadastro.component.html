@@ -1,20 +1,27 @@
 <!-- 
     novalidate: remove as mensagens padrões dos browsers, quanto a validações
 -->
-<form id="formCadastroID" class="needs-validation" novalidate>
+<form class="needs-validation" novalidate [formGroup]="formulario">
     
     <div class="form-row">            
         <!-- PESO -->
         <div class="col-12 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label for="pesoID" class="text-uppercase font-weight-bold">Peso</label><span>* (kg)</span>
+            <label for="pesoID" class="text-uppercase font-weight-bold">Peso</label><span> (kg)</span>
             <div class="input-group">
-                <input id="pesoID" type="text" class="form-control" aria-describedby="inputGroupPrepend" required placeholder="exemplo: 82,1" maxlength="5">
+                <input formControlName="peso" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 82,1" maxlength="5" >
                 <div class="invalid-feedback">
                     Preenchimento Obrigatório.
                 </div>
-                <div class="valid-feedback">
-                    ok
-                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">            
+        <!-- PESCOÇO -->
+        <div class="col-12 col-md-5 col-lg-4 col-xl-4 mb-3">
+            <label for="pescocoID" class="text-uppercase font-weight-bold">Pescoço</label><span> (cm)</span>
+            <div class="input-group">
+                <input input formControlName="pescoco" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 42,1" maxlength="5">
             </div>
         </div>
     </div>
@@ -24,7 +31,27 @@
         <div class="col-12 col-md-5 col-lg-4 col-xl-4 mb-3">
             <label for="toraxID" class="text-uppercase font-weight-bold">Tórax</label><span> (cm)</span>
             <div class="input-group">
-                <input id="toraxID" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 110,4" maxlength="5">
+                <input formControlName="torax" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 110,4" maxlength="5">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">            
+        <!-- CINTURA -->
+        <div class="col-12 col-md-5 col-lg-4 col-xl-4 mb-3">
+            <label for="cinturaID" class="text-uppercase font-weight-bold">Cintura</label><span> (cm)</span>
+            <div class="input-group">
+                <input formControlName="cintura" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 99,4" maxlength="5">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">            
+        <!-- QUADRIL -->
+        <div class="col-12 col-md-5 col-lg-4 col-xl-4 mb-3">
+            <label for="quadrilID" class="text-uppercase font-weight-bold">Quadril</label><span> (cm)</span>
+            <div class="input-group">
+                <input formControlName="quadril" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 97,4" maxlength="5">
             </div>
         </div>
     </div>
@@ -34,7 +61,7 @@
         <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
             <label for="bicepsEsquerdoID" class="text-uppercase font-weight-bold">Bíceps Esquerdo</label><span> (cm)</span>
             <div class="input-group">
-                <input id="bicepsEsquerdoID" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 44,1" maxlength="5">
+                <input formControlName="bicepsE" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 44,1" maxlength="5">
             </div>
         </div>
          
@@ -42,7 +69,7 @@
         <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
             <label for="bicepsDireitoID" class="text-uppercase font-weight-bold">Bíceps Direito</label><span> (cm)</span>
             <div class="input-group">
-                <input id="bicepsDireitoID" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 42,9" maxlength="5">
+                <input formControlName="bicepsD" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 42,9" maxlength="5">
             </div>
         </div>
     </div>
@@ -52,7 +79,7 @@
         <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
             <label for="antebracoEsquerdoID" class="text-uppercase font-weight-bold">Antebraço Esquerdo</label><span> (cm)</span>
             <div class="input-group">
-                <input id="antebracoEsquerdoID" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 44,1" maxlength="5">
+                <input formControlName="antebracoE" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 44,1" maxlength="5">
             </div>
         </div>
          
@@ -60,7 +87,7 @@
         <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
             <label for="antebracoDireitoID" class="text-uppercase font-weight-bold">Antebraço Direito</label><span> (cm)</span>
             <div class="input-group">
-                <input id="antebracoDireitoID" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 42,9" maxlength="5">
+                <input formControlName="antebracoD" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 42,9" maxlength="5">
             </div>
         </div>
     </div>
@@ -70,7 +97,7 @@
         <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
             <label for="coxaEsquerdoID" class="text-uppercase font-weight-bold">Coxa Esquerdo</label><span> (cm)</span>
             <div class="input-group">
-                <input id="coxaEsquerdoID" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 66,1" maxlength="5">
+                <input formControlName="coxaE" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 66,1" maxlength="5">
             </div>
         </div>
          
@@ -78,7 +105,25 @@
         <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
             <label for="coxaDireitoID" class="text-uppercase font-weight-bold">Coxa Direito</label><span> (cm)</span>
             <div class="input-group">
-                <input id="coxaDireitoID" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 65,9" maxlength="5">
+                <input formControlName="coxaD" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 65,9" maxlength="5">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">            
+        <!-- PANTURRILHA ESQUERDA -->
+        <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
+            <label for="paturrihaEsquerdaID" class="text-uppercase font-weight-bold">Panturrilha Esquerda</label><span> (cm)</span>
+            <div class="input-group">
+                <input formControlName="panturrilhaE" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 37,3" maxlength="5">
+            </div>
+        </div>
+         
+        <!-- PANTURRILHA DIREITA -->
+        <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
+            <label for="panturrilhaDireitaID" class="text-uppercase font-weight-bold">Panturrilha Direita</label><span> (cm)</span>
+            <div class="input-group">
+                <input formControlName="panturrilhaD" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 37,3" maxlength="5">
             </div>
         </div>
     </div>
@@ -97,5 +142,5 @@
             <p class="d-none d-xl-block obs-xl">* Valores obrigatórios. Necessários para calcular % de gordura.</p><!-- XL -->
         </div>
     </div>
-    <button class="btn btn-success btn-lg btn-block" type="submit">salvar</button>
-</form>
+    <button class="btn btn-success btn-lg btn-block" type="submit" (click)="onSubmit()">salvar</button>
+</form>        
