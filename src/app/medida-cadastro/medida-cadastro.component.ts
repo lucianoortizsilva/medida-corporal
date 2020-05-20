@@ -1,26 +1,54 @@
 import { Component, ElementRef, Renderer2, AfterViewInit, OnInit } from '@angular/core';
 import { MedidaService } from '../medida.service';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { HttpResponse, HttpResponseBase, HttpErrorResponse } from '@angular/common/http';
-import { Medida } from '../model';
+import { HttpResponseBase, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-medida-cadastro',
   templateUrl: './medida-cadastro.component.html',
   styleUrls: ['./medida-cadastro.component.scss']
 })
-export class MedidaCadastroComponent implements OnInit, AfterViewInit {
+export class MedidaCadastroComponent implements OnInit {
 
   formulario: FormGroup;
+
+
 
   constructor(private elementRef: ElementRef, 
               private rendered2: Renderer2,
               private medidaService: MedidaService,
               private formBuilder: FormBuilder,
               private datepipe: DatePipe) { }
+    
+
+
+  ngOnInit() {
+    this.inicializarFormulario();
+  }
+
+
+
+  onSubmit(): void {
+    if (this.formulario.valid) {
+      const body = JSON.stringify(this.formulario.value);
+      this.medidaService.save(body).subscribe( (data: HttpResponseBase) => {
+        this.removeStyleValidacoes();        
+        this.inicializarFormulario();
+      }, (err: HttpErrorResponse) => {
+        /**
+         * TODO: Adicionar mensagem de erro p\ usuário
+         */
+        console.log('Ocorreu um erro no servidor: ', err);
+      });   
+    } else {
+      this.addStyleValidacoes();
+    }
+  }
+
+
   
-  ngOnInit(){
+  inicializarFormulario(): void {
     this.formulario = this.formBuilder.group({
       dtCriacao: [this.datepipe.transform(new Date(), 'yyyy-MM-dd')],
       peso: [null],
@@ -37,50 +65,20 @@ export class MedidaCadastroComponent implements OnInit, AfterViewInit {
       panturrilhaE: [null],
       panturrilhaD: [null]
     });
-
-  }
-
-  onSubmit(): void{
-    if (this.formulario.valid) {
-      const body = JSON.stringify(this.formulario.value);
-      this.medidaService.save(body).subscribe( (data: HttpResponseBase) => {
-        this.formulario.reset();
-        this.formulario.updateValueAndValidity();
-      }, (err: HttpErrorResponse) => {
-        console.log('Erro: ', err);
-      });   
-    }
-  }
- 
-  ngAfterViewInit(): void {
-    this.inicializarEventosDeValidacaoDoFormulario();
-  }
-
-  /**
-   * 
-   * https://getbootstrap.com/docs/4.1/components/forms/
-   * 
-   */
-  inicializarEventosDeValidacaoDoFormulario(): void {
-    (function() {
-      'use strict';
-      window.addEventListener('load', function() {
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.getElementsByClassName('needs-validation');
-        // Loop over them and prevent submission
-        var validation = Array.prototype.filter.call(forms, function(form) {
-          form.addEventListener('submit', function(event) {
-            if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            form.classList.add('was-validated');
-          }, false);
-        });
-      }, false);
-    })();
   }
 
 
+
+  addStyleValidacoes(): void {
+    const elementForm = this.elementRef.nativeElement.querySelector('.needs-validation');
+    this.rendered2.addClass(elementForm, 'was-validated');      
+  }
+
+
+
+  removeStyleValidacoes(): void {
+    const elementForm = this.elementRef.nativeElement.querySelector('.needs-validation');
+    this.rendered2.removeClass(elementForm, 'was-validated'); 
+  }
 
 }

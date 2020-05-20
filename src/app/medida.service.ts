@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Medida } from './model';
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class MedidaService {
 
   
   getMedidas(): Observable<Medida[]> {
-    const url = 'http://localhost:3001/medidas';
+    const url = environment.medidasAPI;
     return this.http.get<Medida[]>(url, {responseType: 'json'});
   }
 
@@ -20,7 +21,7 @@ export class MedidaService {
 
 
   getMedidasByID(codigo: number): Observable<Medida[]> {
-    const url = 'http://localhost:3001/medidas/' + codigo;
+    const url = environment.medidasAPI + '/' + codigo;
     return this.http.get<Medida[]>(url, {responseType: 'json'});
   }
 
@@ -33,7 +34,7 @@ export class MedidaService {
         'Content-Type': 'application/json',
       })
     };
-    const url = 'http://localhost:3001/medidas';
+    const url = environment.medidasAPI;
     return this.http.post(url, body, httpOptions);
   }
 
