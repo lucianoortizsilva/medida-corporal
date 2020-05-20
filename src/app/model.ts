@@ -22,9 +22,19 @@ export enum MedidaEnum {
 
 export interface Medida { 
     dtCriacao: Date;
-    codigo: number; 
-    descricao: string; 
-    valor: number;
+    peso: number;
+    pescoco: number;
+    torax: number;
+    cintura: number;
+    quadril: number;
+    bicepsE: number;
+    bicepsD: number;
+    antebracoE: number;
+    antebracoD: number;
+    coxaE: number;
+    coxaD: number;
+    panturrilhaE: number;
+    panturrilhaD: number;
 }
 
 export class FiltroMedida { 

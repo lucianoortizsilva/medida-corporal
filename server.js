@@ -56,7 +56,17 @@ app.get('/medidas/:codigo', (req, res) => {
     findMedidas(req, res);    
 });
 
-
+app.post('/medidas', (req, res) => {     
+    try {
+        save(req, res);
+        res.status(201);
+        res.type('application/json');
+        res.send({'message' : 'Cadastro ok!'});
+    } catch (error) {
+        res.status(500);
+        res.send(error);
+    }
+});
 
 async function findMedidas(req, res) {
     var codigo = req.params.codigo;  
@@ -90,59 +100,10 @@ async function findAllMedidas(req, res) {
     res.send(medidas);
 }
 
-
-
 async function save(req, res) {
-    await db.collection('Medida').insertMany([
-        {
-            dtCriacao: '2019-10-01T20:48:52.565Z',
-            codigo: 1,
-            descricao: 'Peso',
-            valor: 83.3
-        },          
-        {
-            dtCriacao: '2019-10-01T20:48:52.565Z',
-            codigo: 2,
-            descricao: 'Tórax',
-            valor: 104
-        },                  
-        {
-            dtCriacao: '2019-11-01T20:48:52.565Z',
-            codigo: 1,
-            descricao: 'Peso',
-            valor: 82.3
-        },          
-        {
-            dtCriacao: '2019-11-01T20:48:52.565Z',
-            codigo: 2,
-            descricao: 'Tórax',
-            valor: 105
-        },                  
-        {
-            dtCriacao: '2019-12-01T20:48:52.565Z',
-            codigo: 1,
-            descricao: 'Peso',
-            valor: 81.3
-        },          
-        {
-            dtCriacao: '2019-12-01T20:48:52.565Z',
-            codigo: 2,
-            descricao: 'Tórax',
-            valor: 108
-        },
-        {
-            dtCriacao: '2020-01-01T20:48:52.565Z',
-            codigo: 1,
-            descricao: 'Peso',
-            valor: 80.1
-        },          
-        {
-            dtCriacao: '2020-01-01T20:48:52.565Z',
-            codigo: 2,
-            descricao: 'Tórax',
-            valor: 106.5
-        },                                    
-    ]);    
+    await db.collection('Medida').insertOne(
+        req.body
+    );    
 }
 
 const server = http.createServer(app);

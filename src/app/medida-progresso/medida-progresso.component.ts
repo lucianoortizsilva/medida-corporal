@@ -27,12 +27,12 @@ export class MedidaProgressoComponent implements OnInit {
   descricoesPeso = new Array<string>();
   descricoesTorax = new Array<string>();
     
-  constructor(private element: ElementRef, public datepipe: DatePipe, private medidaService: MedidaService) { }
+  constructor(private element: ElementRef, private datepipe: DatePipe, private medidaService: MedidaService) { }
 
   ngOnInit(): void {
     this.loadFiltros();
     this.onChangeFiltroPesquisa();  
-    this.loadAllGraficos();
+    //this.loadAllGraficos();
   }
   
   private loadAllGraficos(): void {
@@ -44,7 +44,7 @@ export class MedidaProgressoComponent implements OnInit {
     this.medidaService.getMedidasByID(MedidaEnum.PESO).subscribe(medidas => {
       medidas.forEach(m => {
         const descricao = this.formatarDate(m.dtCriacao);
-        this.dadosPeso.push(m.valor);
+        //this.dadosPeso.push(m.valor);
         this.descricoesPeso.push(descricao);
       })
     });
@@ -54,7 +54,7 @@ export class MedidaProgressoComponent implements OnInit {
     this.medidaService.getMedidasByID(MedidaEnum.TORAX).subscribe(medidas => {
       medidas.forEach(m => {
         const descricao = this.formatarDate(m.dtCriacao);
-        this.dadosTorax.push(m.valor);
+        //this.dadosTorax.push(m.valor);
         this.descricoesTorax.push(descricao);
       })
     });

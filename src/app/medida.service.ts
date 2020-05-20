@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Medida } from './model';
 import { Observable } from 'rxjs';
 
@@ -24,5 +24,17 @@ export class MedidaService {
     return this.http.get<Medida[]>(url, {responseType: 'json'});
   }
 
+
+
+
+  save(body: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    const url = 'http://localhost:3001/medidas';
+    return this.http.post(url, body, httpOptions);
+  }
 
 }

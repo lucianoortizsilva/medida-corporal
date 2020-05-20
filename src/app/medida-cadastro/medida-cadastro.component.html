@@ -3,10 +3,24 @@
 -->
 <form class="needs-validation" novalidate [formGroup]="formulario">
     
-    <div class="form-row">            
-        <!-- PESO -->
+    
+    <!-- DATA CRIACAO -->
+    <div class="form-row">
         <div class="col-12 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label for="pesoID" class="text-uppercase font-weight-bold">Peso</label><span> (kg)</span>
+            <label class="text-uppercase font-weight-bold">Data</label>
+            <div class="input-group">
+                <input formControlName="dtCriacao" class="form-control" type="date">
+                <div class="invalid-feedback">
+                    Preenchimento Obrigatório.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PESO -->
+    <div class="form-row">   
+        <div class="col-12 col-md-5 col-lg-4 col-xl-4 mb-3">
+            <label class="text-uppercase font-weight-bold">Peso</label><span> (kg)</span>
             <div class="input-group">
                 <input formControlName="peso" type="text" class="form-control" aria-describedby="inputGroupPrepend" placeholder="exemplo: 82,1" maxlength="5" >
                 <div class="invalid-feedback">

@@ -1,6 +1,9 @@
 import { Component, ElementRef, Renderer2, AfterViewInit, OnInit } from '@angular/core';
 import { MedidaService } from '../medida.service';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+import { HttpResponse, HttpResponseBase, HttpErrorResponse } from '@angular/common/http';
+import { Medida } from '../model';
 
 @Component({
   selector: 'app-medida-cadastro',
@@ -12,12 +15,14 @@ export class MedidaCadastroComponent implements OnInit, AfterViewInit {
   formulario: FormGroup;
 
   constructor(private elementRef: ElementRef, 
-               private rendered2: Renderer2,
-               private medidaService: MedidaService,
-               private formBuilder: FormBuilder) { }
+              private rendered2: Renderer2,
+              private medidaService: MedidaService,
+              private formBuilder: FormBuilder,
+              private datepipe: DatePipe) { }
   
   ngOnInit(){
     this.formulario = this.formBuilder.group({
+      dtCriacao: [this.datepipe.transform(new Date(), 'yyyy-MM-dd')],
       peso: [null],
       pescoco: [null],
       torax: [null],
@@ -36,7 +41,15 @@ export class MedidaCadastroComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit(): void{
-    console.log(JSON.stringify(this.formulario.value));
+    if (this.formulario.valid) {
+      const body = JSON.stringify(this.formulario.value);
+      this.medidaService.save(body).subscribe( (data: HttpResponseBase) => {
+        this.formulario.reset();
+        this.formulario.updateValueAndValidity();
+      }, (err: HttpErrorResponse) => {
+        console.log('Erro: ', err);
+      });   
+    }
   }
  
   ngAfterViewInit(): void {
@@ -67,4 +80,7 @@ export class MedidaCadastroComponent implements OnInit, AfterViewInit {
       }, false);
     })();
   }
+
+
+
 }
