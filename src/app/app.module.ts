@@ -13,6 +13,13 @@ import { GraficoComponent } from './grafico/grafico.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MedidaService } from './medida.service';
 import { DatePipe } from '@angular/common';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+
+const maskConfigFunction: () => Partial<IConfig> = () => {
+  return {
+    validation: false,
+  };
+};
 
 @NgModule({
   declarations: [
@@ -30,6 +37,7 @@ import { DatePipe } from '@angular/common';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxMaskModule.forRoot(maskConfigFunction),//https://www.npmjs.com/package/ngx-mask
   ],
   providers: [MedidaService, DatePipe],
   bootstrap: [AppComponent]

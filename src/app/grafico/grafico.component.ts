@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, ElementRef, Input, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { Chart } from 'chart.js';
 
 
@@ -17,7 +17,8 @@ export class GraficoComponent implements OnInit, OnChanges {
   grafico = [];
 
 
-  constructor(private element: ElementRef) { }
+  constructor(private element: ElementRef, 
+              private changeDetectorRef:ChangeDetectorRef) { }
 
   ngOnInit(){
     this.create();
@@ -87,7 +88,7 @@ export class GraficoComponent implements OnInit, OnChanges {
                 fontColor: '#000',
                 fontSize: 13,
                 fontStyle	: 'bold',
-                callback: function(label, index, labels) {                   
+                callback: function(label, index, labels) {            
                     return ' '  + label + ' ' + GraficoComponent.getLabelSufixo();
                   },
                 },
@@ -99,6 +100,7 @@ export class GraficoComponent implements OnInit, OnChanges {
           },          
         }
       });
+      this.changeDetectorRef.detectChanges();
   }  
 
 

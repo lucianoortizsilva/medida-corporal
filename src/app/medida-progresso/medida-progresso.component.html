@@ -13,14 +13,21 @@
 
 <app-grafico   *ngIf="dadosPeso.length > 0"
              [dados]="dadosPeso"
-        [descricoes]="descricoesPeso"
+        [descricoes]="descricoes"
            [legenda]="'Peso'"
      [unidadeMedida]="'kg'">
 </app-grafico>
 
+<app-grafico   *ngIf="dadosPescoco.length > 0"
+             [dados]="dadosPescoco"
+        [descricoes]="descricoes"
+           [legenda]="'Pescoço'"
+     [unidadeMedida]="'cm'">
+</app-grafico>
+
 <app-grafico   *ngIf="dadosTorax.length > 0"  
              [dados]="dadosTorax"
-        [descricoes]="descricoesTorax"
+        [descricoes]="descricoes"
            [legenda]="'Tórax'"
      [unidadeMedida]="'cm'">
 </app-grafico>

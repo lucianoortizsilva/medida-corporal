@@ -1,8 +1,10 @@
 import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FiltroMedida, Medida, MedidaEnum } from '../model';
+import { FiltroMedida, MedidaEnum } from '../model';
 import { MedidaService } from '../medida.service';
 import { DatePipe } from '@angular/common';
+import { isNull } from 'util';
+import { Subscription } from 'rxjs';
 
 
 /**
@@ -15,88 +17,123 @@ import { DatePipe } from '@angular/common';
   templateUrl: './medida-progresso.component.html',
   styleUrls: ['./medida-progresso.component.scss']
 })
-export class MedidaProgressoComponent implements OnInit {
+export class MedidaProgressoComponent implements OnInit, OnDestroy {
   
   filtroControl = new FormControl();
   filtros: FiltroMedida[];
   listaPesos = new Array();
-  grafico = [];
   
-  dadosPeso = new Array<number>();
+  dadosPeso = new Array<number>();  
   dadosTorax = new Array<number>();
-  descricoesPeso = new Array<string>();
-  descricoesTorax = new Array<string>();
+  dadosPescoco = new Array<number>();
+  descricoes = new Array<string>();
     
-  constructor(private element: ElementRef, private datepipe: DatePipe, private medidaService: MedidaService) { }
+  subscriptionMedidas: Subscription;
+  
+  constructor(private datepipe: DatePipe,
+              private medidaService: MedidaService) { }
+
+
 
   ngOnInit(): void {
-    this.loadFiltros();
-    this.onChangeFiltroPesquisa();  
-    //this.loadAllGraficos();
+    this.loadFilters();
+    this.onChangeFilter();  
+    this.loadAllCharts();
   }
   
-  private loadAllGraficos(): void {
-    this.loadGraficoPesos();
-    this.loadGraficosTorax();
+
+
+  ngOnDestroy(): void {
+    this.subscriptionMedidas.unsubscribe();
   }
 
-  private loadGraficoPesos(): void {
-    this.medidaService.getMedidasByID(MedidaEnum.PESO).subscribe(medidas => {
+
+
+  private loadAllCharts(): void {
+    this.subscriptionMedidas = this.medidaService.getMedidas().subscribe(medidas => {
       medidas.forEach(m => {
-        const descricao = this.formatarDate(m.dtCriacao);
-        //this.dadosPeso.push(m.valor);
-        this.descricoesPeso.push(descricao);
+        this.dadosPeso.push(this.toNumber(m.peso));
+        this.dadosTorax.push(this.toNumber(m.torax));
+        this.dadosPescoco.push(this.toNumber(m.pescoco));
+        this.descricoes.push(this.toDateFormat(m.dtCriacao));
       })
     });
   }
 
-  private loadGraficosTorax(): void {
-    this.medidaService.getMedidasByID(MedidaEnum.TORAX).subscribe(medidas => {
-      medidas.forEach(m => {
-        const descricao = this.formatarDate(m.dtCriacao);
-        //this.dadosTorax.push(m.valor);
-        this.descricoesTorax.push(descricao);
-      })
-    });
-  }
 
-  private loadFiltros(): void {
+
+  private loadFilters(): void {
     this.filtros = [
       {codigo: null, descricao: 'Todas medidas'},
       {codigo: MedidaEnum.PESO, descricao: 'Peso'},
-      {codigo: MedidaEnum.TORAX, descricao: 'Tórax'}
+      {codigo: MedidaEnum.TORAX, descricao: 'Tórax'},
+      {codigo: MedidaEnum.PESCOCO, descricao: 'Pescoço'}
     ];
   }
 
-  private filtrar(filtro: FiltroMedida): void {    
-    this.limparGraficos();
+
+
+  private filtrar(filtro: FiltroMedida): void {        
+    this.clearCharts();
     switch (filtro.codigo) {
+
       case MedidaEnum.PESO:
-        this.loadGraficoPesos();
+        this.medidaService.getMedidas().subscribe(medidas => {
+          medidas.forEach(m => {
+            this.dadosPeso.push(m.peso);
+            this.descricoes.push(this.toDateFormat(m.dtCriacao));
+          });
+        });
         break;
       case MedidaEnum.TORAX:
-          this.loadGraficosTorax();
+        this.medidaService.getMedidas().subscribe(medidas => {
+          medidas.forEach(m => {
+            this.dadosTorax.push(m.torax);
+            this.descricoes.push(this.toDateFormat(m.dtCriacao));
+          });
+        });
           break;          
+      case MedidaEnum.PESCOCO:
+        this.medidaService.getMedidas().subscribe(medidas => {
+          medidas.forEach(m => {
+            this.dadosPescoco.push(m.pescoco);
+            this.descricoes.push(this.toDateFormat(m.dtCriacao));
+          });
+        });
+          break;              
       default:
-          this.loadGraficoPesos();
-          this.loadGraficosTorax();
         break;
+    
     }
   }
 
-  private onChangeFiltroPesquisa(): void {
+
+
+  private onChangeFilter(): void {
     this.filtroControl.valueChanges.subscribe(data =>{this.filtrar(data);})
   }
 
-  private limparGraficos(): void {
+
+
+  private clearCharts(): void {
     this.dadosPeso = new Array();
     this.dadosTorax= new Array();
-    this.descricoesPeso = new Array();
-    this.descricoesTorax = new Array();
+    this.dadosPescoco= new Array();
+    this.descricoes = new Array();
   }
 
-  private formatarDate(dt: Date): string {
+
+
+  private toDateFormat(dt: Date): string {
     return this.datepipe.transform(dt, 'dd/MM/yyyy');      ;
   }
 
+
+
+  private toNumber(value: any): number {
+    if (!isNull(value)  && value.typeof === undefined) {
+      return Number(value);  
+    }
+    return 0.0;
+  }
 }
