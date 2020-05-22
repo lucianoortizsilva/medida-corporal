@@ -102,6 +102,7 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
         });
           break;              
       default:
+        this.loadAllCharts();
         break;
     
     }
