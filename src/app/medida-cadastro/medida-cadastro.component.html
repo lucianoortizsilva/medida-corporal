@@ -5,10 +5,13 @@
     
     
     <!-- DATA CRIACAO -->
-    <div class="form-row mt-5">
+    <div class="form-row mt-3">
         <div class="col-8 offset-2 col-md-5 col-lg-4 col-xl-4 mb-3">
             <div class="input-group">
-                <input formControlName="dtCriacao" class="form-control" type="date" required>
+                <span class="input-group-text">                                            
+                    <i class="far fa-calendar-alt"></i>
+                </span>
+                <input formControlName="dtCriacao" class="form-control text-primary" type="date" required>
                 <div class="invalid-feedback">
                     Preenchimento Obrigatório.
                 </div>
@@ -16,14 +19,19 @@
         </div>
     </div>
 
-    <hr class="w3-opacity">
+    <hr class="w3-opacity mt-0">
 
     <div class="form-row">   
         <!-- PESO -->
         <div class="col-12 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label class="font-weight-bold">Peso*</label><span> (kg)</span>
+            <label class="font-weight-bold text-secondary">Peso* (kg)</label>
             <div class="input-group">
-                <input formControlName="peso" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="5" mask="separator.2" required>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">                                            
+                        <i class="fas fa-weight"></i>
+                    </span>
+                </div>
+                <input formControlName="peso" type="text" class="form-control" placeholder="Exemplo = 82.1" maxlength="5" mask="separator.2" required>
                 <div class="invalid-feedback">
                     Obrigatório.
                 </div>
@@ -34,8 +42,11 @@
     <div class="form-row">   
         <!-- PESCOÇO -->
         <div class="col-6 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label for="pescocoID" class="font-weight-bold">Pescoço*</label><span> (cm)</span>
+            <label class="font-weight-bold text-secondary">Pescoço*</label>
             <div class="input-group">
+                <span class="input-group-text">                                            
+                    <span><strong>cm</strong></span>
+                </span>
                 <input input formControlName="pescoco" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="5" mask="separator.2" required>
                 <div class="invalid-feedback">
                     Obrigatório.
@@ -44,8 +55,11 @@
         </div>        
         <!-- TÓRAX -->
         <div class="col-6 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label for="toraxID" class="font-weight-bold">Tórax*</label><span> (cm)</span>
+            <label class="font-weight-bold text-secondary">Tórax*</label>
             <div class="input-group">
+                <span class="input-group-text">                                            
+                    <span><strong>cm</strong></span>
+                </span>
                 <input formControlName="torax" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="5" mask="separator.2" required>
                 <div class="invalid-feedback">
                     Obrigatório.
@@ -57,8 +71,11 @@
     <div class="form-row">            
         <!-- CINTURA -->
         <div class="col-6 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label for="cinturaID" class="font-weight-bold">Cintura*</label><span> (cm)</span>
+            <label class="font-weight-bold text-secondary">Cintura*</label>
             <div class="input-group">
+                <span class="input-group-text">                                            
+                    <span><strong>cm</strong></span>
+                </span>
                 <input formControlName="cintura" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="5" mask="separator.2" required>
                 <div class="invalid-feedback">
                     Obrigatório.
@@ -67,8 +84,11 @@
         </div>
         <!-- QUADRIL -->
         <div class="col-6 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label for="quadrilID" class="font-weight-bold">Quadril*</label><span> (cm)</span>
+            <label class="font-weight-bold text-secondary">Quadril*</label>
             <div class="input-group">
+                <span class="input-group-text">                                            
+                    <span><strong>cm</strong></span>
+                </span>
                 <input formControlName="quadril" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="5" mask="separator.2" required>
                 <div class="invalid-feedback">
                     Obrigatório.
@@ -82,16 +102,22 @@
     <div class="form-row">            
         <!-- BICEPS ESQUERDO -->
         <div class="col-6 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label for="bicepsEsquerdoID" class="font-weight-bold">Bíceps Esquerdo</label><span> (cm)</span>
+            <label class="font-weight-bold text-secondary">Bíceps Esquerdo</label>
             <div class="input-group">
+                <span class="input-group-text">                                            
+                    <span><strong>cm</strong></span>
+                </span>
                 <input formControlName="bicepsE" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="5" mask="separator.2">
             </div>
         </div>
          
         <!-- BICEPS DIREITO -->
         <div class="col-6 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label for="bicepsDireitoID" class="font-weight-bold">Bíceps Direito</label><span> (cm)</span>
+            <label class="font-weight-bold text-secondary">Bíceps Direito</label>
             <div class="input-group">
+                <span class="input-group-text">                                            
+                    <span><strong>cm</strong></span>
+                </span>
                 <input formControlName="bicepsD" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="5" mask="separator.2">
             </div>
         </div>
@@ -102,16 +128,22 @@
     <div class="form-row">            
         <!-- ANTEBRACO ESQUERDO -->
         <div class="col-6 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label for="antebracoEsquerdoID" class="font-weight-bold">Antebraço Esq.</label><span> (cm)</span>
+            <label class="font-weight-bold text-secondary">Antebraço Esq.</label>
             <div class="input-group">
+                <span class="input-group-text">                                            
+                    <span><strong>cm</strong></span>
+                </span>
                 <input formControlName="antebracoE" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="5" mask="separator.2">
             </div>
         </div>
          
         <!-- ANTEBRACO DIREITO -->
         <div class="col-6 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label for="antebracoDireitoID" class="font-weight-bold">Antebraço Dir.</label><span> (cm)</span>
+            <label class="font-weight-bold text-secondary">Antebraço Dir.</label>
             <div class="input-group">
+                <span class="input-group-text">                                            
+                    <span><strong>cm</strong></span>
+                </span>
                 <input formControlName="antebracoD" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="5" mask="separator.2">
             </div>
         </div>
@@ -122,16 +154,22 @@
     <div class="form-row">            
         <!-- COXA ESQUERDO -->
         <div class="col-6 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label for="coxaEsquerdoID" class="font-weight-bold">Coxa Esquerda</label><span> (cm)</span>
+            <label class="font-weight-bold text-secondary">Coxa Esquerda</label>
             <div class="input-group">
+                <span class="input-group-text">                                            
+                    <span><strong>cm</strong></span>
+                </span>
                 <input formControlName="coxaE" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="5" mask="separator.2">
             </div>
         </div>
          
         <!-- COXA DIREITO -->
         <div class="col-6 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label for="coxaDireitoID" class="font-weight-bold">Coxa Direita</label><span> (cm)</span>
+            <label class="font-weight-bold text-secondary">Coxa Direita</label>
             <div class="input-group">
+                <span class="input-group-text">                                            
+                    <span><strong>cm</strong></span>
+                </span>
                 <input formControlName="coxaD" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="5" mask="separator.2">
             </div>
         </div>
@@ -142,15 +180,21 @@
     <div class="form-row">            
         <!-- PANTURRILHA ESQUERDA -->
         <div class="col-6 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label for="paturrihaEsquerdaID" class="font-weight-bold">Panturrilha Esq.</label><span> (cm)</span>
+            <label class="font-weight-bold text-secondary">Panturrilha Esq.</label>
             <div class="input-group">
+                <span class="input-group-text">                                            
+                    <span><strong>cm</strong></span>
+                </span>
                 <input formControlName="panturrilhaE" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="5" mask="separator.2">
             </div>
         </div>
         <!-- PANTURRILHA DIREITA -->
         <div class="col-6 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label for="panturrilhaDireitaID" class="font-weight-bold">Panturrilha Dir.</label><span> (cm)</span>
+            <label class="font-weight-bold  text-secondary">Panturrilha Dir.</label>
             <div class="input-group">
+                <span class="input-group-text">                                            
+                    <span><strong>cm</strong></span>
+                </span>
                 <input formControlName="panturrilhaD" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="5" mask="separator.2">
             </div>
         </div>
@@ -162,22 +206,6 @@
         https://getbootstrap.com/docs/4.0/utilities/display/
     -->
     <div class="row">
-        <div class="col-6">
-            <p class="d-block d-sm-none obs-xs text-left">(kg) Exemplo: 82.4</p><!-- XS -->
-            <p class="d-none d-sm-block d-md-none obs-sm">(kg) Exemplo: 82.4</p><!-- SM -->
-            <p class="d-none d-md-block d-lg-none obs-md">(kg) Exemplo: 82.4</p><!-- MD -->
-            <p class="d-none d-lg-block d-xl-none obs-lg">(kg) Exemplo: 82.4</p><!-- LG -->
-            <p class="d-none d-xl-block obs-xl">(kg) Exemplo: 82.4</p><!-- XL -->
-        </div>
-        <div class="col-6">
-            <p class="d-block d-sm-none obs-xs text-right">(cm) Exemplo: 82.4</p><!-- XS -->
-            <p class="d-none d-sm-block d-md-none obs-sm text-right">(cm) Exemplo: 82.4</p><!-- SM -->
-            <p class="d-none d-md-block d-lg-none obs-md text-right">(cm) Exemplo: 82.4</p><!-- MD -->
-            <p class="d-none d-lg-block d-xl-none obs-lg text-right">(cm) Exemplo: 82.4</p><!-- LG -->
-            <p class="d-none d-xl-block obs-xl text-right">(cm) Exemplo: 82.4</p><!-- XL -->
-        </div>
-    </div>
-    <div class="row">
         <div class="col-12">
             <p class="d-block d-sm-none obs-xs">* Valores obrigatórios. Necessários para calcular % de gordura.</p><!-- XS -->
             <p class="d-none d-sm-block d-md-none obs-sm">* Valores obrigatórios. Necessários para calcular % de gordura.</p><!-- SM -->
@@ -186,7 +214,10 @@
             <p class="d-none d-xl-block obs-xl">* Valores obrigatórios. Necessários para calcular % de gordura.</p><!-- XL -->
         </div>
     </div>
-    <button class="btn btn-success btn-lg btn-block" type="submit" (click)="onSubmit()">
+    
+    
+
+    <button class="btn btn-success btn-lg btn-block d-block d-xs-block d-sm-none mb-3" type="submit" (click)="onSubmit()">
         <i class="far fa-check-circle"></i> salvar
     </button>
 </form>        

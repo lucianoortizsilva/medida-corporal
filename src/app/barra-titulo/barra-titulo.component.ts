@@ -31,7 +31,7 @@ export class BarraTituloComponent implements OnChanges {
       this.rendered2.addClass(element, 'fas');
       this.rendered2.addClass(element, 'fa-chart-line');
     } else{
-      this.titulo = 'Novo';
+      this.titulo = 'Cadastro Novo';
       this.rendered2.addClass(element, 'fa');
       this.rendered2.addClass(element, 'fa-plus');
     }

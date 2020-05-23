@@ -35,9 +35,14 @@ export interface Medida {
     coxaD: number;
     panturrilhaE: number;
     panturrilhaD: number;
+    usuario: Usuario;
 }
 
 export class FiltroMedida { 
     codigo: number;
     descricao: string;
+}
+
+export interface Usuario {
+    email: string;
 }

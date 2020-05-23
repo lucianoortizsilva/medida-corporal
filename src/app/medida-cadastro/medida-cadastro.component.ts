@@ -63,7 +63,8 @@ export class MedidaCadastroComponent implements OnInit {
       coxaE: [null],
       coxaD: [null],
       panturrilhaE: [null],
-      panturrilhaD: [null]
+      panturrilhaD: [null],
+      usuario: [{email : 'lucianoortizasilva@gmail.com'}]
     });
   }
 
