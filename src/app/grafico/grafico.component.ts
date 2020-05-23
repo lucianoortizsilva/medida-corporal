@@ -7,13 +7,12 @@ import { Chart } from 'chart.js';
   templateUrl: './grafico.component.html',
   styleUrls: ['./grafico.component.scss']
 })
-export class GraficoComponent implements OnInit, OnChanges {
+export class GraficoComponent implements OnInit {
 
   @Input() dados = Array<number>();
   @Input() descricoes = Array<string>();
   @Input() legenda: string;
   @Input() unidadeMedida: string;  
-  static labelSufixo = '';  
   grafico = [];
 
 
@@ -21,14 +20,10 @@ export class GraficoComponent implements OnInit, OnChanges {
               private changeDetectorRef:ChangeDetectorRef) { }
 
   ngOnInit(){
-    this.create();
+    this.create(this.unidadeMedida);
   }
   
-  ngOnChanges(){
-    this.setLabelSufixo();
-  }
-
-  create(): void {
+  create(sufixo: string): void {
     const ctx = this.element.nativeElement.querySelector('.grafico');
     this.grafico = new Chart(ctx, {
       type: 'line',
@@ -89,7 +84,7 @@ export class GraficoComponent implements OnInit, OnChanges {
                 fontSize: 13,
                 fontStyle	: 'bold',
                 callback: function(label, index, labels) {            
-                    return ' '  + label + ' ' + GraficoComponent.getLabelSufixo();
+                    return ' '  + label + ' ' + sufixo;
                   },
                 },
                 gridLines : {
@@ -102,17 +97,5 @@ export class GraficoComponent implements OnInit, OnChanges {
       });
       this.changeDetectorRef.detectChanges();
   }  
-
-
-
-  setLabelSufixo(): void {
-    GraficoComponent.labelSufixo = this.unidadeMedida;    
-  }
-
-
-
-  static getLabelSufixo(): string {
-    return this.labelSufixo;
-  }
 
 }
