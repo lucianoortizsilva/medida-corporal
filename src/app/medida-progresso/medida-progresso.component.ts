@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FiltroMedida, MedidaEnum } from '../model';
+import { FiltroMedida, MedidaEnum, Medida } from '../model';
 import { MedidaService } from '../medida.service';
 import { DatePipe } from '@angular/common';
 import { isNull } from 'util';
@@ -26,9 +26,14 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
   dadosPeso = new Array<number>();  
   dadosTorax = new Array<number>();
   dadosPescoco = new Array<number>();
-  descricoes = new Array<string>();
+  
+  descricoesPeso = new Array<string>();
+  descricoesTorax = new Array<string>();
+  descricoesPescoco = new Array<string>();
     
   subscriptionMedidas: Subscription;
+
+  qtdDadosParaVisualizar = 6;
   
   constructor(private datepipe: DatePipe,
               private medidaService: MedidaService) { }
@@ -52,10 +57,9 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
   private loadAllCharts(): void {
     this.subscriptionMedidas = this.medidaService.getMedidas().subscribe(medidas => {
       medidas.forEach(m => {
-        this.dadosPeso.push(this.toNumber(m.peso));
-        this.dadosTorax.push(this.toNumber(m.torax));
-        this.dadosPescoco.push(this.toNumber(m.pescoco));
-        this.descricoes.push(this.toDateFormat(m.dtCriacao));
+        this.loadPeso(m);
+        this.loadTorax(m);
+        this.loadPescoco(m);
       })
     });
   }
@@ -80,24 +84,21 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
       case MedidaEnum.PESO:
         this.medidaService.getMedidas().subscribe(medidas => {
           medidas.forEach(m => {
-            this.dadosPeso.push(m.peso);
-            this.descricoes.push(this.toDateFormat(m.dtCriacao));
+            this.loadPeso(m);
           });
         });
         break;
       case MedidaEnum.TORAX:
         this.medidaService.getMedidas().subscribe(medidas => {
           medidas.forEach(m => {
-            this.dadosTorax.push(m.torax);
-            this.descricoes.push(this.toDateFormat(m.dtCriacao));
+            this.loadTorax(m);
           });
         });
           break;          
       case MedidaEnum.PESCOCO:
         this.medidaService.getMedidas().subscribe(medidas => {
           medidas.forEach(m => {
-            this.dadosPescoco.push(m.pescoco);
-            this.descricoes.push(this.toDateFormat(m.dtCriacao));
+            this.loadPescoco(m);
           });
         });
           break;              
@@ -118,9 +119,12 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
 
   private clearCharts(): void {
     this.dadosPeso = new Array();
-    this.dadosTorax= new Array();
     this.dadosPescoco= new Array();
-    this.descricoes = new Array();
+    this.dadosTorax= new Array();
+
+    this.descricoesPeso = new Array();
+    this.descricoesPescoco= new Array();
+    this.descricoesTorax= new Array();
   }
 
 
@@ -137,4 +141,26 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
     }
     return 0.0;
   }
+
+  private loadPeso(m: Medida): void{
+    if(!isNull(m.peso) && this.dadosPeso.length < this.qtdDadosParaVisualizar ){
+      this.dadosPeso.push(this.toNumber(m.peso));
+      this.descricoesPeso.push(this.toDateFormat(m.dtCriacao));
+    }
+  }
+
+  private loadTorax(m: Medida): void {
+    if(!isNull(m.torax) && this.dadosTorax.length < this.qtdDadosParaVisualizar ){
+      this.dadosTorax.push(this.toNumber(m.torax));
+      this.descricoesTorax.push(this.toDateFormat(m.dtCriacao));
+    }
+  }
+  
+  private loadPescoco(m: Medida): void {
+    if(!isNull(m.pescoco) && this.dadosPescoco.length < this.qtdDadosParaVisualizar ){
+      this.dadosPescoco.push(this.toNumber(m.pescoco));
+      this.descricoesPescoco.push(this.toDateFormat(m.dtCriacao));
+    }
+  }
+
 }

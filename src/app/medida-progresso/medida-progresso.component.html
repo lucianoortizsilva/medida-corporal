@@ -1,7 +1,7 @@
-<div class="w3-container">
-      <div class="input-group mb-3">
+<div class="w3-container mt-3 mb-3">
+      <div class="input-group">
             <div class="input-group-prepend">
-                  <label class="input-group-text" for="filtroID">Filtro</label>
+                  <label class="input-group-text">Filtro</label>
             </div>
             <select id="filtroID" name="filtros" class="form-control" [formControl]="filtroControl">
                   <option *ngFor="let filtro of filtros" [ngValue]="filtro">
@@ -13,21 +13,21 @@
 
 <app-grafico   *ngIf="dadosPeso.length > 0"
              [dados]="dadosPeso"
-        [descricoes]="descricoes"
+        [descricoes]="descricoesPeso"
            [legenda]="'Peso'"
      [unidadeMedida]="'kg'">
 </app-grafico>
 
 <app-grafico   *ngIf="dadosPescoco.length > 0"
              [dados]="dadosPescoco"
-        [descricoes]="descricoes"
+        [descricoes]="descricoesPescoco"
            [legenda]="'Pescoço'"
      [unidadeMedida]="'cm'">
 </app-grafico>
 
 <app-grafico   *ngIf="dadosTorax.length > 0"  
              [dados]="dadosTorax"
-        [descricoes]="descricoes"
+        [descricoes]="descricoesTorax"
            [legenda]="'Tórax'"
      [unidadeMedida]="'cm'">
 </app-grafico>

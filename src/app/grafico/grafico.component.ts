@@ -28,10 +28,10 @@ export class GraficoComponent implements OnInit, OnChanges {
     this.setLabelSufixo();
   }
 
-  create(): void{
+  create(): void {
     const ctx = this.element.nativeElement.querySelector('.grafico');
     this.grafico = new Chart(ctx, {
-      type: 'bar',
+      type: 'line',
       data: {
         labels: this.descricoes,
         datasets: [          
@@ -84,7 +84,7 @@ export class GraficoComponent implements OnInit, OnChanges {
             yAxes: [{
               display: true,               
               ticks: {
-                beginAtZero: true,
+                beginAtZero: false,
                 fontColor: '#000',
                 fontSize: 13,
                 fontStyle	: 'bold',
