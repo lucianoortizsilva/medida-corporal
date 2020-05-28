@@ -1,15 +1,22 @@
 <div class="row mt-3 mb-3">
-      <div class="col-12">
-            <div class="input-group">
-                  <div class="input-group-prepend">
-                        <label class="input-group-text">Filtro</label>
+      <div class="col-12">            
+            <form [formGroup]="form">
+                  
+                  <div class="form-check">
+                        <input formControlName="opcaoQuantidade" type="radio" class="form-check-input" name="opcaoQuantidade" value="3">
+                        <label class="form-check-label ml-2">Trazer no máximo 3 registros</label>
                   </div>
-                  <select id="filtroID" name="filtros" class="form-control" [formControl]="filtroControl">
-                        <option *ngFor="let filtro of filtros" [ngValue]="filtro">
-                              {{ filtro.descricao }}
+                  <div class="form-check">
+                        <input formControlName="opcaoQuantidade" type="radio" class="form-check-input" name="opcaoQuantidade" value="6">
+                        <label class="form-check-label ml-2">Trazer no máximo 6 registros</label>
+                  </div>
+
+                  <select formControlName="filtros" id="filtros" class="form-control mt-3">
+                        <option *ngFor="let filtro of filtros; let i = index" [value]="filtros[i].id">
+                              {{filtros[i].name}}
                         </option>
                   </select>
-            </div>
+            </form>
       </div>
 </div>
 

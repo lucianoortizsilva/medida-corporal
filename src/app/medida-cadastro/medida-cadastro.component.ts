@@ -15,12 +15,12 @@ export class MedidaCadastroComponent implements OnInit {
 
 
 
-  constructor(private elementRef: ElementRef, 
+  constructor(private elementRef: ElementRef,
               private rendered2: Renderer2,
               private medidaService: MedidaService,
               private formBuilder: FormBuilder,
               private datepipe: DatePipe) { }
-    
+
 
 
   ngOnInit() {
@@ -33,21 +33,21 @@ export class MedidaCadastroComponent implements OnInit {
     if (this.formulario.valid) {
       const body = JSON.stringify(this.formulario.value);
       this.medidaService.save(body).subscribe( (data: HttpResponseBase) => {
-        this.removeStyleValidacoes();        
+        this.removeStyleValidacoes();
         this.inicializarFormulario();
       }, (err: HttpErrorResponse) => {
         /**
          * TODO: Adicionar mensagem de erro p\ usuário
          */
         console.log('Ocorreu um erro no servidor: ', err);
-      });   
+      });
     } else {
       this.addStyleValidacoes();
     }
   }
 
 
-  
+
   inicializarFormulario(): void {
     this.formulario = this.formBuilder.group({
       dtCriacao: [this.datepipe.transform(new Date(), 'yyyy-MM-dd')],

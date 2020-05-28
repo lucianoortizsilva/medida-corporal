@@ -8,7 +8,7 @@ import { Pagina } from '../model';
 })
 export class PrincipalComponent implements OnInit {
 
-  paginaSelecionada = Pagina.medida_cadastro;
+  paginaSelecionada = Pagina.medida_progresso;
   exibirMenu = false;
   titulo = '';
   @Output() paginaSelecionadaEventEmitter = new EventEmitter<Pagina>();
