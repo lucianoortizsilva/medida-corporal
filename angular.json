@@ -28,8 +28,6 @@
               "src/assets"
             ],
             "styles": [
-              //"node_modules/bootstrap/scss/bootstrap.scss",
-              //"src/styles.scss"
               "node_modules/angular-bootstrap-md/assets/scss/bootstrap/bootstrap.scss",
               "node_modules/angular-bootstrap-md/assets/scss/mdb.scss",
               "src/styles.scss"
@@ -133,6 +131,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "medida-corporal"
+    }
+  },
+  "defaultProject": "medida-corporal",
+  "cli": {
+    "analytics": "8992573a-210e-446d-96fa-09a166db33e5"
+  }
 }

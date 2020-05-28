@@ -3,7 +3,7 @@
 -->
 
 
-<form class="needs-validation mr-4" novalidate [formGroup]="formulario">
+<form class="needs-validation m-5" novalidate [formGroup]="formulario">
     
     <!-- DATA CRIACAO -->
     <div class="md-form mt-5">
@@ -157,8 +157,12 @@
         </div>
     </div>
 
-    <button mdbBtn type="submit" color="primary" mdbWavesEffect (click)="onSubmit()">
-        <i class="far fa-check-circle"></i> salvar
-    </button>
+    <div class="row mb-5">
+        <div class="col-12">
+            <button mdbBtn [disabled]="!formulario.valid" class="col-12 float-right" type="submit" color="primary" mdbWavesEffect (click)="onSubmit()">
+                <i class="far fa-check-circle"></i> salvar
+            </button>
+        </div>
+    </div>
 
 </form>        

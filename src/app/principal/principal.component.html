@@ -1,7 +1,4 @@
-<div class="w3-light-grey w3-content">
-    <!--
-    <app-cabecalho (paginaSelecionadaEventEmitter)="setPagina($event)"></app-cabecalho>
-    -->
+<div class="w3-content">
 
   <!-- Conteudo do menu INICIO -->
   <nav id="menu-conteudo" class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;"><br>
@@ -44,9 +41,11 @@
             <i class="fa fa-bars"></i>
         </span>
         
+        
         <app-barra-titulo [pagina]="paginaSelecionada"></app-barra-titulo>
 
         <div class="w3-container mt-2">
+
             <div [ngSwitch]="paginaSelecionada">    
               <app-medida-cadastro  *ngSwitchCase="'medida_cadastro'"></app-medida-cadastro>
                 <app-medida-progresso *ngSwitchCase="'medida_progresso'"></app-medida-progresso>
