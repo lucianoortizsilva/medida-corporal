@@ -1,33 +1,57 @@
-<div class="w3-container mt-3 mb-3">
-      <div class="input-group">
-            <div class="input-group-prepend">
-                  <label class="input-group-text">Filtro</label>
+<div class="row mt-3 mb-3">
+      <div class="col-12">
+            <div class="input-group">
+                  <div class="input-group-prepend">
+                        <label class="input-group-text">Filtro</label>
+                  </div>
+                  <select id="filtroID" name="filtros" class="form-control" [formControl]="filtroControl">
+                        <option *ngFor="let filtro of filtros" [ngValue]="filtro">
+                              {{ filtro.descricao }}
+                        </option>
+                  </select>
             </div>
-            <select id="filtroID" name="filtros" class="form-control" [formControl]="filtroControl">
-                  <option *ngFor="let filtro of filtros" [ngValue]="filtro">
-                        {{ filtro.descricao }}
-                  </option>
-            </select>
       </div>
 </div>
 
 <app-grafico   *ngIf="dadosPeso.length > 0"
-             [dados]="dadosPeso"
+             [dados]="[dadosPeso]"
         [descricoes]="descricoesPeso"
-           [legenda]="'Peso'"
+           [legenda]="['Peso']"
      [unidadeMedida]="'kg'">
 </app-grafico>
 
+
 <app-grafico   *ngIf="dadosPescoco.length > 0"
-             [dados]="dadosPescoco"
+             [dados]="[dadosPescoco]"
         [descricoes]="descricoesPescoco"
-           [legenda]="'Pescoço'"
+           [legenda]="['Pescoço']"
      [unidadeMedida]="'cm'">
 </app-grafico>
 
 <app-grafico   *ngIf="dadosTorax.length > 0"  
-             [dados]="dadosTorax"
+             [dados]="[dadosTorax]"
         [descricoes]="descricoesTorax"
-           [legenda]="'Tórax'"
+           [legenda]="['Tórax']"
+     [unidadeMedida]="'cm'">
+</app-grafico>
+
+<app-grafico   *ngIf="dadosCintura.length > 0"  
+             [dados]="[dadosCintura]"
+        [descricoes]="descricoesCintura"
+           [legenda]="['Cintura']"
+     [unidadeMedida]="'cm'">
+</app-grafico>
+
+<app-grafico   *ngIf="dadosQuadril.length > 0"  
+             [dados]="[dadosQuadril]"
+        [descricoes]="descricoesQuadril"
+           [legenda]="['Quadril']"
+     [unidadeMedida]="'cm'">
+</app-grafico>
+
+<app-grafico   *ngIf="dadosBicepsE.length > 0 && dadosBicepsD.length > 0"  
+             [dados]="[dadosBicepsE, dadosBicepsD]"
+        [descricoes]="descricoesBiceps"
+           [legenda]="['Bíceps Esquerdo', 'Bíceps Direito']"
      [unidadeMedida]="'cm'">
 </app-grafico>

@@ -2,6 +2,24 @@
 
 hr {border-top: 1px solid #BDBDBD;}
 
+.was-validated .form-control:invalid:focus, .form-control.is-invalid:focus {
+    border-color: unset;
+    box-shadow: unset;
+}
+
+.was-validated .form-control:valid:focus, .form-control.is-valid:focus {
+    border-color: unset;
+    box-shadow: unset;
+}
+
+.was-validated .form-control:invalid, .form-control.is-invalid {
+    padding-right: unset;
+}
+
+.was-validated .form-control:valid, .form-control.is-valid {
+    padding-right: unset;
+}
+
 @include media-breakpoint-up(xs) {     
     .form-control {
         font-weight: 700;   
@@ -9,6 +27,7 @@ hr {border-top: 1px solid #BDBDBD;}
     label {
         font-size: 12px;
         text-align: center;
+        font-weight: bold;
     }
 }
 
@@ -16,33 +35,3 @@ hr {border-top: 1px solid #BDBDBD;}
 //@include media-breakpoint-up(md) {  }
 //@include media-breakpoint-up(lg) {  }
 //@include media-breakpoint-up(xl) {  }
-
-.obs-xs {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 10px;
-    font-weight: 500;
-}
-
-.obs-sm {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 12px;
-    font-weight: 800;
-}
-
-.obs-md {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 12px;
-    font-weight: 900;
-}
-
-.obs-lg {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 14px;
-    font-weight: 900;
-}
-
-.obs-xl {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 15px;
-    font-weight: 900;
-}

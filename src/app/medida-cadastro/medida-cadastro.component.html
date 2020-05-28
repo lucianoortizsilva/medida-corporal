@@ -1,223 +1,164 @@
 <!-- 
     novalidate: remove as mensagens padrões dos browsers, quanto a validações
 -->
-<form class="needs-validation" novalidate [formGroup]="formulario">
-    
+
+
+<form class="needs-validation mr-4" novalidate [formGroup]="formulario">
     
     <!-- DATA CRIACAO -->
-    <div class="form-row mt-3">
-        <div class="col-8 offset-2 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <div class="input-group">
-                <span class="input-group-text">                                            
-                    <i class="far fa-calendar-alt"></i>
-                </span>
-                <input formControlName="dtCriacao" class="form-control text-primary" type="date" required>
-                <div class="invalid-feedback">
-                    Preenchimento Obrigatório.
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <hr class="w3-opacity mt-0">
-
-    <div class="form-row">   
-        <!-- PESO -->
-        <div class="col-12 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label class="font-weight-bold text-secondary">Peso* (kg)</label>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">                                            
-                        <i class="fas fa-weight"></i>
-                    </span>
-                </div>
-                <input formControlName="peso" type="text" class="form-control" placeholder="Exemplo = 82.1" maxlength="5" mask="separator.2" required>
-                <div class="invalid-feedback">
-                    Obrigatório.
-                </div>
-            </div>
-        </div>
-    </div>   
-
-    <div class="form-row">   
-        <!-- PESCOÇO -->
-        <div class="col-6 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label class="font-weight-bold text-secondary">Pescoço*</label>
-            <div class="input-group">
-                <span class="input-group-text">                                            
-                    <span><strong>cm</strong></span>
-                </span>
-                <input input formControlName="pescoco" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="4" mask="separator.2" required>
-                <div class="invalid-feedback">
-                    Obrigatório.
-                </div>
-            </div>
-        </div>        
-        <!-- TÓRAX -->
-        <div class="col-6 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label class="font-weight-bold text-secondary">Tórax*</label>
-            <div class="input-group">
-                <span class="input-group-text">                                            
-                    <span><strong>cm</strong></span>
-                </span>
-                <input formControlName="torax" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="5" mask="separator.2" required>
-                <div class="invalid-feedback">
-                    Obrigatório.
-                </div>
-            </div>
+    <div class="md-form mt-5">
+        <label for="input">Data*</label>
+        <input mdbInput formControlName="dtCriacao" type="date" class="form-control" required>
+        <div class="invalid-feedback">
+            Preenchimento Obrigatório.
         </div>
     </div>
     
-    <div class="form-row">            
-        <!-- CINTURA -->
-        <div class="col-6 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label class="font-weight-bold text-secondary">Cintura*</label>
-            <div class="input-group">
-                <span class="input-group-text">                                            
-                    <span><strong>cm</strong></span>
-                </span>
-                <input formControlName="cintura" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="5" mask="separator.2" required>
-                <div class="invalid-feedback">
-                    Obrigatório.
-                </div>
-            </div>
-        </div>
-        <!-- QUADRIL -->
-        <div class="col-6 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label class="font-weight-bold text-secondary">Quadril*</label>
-            <div class="input-group">
-                <span class="input-group-text">                                            
-                    <span><strong>cm</strong></span>
-                </span>
-                <input formControlName="quadril" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="5" mask="separator.2" required>
-                <div class="invalid-feedback">
-                    Obrigatório.
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <hr class="w3-opacity">
-
-    <div class="form-row">            
-        <!-- BICEPS ESQUERDO -->
-        <div class="col-6 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label class="font-weight-bold text-secondary">Bíceps Esquerdo</label>
-            <div class="input-group">
-                <span class="input-group-text">                                            
-                    <span><strong>cm</strong></span>
-                </span>
-                <input formControlName="bicepsE" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="4" mask="separator.2">
-            </div>
-        </div>
-         
-        <!-- BICEPS DIREITO -->
-        <div class="col-6 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label class="font-weight-bold text-secondary">Bíceps Direito</label>
-            <div class="input-group">
-                <span class="input-group-text">                                            
-                    <span><strong>cm</strong></span>
-                </span>
-                <input formControlName="bicepsD" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="4" mask="separator.2">
+    <!-- PESO -->
+    <div class="form-row">
+        <div class="md-form col-12">
+            <label class="">Peso* (kg)</label>
+            <input mdbInput formControlName="peso" type="text" class="form-control" maxlength="5" mask="separator.2" required>
+            <div class="invalid-feedback">
+                Preenchimento Obrigatório.
             </div>
         </div>
     </div>
 
-    <hr class="w3-opacity">
-
-    <div class="form-row">            
-        <!-- ANTEBRACO ESQUERDO -->
-        <div class="col-6 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label class="font-weight-bold text-secondary">Antebraço Esq.</label>
-            <div class="input-group">
-                <span class="input-group-text">                                            
-                    <span><strong>cm</strong></span>
-                </span>
-                <input formControlName="antebracoE" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="4" mask="separator.2">
-            </div>
-        </div>
-         
-        <!-- ANTEBRACO DIREITO -->
-        <div class="col-6 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label class="font-weight-bold text-secondary">Antebraço Dir.</label>
-            <div class="input-group">
-                <span class="input-group-text">                                            
-                    <span><strong>cm</strong></span>
-                </span>
-                <input formControlName="antebracoD" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="4" mask="separator.2">
+    <!-- PESCOÇO -->
+    <div class="form-row">
+        <div class="md-form col-12">
+            <label class="">Pescoço* (cm)</label>
+            <input mdbInput formControlName="pescoco" type="text" class="form-control" maxlength="4" mask="separator.2" required>
+            <div class="invalid-feedback">
+                Preenchimento Obrigatório.
             </div>
         </div>
     </div>
 
-    <hr class="w3-opacity">
-
-    <div class="form-row">            
-        <!-- COXA ESQUERDO -->
-        <div class="col-6 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label class="font-weight-bold text-secondary">Coxa Esquerda</label>
-            <div class="input-group">
-                <span class="input-group-text">                                            
-                    <span><strong>cm</strong></span>
-                </span>
-                <input formControlName="coxaE" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="4" mask="separator.2">
-            </div>
-        </div>
-         
-        <!-- COXA DIREITO -->
-        <div class="col-6 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label class="font-weight-bold text-secondary">Coxa Direita</label>
-            <div class="input-group">
-                <span class="input-group-text">                                            
-                    <span><strong>cm</strong></span>
-                </span>
-                <input formControlName="coxaD" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="4" mask="separator.2">
+    <!-- TORAX -->
+    <div class="form-row">
+        <div class="md-form col-12">
+            <label class="">Tórax* (cm)</label>
+            <input mdbInput formControlName="torax" type="text" class="form-control" maxlength="5" mask="separator.2" required>
+            <div class="invalid-feedback">
+                Preenchimento Obrigatório.
             </div>
         </div>
     </div>
 
-    <hr class="w3-opacity">
-
-    <div class="form-row">            
-        <!-- PANTURRILHA ESQUERDA -->
-        <div class="col-6 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label class="font-weight-bold text-secondary">Panturrilha Esq.</label>
-            <div class="input-group">
-                <span class="input-group-text">                                            
-                    <span><strong>cm</strong></span>
-                </span>
-                <input formControlName="panturrilhaE" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="4" mask="separator.2">
-            </div>
-        </div>
-        <!-- PANTURRILHA DIREITA -->
-        <div class="col-6 col-sm-12 col-md-5 col-lg-4 col-xl-4 mb-3">
-            <label class="font-weight-bold  text-secondary">Panturrilha Dir.</label>
-            <div class="input-group">
-                <span class="input-group-text">                                            
-                    <span><strong>cm</strong></span>
-                </span>
-                <input formControlName="panturrilhaD" type="text" class="form-control" aria-describedby="inputGroupPrepend" maxlength="4" mask="separator.2">
+    <!-- CINTURA -->
+    <div class="form-row">
+        <div class="md-form col-12">
+            <label class="">Cintura* (cm)</label>
+            <input mdbInput formControlName="cintura" type="text" class="form-control" maxlength="5" mask="separator.2" required>
+            <div class="invalid-feedback">
+                Preenchimento Obrigatório.
             </div>
         </div>
     </div>
 
-    <hr>
-
-    <!--
-        https://getbootstrap.com/docs/4.0/utilities/display/
-    -->
-    <div class="row">
-        <div class="col-12">
-            <p class="d-block d-sm-none obs-xs">* Valores obrigatórios. Necessários para calcular % de gordura.</p><!-- XS -->
-            <p class="d-none d-sm-block d-md-none obs-sm">* Valores obrigatórios. Necessários para calcular % de gordura.</p><!-- SM -->
-            <p class="d-none d-md-block d-lg-none obs-md">* Valores obrigatórios. Necessários para calcular % de gordura.</p><!-- MD -->
-            <p class="d-none d-lg-block d-xl-none obs-lg">* Valores obrigatórios. Necessários para calcular % de gordura.</p><!-- LG -->
-            <p class="d-none d-xl-block obs-xl">* Valores obrigatórios. Necessários para calcular % de gordura.</p><!-- XL -->
+    <!-- QUADRIL -->
+    <div class="form-row">
+        <div class="md-form col-12">
+            <label class="">Quadril* (cm)</label>
+            <input mdbInput formControlName="quadril" type="text" class="form-control" maxlength="5" mask="separator.2" required>
+            <div class="invalid-feedback">
+                Preenchimento Obrigatório.
+            </div>
         </div>
     </div>
-    
-    
 
-    <button class="btn btn-success btn-lg btn-block d-block d-xs-block d-sm-none mb-3" type="submit" (click)="onSubmit()">
+    <!-- BICEPS ESQUERDO -->
+    <div class="form-row">
+        <div class="md-form col-12">
+            <label class="">Bíceps Esquerdo (cm)</label>
+            <input mdbInput formControlName="bicepsE" type="text" class="form-control" maxlength="5" mask="separator.2">
+            <div class="invalid-feedback">
+                Preenchimento Obrigatório.
+            </div>
+        </div>
+    </div>
+
+    <!-- BICEPS DIREITO -->
+    <div class="form-row">
+        <div class="md-form col-12">
+            <label class="">Bíceps Direito (cm)</label>
+            <input mdbInput formControlName="bicepsD" type="text" class="form-control" maxlength="5" mask="separator.2">
+            <div class="invalid-feedback">
+                Preenchimento Obrigatório.
+            </div>
+        </div>
+    </div>
+
+    <!-- ANTEBRAÇO ESQUERDO -->
+    <div class="form-row">
+        <div class="md-form col-12">
+            <label class="">Antebraço Esquerdo (cm)</label>
+            <input mdbInput formControlName="antebracoE" type="text" class="form-control" maxlength="5" mask="separator.2">
+            <div class="invalid-feedback">
+                Preenchimento Obrigatório.
+            </div>
+        </div>
+    </div>
+
+    <!-- ANTEBRAÇO DIREITO -->
+    <div class="form-row">
+        <div class="md-form col-12">
+            <label class="">Antebraço Direito (cm)</label>
+            <input mdbInput formControlName="antebracoD" type="text" class="form-control" maxlength="5" mask="separator.2">
+            <div class="invalid-feedback">
+                Preenchimento Obrigatório.
+            </div>
+        </div>
+    </div>
+
+    <!-- COXA ESQUERDO -->
+    <div class="form-row">
+        <div class="md-form col-12">
+            <label class="">Coxa Esquerda (cm)</label>
+            <input mdbInput formControlName="coxaE" type="text" class="form-control" maxlength="5" mask="separator.2">
+            <div class="invalid-feedback">
+                Preenchimento Obrigatório.
+            </div>
+        </div>
+    </div>
+
+    <!-- COXA DIREITO -->
+    <div class="form-row">
+        <div class="md-form col-12">
+            <label class="">Coxa Direita (cm)</label>
+            <input mdbInput formControlName="coxaD" type="text" class="form-control" maxlength="5" mask="separator.2">
+            <div class="invalid-feedback">
+                Preenchimento Obrigatório.
+            </div>
+        </div>
+    </div>
+
+    <!-- PANTURRILHA ESQUERDO -->
+    <div class="form-row">
+        <div class="md-form col-12">
+            <label class="">Panturrilha Esquerda (cm)</label>
+            <input mdbInput formControlName="panturrilhaE" type="text" class="form-control" maxlength="5" mask="separator.2">
+            <div class="invalid-feedback">
+                Preenchimento Obrigatório.
+            </div>
+        </div>
+    </div>
+
+    <!-- PANTURRILHA DIREITO -->
+    <div class="form-row">
+        <div class="md-form col-12">
+            <label class="">Panturrilha Direita (cm)</label>
+            <input mdbInput formControlName="panturrilhaD" type="text" class="form-control" maxlength="5" mask="separator.2">
+            <div class="invalid-feedback">
+                Preenchimento Obrigatório.
+            </div>
+        </div>
+    </div>
+
+    <button mdbBtn type="submit" color="primary" mdbWavesEffect (click)="onSubmit()">
         <i class="far fa-check-circle"></i> salvar
     </button>
+
 </form>        

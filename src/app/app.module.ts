@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MedidaService } from './medida.service';
 import { DatePipe } from '@angular/common';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 const maskConfigFunction: () => Partial<IConfig> = () => {
   return {
@@ -37,8 +38,10 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    MDBBootstrapModule.forRoot(),
     NgxMaskModule.forRoot(maskConfigFunction),//https://www.npmjs.com/package/ngx-mask
   ],
+  schemas: [ NO_ERRORS_SCHEMA ],
   providers: [MedidaService, DatePipe],
   bootstrap: [AppComponent]
 })

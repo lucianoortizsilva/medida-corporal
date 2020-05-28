@@ -13,8 +13,7 @@ export enum MedidaEnum {
     COXA_D = 6,
     PANTURRILHA_E = 7,
     PANTURRILHA_D = 8,
-    BICEPS_E = 9,
-    BICEPS_D = 10,
+    BICEPS = 9,
     ANTEBRACO_E = 11,
     ANTEBRACO_D = 12,
     PESCOCO = 13

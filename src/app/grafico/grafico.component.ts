@@ -9,9 +9,9 @@ import { Chart } from 'chart.js';
 })
 export class GraficoComponent implements OnInit {
 
-  @Input() dados = Array<number>();
+  @Input() dados = Array<number[]>();
   @Input() descricoes = Array<string>();
-  @Input() legenda: string;
+  @Input() legenda = Array<string[]>();
   @Input() unidadeMedida: string;  
   grafico = [];
 
@@ -29,20 +29,7 @@ export class GraficoComponent implements OnInit {
       type: 'line',
       data: {
         labels: this.descricoes,
-        datasets: [          
-          {
-            label: this.legenda,
-            data: this.dados,
-            backgroundColor: '#2E64FE',
-            borderColor: '#0000FF',
-            borderWidth: 2,
-            hoverBackgroundColor:'#58FA58',
-            hoverBorderColor: '#04B45F',
-            hoverBorderWidth: 3,
-            barPercentage: 1.1,
-            maxBarThickness: 21,   
-          }
-          ],
+        datasets: this.createDatasets(),
       },  
         options: {          
           title: {
@@ -97,5 +84,43 @@ export class GraficoComponent implements OnInit {
       });
       this.changeDetectorRef.detectChanges();
   }  
+
+
+  
+  createDatasets(): Array<any> {
+    const datasets = new Array<any>();
+
+    if(this.dados[0] !== undefined ){
+      datasets.push({
+        label: this.legenda[0],
+        data: this.dados[0],
+        backgroundColor: '#2E64FE',
+        borderColor: '#0000FF',
+        borderWidth: 2,
+        hoverBackgroundColor:'#58FA58',
+        hoverBorderColor: '#04B45F',
+        hoverBorderWidth: 3,
+        barPercentage: 1.1,
+        maxBarThickness: 21,   
+      });
+    }
+
+    if(this.dados[1] !== undefined ){
+      datasets.push({
+        display: false,
+        label: this.legenda[1],
+        data: this.dados[1],
+        backgroundColor: '#2E64FE',
+        borderColor: '#0000FF',
+        borderWidth: 2,
+        hoverBackgroundColor:'#58FA58',
+        hoverBorderColor: '#04B45F',
+        hoverBorderWidth: 3,
+        barPercentage: 1.1,
+        maxBarThickness: 21,   
+      });
+    }
+    return datasets;
+  }
 
 }
