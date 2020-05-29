@@ -11,7 +11,7 @@ export class MedidaService {
 
   constructor(private http: HttpClient) { }
 
-  
+
   getMedidas(): Observable<Medida[]> {
     const url = environment.medidasAPI;
     return this.http.get<Medida[]>(url, {responseType: 'json'});
@@ -20,9 +20,9 @@ export class MedidaService {
 
 
 
-  getMedidasByID(codigo: number): Observable<Medida[]> {
-    const url = environment.medidasAPI + '/' + codigo;
-    return this.http.get<Medida[]>(url, {responseType: 'json'});
+  getMedidaAtual(email: string): Observable<Medida> {
+    const url = environment.medidasAPI + '/' + email + '/atual';
+    return this.http.get<Medida>(url, {responseType: 'json'});
   }
 
 
