@@ -15,6 +15,7 @@ import { MedidaService } from './medida.service';
 import { DatePipe } from '@angular/common';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { PerfilComponent } from './perfil/perfil.component';
 
 const maskConfigFunction: () => Partial<IConfig> = () => {
   return {
@@ -31,7 +32,8 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
     MedidaProgressoComponent,
     MedidaAtualComponent,
     BarraTituloComponent,
-    GraficoComponent,    
+    GraficoComponent,
+    PerfilComponent,    
   ],
   imports: [
     BrowserModule,
