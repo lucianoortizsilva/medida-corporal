@@ -41,7 +41,7 @@ export class GraficoComponent implements OnInit {
             display: true,
             position: 'top',
             labels: {
-              fontColor: '#FE2E2E',
+              fontColor: '#000',
               fontSize: 14
             }
           },
@@ -92,6 +92,7 @@ export class GraficoComponent implements OnInit {
 
     if(this.dados[0] !== undefined ){
       datasets.push({
+        display: true,
         label: this.legenda[0],
         data: this.dados[0],
         backgroundColor: '#2E64FE',
@@ -107,11 +108,11 @@ export class GraficoComponent implements OnInit {
 
     if(this.dados[1] !== undefined ){
       datasets.push({
-        display: false,
+        display: true,
         label: this.legenda[1],
         data: this.dados[1],
-        backgroundColor: '#2E64FE',
-        borderColor: '#0000FF',
+        backgroundColor: '#B22222',
+        borderColor: '#FF0000',
         borderWidth: 2,
         hoverBackgroundColor:'#58FA58',
         hoverBorderColor: '#04B45F',

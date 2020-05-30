@@ -41,7 +41,7 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
 
   subscriptionMedidas: Subscription;
 
-  qtdDadosParaVisualizar = 3;
+  qtdDadosParaVisualizar = 6;
 
   constructor(private datepipe: DatePipe,
               private medidaService: MedidaService,
@@ -82,7 +82,7 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
   private loadForm(): void {
     this.form = this.formBuilder.group({
       filtros: [''],
-      opcaoQuantidade: new FormControl('3'),
+      opcaoQuantidade: new FormControl('6'),
     });
   }
 

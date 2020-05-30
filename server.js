@@ -88,7 +88,7 @@ async function findMedidas(req, res) {
 
 async function findAllMedidas(req, res) {    
     var collection = db.collection('Medida');
-    var cursor = collection.find({});
+    var cursor = collection.find({}).sort( { dtCriacao: -1 } ).limit(3);
     var medidas = new Array();    
     await cursor.forEach(function(result, err) {
         if (result !== null) {
