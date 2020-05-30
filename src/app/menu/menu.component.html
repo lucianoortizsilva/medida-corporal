@@ -1,0 +1,14 @@
+<nav id="menu-conteudo" class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;"><br>
+    <div class="w3-container">
+        <a href="#" (click)="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+        <i class="fas fa-times"></i>
+        </a>
+        <app-perfil></app-perfil>
+    </div>    
+    <hr class="w3-opacity">
+    <div class="w3-bar-block">
+        <a (click)="selecionarPagina('medida_cadastro')" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-plus fa-fw w3-margin-right"></i>CADASTRO NOVO</a> 
+        <a (click)="selecionarPagina('medida_progresso')" class="w3-bar-item w3-button w3-padding"><i class="fas fa-chart-line fa-fw w3-margin-right"></i>PROGRESSO</a> 
+        <a (click)="selecionarPagina('medida_atual')" class="w3-bar-item w3-button w3-padding"><i class="fas fa-weight fa-fw w3-margin-right"></i>ATUAL</a>
+    </div>
+</nav>

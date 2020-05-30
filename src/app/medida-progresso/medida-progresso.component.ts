@@ -162,6 +162,7 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
   private onChangeFilter(): void {
     this.form.controls.opcaoQuantidade.valueChanges.subscribe(data => {
       this.qtdDadosParaVisualizar = data;
+      this.loadFilters();
       this.clearCharts();
       this.loadAllCharts();
     });

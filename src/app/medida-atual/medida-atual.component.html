@@ -1,18 +1,13 @@
-<!--
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-6 col-sm-6 text-center">
-            <h5>{{ medidaAtual.dtCriacao | date: 'dd/MM/yyyy' }}</h5>    
-        </div>
+<div class="row">
+    <div class="col-12">
+        <mdb-card class="testimonial-card">
+            <div class="card-up indigo lighten-1"></div>
+            <mdb-card-body>
+                <mdb-card-title>
+                    <h4>Última medida realizada</h4>
+                </mdb-card-title>
+                <hr>
+            </mdb-card-body>
+        </mdb-card>
     </div>
 </div>
-
-<form>
-    <fieldset disabled *ngFor="let param of medidaAtual.parametros">
-        <div class="form-group">
-            <label for="disabledTextInput" class="font-weight-bold">{{ param.descricao }}: </label>
-            <input type="text" class="form-control border border-primary" value="{{ param.valor}}">
-        </div>
-    </fieldset>
-</form>
--->
