@@ -52,13 +52,15 @@ app.get('/medidas', (req, res) => {
     findAllMedidas(req, res);    
 });
 
-app.get('/medidas/:codigo', (req, res) => { 
-    findMedidas(req, res);    
+app.get('/medidas/:email/atual', (req, res) => { 
+    buscarUltimaMedidaRealizada(req, res);    
 });
+
+
 
 app.post('/medidas', (req, res) => {     
     try {
-        save(req, res);
+        insert(req, res);
         res.status(201);
         res.type('application/json');
         res.send({'message' : 'Cadastro ok!'});
@@ -68,20 +70,34 @@ app.post('/medidas', (req, res) => {
     }
 });
 
-async function findMedidas(req, res) {
-    var codigo = req.params.codigo;  
-    var collection = db.collection('Medida');   
-    var cursor = collection.find({
-        'codigo' : { $eq : Number(codigo) } 
-    });       
-    var medidas = new Array();    
-    await cursor.forEach(function(result, err) {
-        if (result !== null) {
-            medidas.push(result);
+
+
+async function buscarUltimaMedidaRealizada(req, res) {
+    var email = req.params.email;  
+    db.collection('Medida')   
+      .find({ 'usuario.email' : email})
+      .sort({dtCriacao: -1})
+      .limit(1)
+      .maxTimeMS(5000)
+      .toArray()
+      .then(medidas => {
+        const medida = medidas[0];
+        if (medida === undefined) {
+            res.status(404);
+            res.type('application/json');
+            res.send({ message : 'Não encontrado!'});
+        } else {
+            res.status(200);
+            res.type('application/json');
+            res.send(medida);
         }
-    });
-    res.type('application/json');
-    res.send(medidas);
+    })
+      .catch(err => {
+        console.error(err);
+        res.status(500);
+        res.type('application/json');
+        res.send({ message : 'Erro inesperado!'});
+    }); 
 }
 
 
@@ -91,7 +107,11 @@ async function findAllMedidas(req, res) {
     var cursor = collection.find({}).sort( { dtCriacao: -1 } ).limit(3);
     var medidas = new Array();    
     await cursor.forEach(function(result, err) {
-        if (result !== null) {
+        if (result === null) {
+            res.status(404);
+            res.type('application/json');
+            res.send({ message : 'Não encontrado!'});
+        } else {
             medidas.push(result);
         }
     });
@@ -100,11 +120,15 @@ async function findAllMedidas(req, res) {
     res.send(medidas);
 }
 
-async function save(req, res) {
+
+
+async function insert(req, res) {
     await db.collection('Medida').insertOne(
         req.body
     );    
 }
+
+
 
 const server = http.createServer(app);
 

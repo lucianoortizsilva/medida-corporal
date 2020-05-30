@@ -11,9 +11,12 @@ export class MedidaAtualComponent implements OnInit {
   constructor(private medidaService: MedidaService) { }
 
   ngOnInit(): void {
-    this.medidaService.getMedidaByEmail('lucianoortizsilva@gmail.com').subscribe(data => {
-      console.log('by email: ', data);
+    this.medidaService.getMedidaAtual('luciano.ortiz@gmail.com').subscribe(
+      response => {
+        console.log('response: ', response);
+    },
+      err => {
+        console.log('erro encontrado: ', err);
     });
   }
-
 }
