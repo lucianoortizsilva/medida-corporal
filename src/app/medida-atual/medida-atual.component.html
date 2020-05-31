@@ -7,6 +7,102 @@
                     <h4>Última medida realizada</h4>
                 </mdb-card-title>
                 <hr>
+
+                <form class="needs-validation m-5" novalidate [formGroup]="formulario">
+                    
+                    <!-- DATA CRIACAO -->
+                    <div class="md-form">
+                        <input mdbInput formControlName="dtCriacao" type="date" class="form-control" required>
+                        <label>Data*</label>
+                    </div>
+
+                    <!-- PESO -->
+                    <div class="md-form">
+                        <input mdbInput formControlName="peso" type="text" class="form-control" maxlength="5" mask="separator.2" required>
+                        <label>Peso* (kg)</label>
+                    </div>
+
+                    <!-- PESCOÇO -->
+                    <div class="md-form">
+                        <input mdbInput formControlName="pescoco" type="text" class="form-control" maxlength="4" mask="separator.2" required>
+                        <label>Pescoço* (cm)</label>
+                    </div>
+
+                    <!-- TORAX -->
+                    <div class="md-form">
+                        <input mdbInput formControlName="torax" type="text" class="form-control" maxlength="4" mask="separator.2" required>
+                        <label>Tórax* (cm)</label>
+                    </div>
+
+                    <!-- CINTURA -->
+                    <div class="md-form">
+                        <input mdbInput formControlName="cintura" type="text" class="form-control" maxlength="5" mask="separator.2" required>
+                        <label>Cintura* (cm)</label>
+                    </div>
+
+                    <!-- QUADRIL -->
+                    <div class="md-form">
+                        <input mdbInput formControlName="quadril" type="text" class="form-control" maxlength="5" mask="separator.2" required>
+                        <label>Quadril* (cm)</label>
+                    </div>
+
+                    <!-- BICEPS ESQUERDO -->
+                    <div class="md-form">
+                        <input mdbInput formControlName="bicepsE" type="text" class="form-control" maxlength="5" mask="separator.2">
+                        <label>Bíceps Esquerdo (cm)</label>
+                    </div>
+
+                    <!-- BICEPS DIREITO -->
+                    <div class="md-form">
+                        <input mdbInput formControlName="bicepsD" type="text" class="form-control" maxlength="5" mask="separator.2">
+                        <label>Bíceps Direito (cm)</label>
+                    </div>
+
+                    <!-- ANTEBRAÇO ESQUERDO -->
+                    <div class="md-form">
+                        <input mdbInput formControlName="antebracoE" type="text" class="form-control" maxlength="5" mask="separator.2">
+                        <label>Antebraço Esquerdo (cm)</label>
+                    </div>
+
+                    <!-- ANTEBRAÇO DIREITO -->
+                    <div class="md-form">
+                        <input mdbInput formControlName="antebracoD" type="text" class="form-control" maxlength="5" mask="separator.2">
+                        <label>Antebraço Direito (cm)</label>
+                    </div>
+
+                    <!-- COXA ESQUERDO -->
+                    <div class="md-form">
+                        <input mdbInput formControlName="coxaE" type="text" class="form-control" maxlength="5" mask="separator.2">
+                        <label>Coxa Esquerda (cm)</label>
+                    </div>
+
+                    <!-- COXA DIREITO -->
+                    <div class="md-form">
+                        <input mdbInput formControlName="coxaD" type="text" class="form-control" maxlength="5" mask="separator.2">
+                        <label>Coxa Direita (cm)</label>
+                    </div>
+
+                    <!-- PANTURRILHA ESQUERDO -->
+                    <div class="md-form">
+                        <input mdbInput formControlName="panturrilhaE" type="text" class="form-control" maxlength="5" mask="separator.2">
+                        <label>Panturrilha Esquerda (cm)</label>
+                    </div>
+
+                    <!-- PANTURRILHA DIREITO -->
+                    <div class="md-form">
+                        <input mdbInput formControlName="panturrilhaD" type="text" class="form-control" maxlength="5" mask="separator.2">
+                        <label>Panturrilha Direita (cm)</label>
+                    </div>
+                    
+                    <div class="row mb-5">
+                        <div class="col-12">
+                            <button mdbBtn [disabled]="!formulario.valid" class="col-12 float-right" type="submit" color="primary" mdbWavesEffect>
+                                <i class="far fa-check-circle"></i> salvar
+                            </button>
+                        </div>
+                    </div>
+                
+                </form>        
             </mdb-card-body>
         </mdb-card>
     </div>
