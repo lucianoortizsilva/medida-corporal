@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, ElementRef, Renderer2 } from '@angular/core';
+import { Component, Input, OnChanges, ElementRef, Renderer2 } from '@angular/core';
 import { Pagina } from '../model';
 
 @Component({

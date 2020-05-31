@@ -11,11 +11,17 @@ import { MedidaAtualComponent } from './medida-atual/medida-atual.component';
 import { BarraTituloComponent } from './barra-titulo/barra-titulo.component';
 import { GraficoComponent } from './grafico/grafico.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MedidaService } from './medida.service';
+import { MedidaService } from './@services/medida.service';
 import { DatePipe } from '@angular/common';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { PerfilComponent } from './perfil/perfil.component';
+import { PageMedidaAtualComponent } from './pages/page-medida-atual/page-medida-atual.component';
+import { PageMedidaProgressoComponent } from './pages/page-medida-progresso/page-medida-progresso.component';
+import { PageMedidaNovoComponent } from './pages/page-medida-novo/page-medida-novo.component';
+import { PageLoginComponent } from './pages/page-login/page-login.component';
+import { PagePerfilComponent } from './pages/page-perfil/page-perfil.component';
+import { PagePrincipalComponent } from './pages/page-principal/page-principal.component';
 
 const maskConfigFunction: () => Partial<IConfig> = () => {
   return {
@@ -33,7 +39,13 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
     MedidaAtualComponent,
     BarraTituloComponent,
     GraficoComponent,
-    PerfilComponent,    
+    PerfilComponent,
+    PageMedidaAtualComponent,
+    PageMedidaProgressoComponent,
+    PageMedidaNovoComponent,
+    PageLoginComponent,
+    PagePerfilComponent,
+    PagePrincipalComponent,    
   ],
   imports: [
     BrowserModule,
