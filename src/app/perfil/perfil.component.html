@@ -9,6 +9,12 @@
             <span [hidden]="altura !== null" class="spinner-border text-primary" role="status"></span>
         </h6>
         <h6>
+            <i>IMC: </i>
+            <span [hidden]="imc === null">{{ imc }}</span>
+            <span [hidden]="imc !== null" class="spinner-border text-primary" role="status"></span>
+            <i class="ml-2 fas fa-info-circle" mdbTooltip="{{ descricaoIMC }}" placement="top" mdbWavesEffect></i>
+        </h6>
+        <h6>
             <i>% Gordura: </i> 
             <span [hidden]="percentualGordura === null">{{ percentualGordura }}</span>
             <span [hidden]="percentualGordura !== null" class="spinner-border text-primary" role="status"></span>            
