@@ -41,7 +41,7 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
 
   subscriptionMedidas: Subscription;
 
-  qtdDadosParaVisualizar = 6;
+  qtdDadosParaVisualizar = 99; //TODO: AJUSTAR
 
   constructor(private datepipe: DatePipe,
               private medidaService: MedidaService,
