@@ -4,14 +4,13 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { CabecalhoComponent } from './cabecalho/cabecalho.component';
-import { PrincipalComponent } from './principal/principal.component';
 import { MedidaCadastroComponent } from './medida-cadastro/medida-cadastro.component';
 import { MedidaProgressoComponent } from './medida-progresso/medida-progresso.component';
 import { MedidaAtualComponent } from './medida-atual/medida-atual.component';
 import { BarraTituloComponent } from './barra-titulo/barra-titulo.component';
 import { GraficoComponent } from './grafico/grafico.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MedidaService } from './@services/medida.service';
+import { MedidaService } from './services/medida.service';
 import { DatePipe, APP_BASE_HREF } from '@angular/common';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -24,14 +23,13 @@ import { AuthService } from 'angularx-social-login';
 import { PageHomeComponent } from './pages/page-home/page-home.component';
 import { PageErro500Component } from './pages/page-erro500/page-erro500.component';
 import { PageErro404Component } from './pages/page-erro404/page-erro404.component';
+import { MedidaMenuComponent } from './components/medida-menu/medida-menu.component';
+import { MedidaUsuarioComponent } from './components/medida-usuario/medida-usuario.component';
 
-/**
- * key: z-sw-98ubU28FrNHsFjKf46-
- */
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider('')
+    provider: new GoogleLoginProvider('85887977533-3p5mfjpe2e22a4l01p6b167ggmip9ujv.apps.googleusercontent.com')
   }
 ]);
 
@@ -58,7 +56,6 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     CabecalhoComponent,
-    PrincipalComponent,
     MedidaCadastroComponent,
     MedidaProgressoComponent,
     MedidaAtualComponent,
@@ -69,7 +66,9 @@ const routes: Routes = [
     PageLoginComponent,
     PageHomeComponent,
     PageErro500Component,
-    PageErro404Component
+    PageErro404Component,
+    MedidaMenuComponent,
+    MedidaUsuarioComponent
   ],
   imports: [
     BrowserModule,

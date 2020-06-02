@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { MedidaEnum, Medida } from '../model';
-import { MedidaService } from '../@services/medida.service';
+import { MedidaService } from '../services/medida.service';
 import { DatePipe } from '@angular/common';
 import { isNull } from 'util';
 import { Subscription } from 'rxjs';

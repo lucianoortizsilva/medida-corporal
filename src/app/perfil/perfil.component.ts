@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { MedidaService } from '../@services/medida.service';
+import { MedidaService } from '../services/medida.service';
 import { Medida } from '../model';
 
 @Component({
