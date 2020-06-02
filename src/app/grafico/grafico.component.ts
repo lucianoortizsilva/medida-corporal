@@ -12,11 +12,11 @@ export class GraficoComponent implements OnInit {
   @Input() dados = Array<number[]>();
   @Input() descricoes = Array<string>();
   @Input() legenda = Array<string[]>();
-  @Input() unidadeMedida: string;  
+  @Input() unidadeMedida: string;
   grafico = [];
 
 
-  constructor(private element: ElementRef, 
+  constructor(private element: ElementRef,
               private changeDetectorRef:ChangeDetectorRef) { }
 
   ngOnInit(){

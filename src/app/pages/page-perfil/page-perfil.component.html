@@ -1,3 +1,45 @@
-<div *ngIf="autenticado">
-    <p>"PERFIL"!</p>
+<div *ngIf="autenticado" class="container">
+    <div class="row mt-5">
+        <div class="col-12">
+            
+            <div class="form-header row text-center">
+                <div class="col-12">
+                    <h3>
+                        <mdb-icon fas icon="user"></mdb-icon> PERFIL
+                    </h3>
+                </div>
+            </div>
+            
+            <br>  
+
+            <form [formGroup]="form" novalidate>
+                
+                <div class="form-check text-center">
+                    <div class="row">
+                        <div class="col-6">
+                            <input formControlName="sexo" type="radio" class="form-check-input" name="sexo" value="M" required>
+                            <mdb-icon fas icon="male"></mdb-icon>
+                            <label class="form-check-label ml-1">MASCULINO</label>
+                        </div>
+                        <div class="col-6">
+                            <input formControlName="sexo" type="radio" class="form-check-input" name="sexo" value="F" required>
+                            <mdb-icon fas icon="female" class=""></mdb-icon>                    
+                            <label class="form-check-label ml-1">FEMININO</label>
+                        </div>                    
+                    </div>
+                </div>
+
+                <div class="md-form mt-5">
+                    <input mdbInput type="text" formControlName="altura" id="form2" class="form-control" placeholder="Exemplo: 1.68" maxlength="4" mask="0.00" required>
+                    <label for="form2">Altura (cm)</label>
+                </div>
+
+                <input formControlName="email" type="hidden">
+
+                <div class="text-center">
+                    <button mdbBtn [disabled]="!form.valid" color="light-blue" class="waves-light" mdbWavesEffect (click)="save()">Enviar</button>
+                </div>
+            </form>    
+        </div>
+    </div>
 </div>

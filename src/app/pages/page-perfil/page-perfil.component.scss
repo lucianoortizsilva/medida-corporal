@@ -1,0 +1,7 @@
+@import "~angular-bootstrap-md/assets/scss/bootstrap/bootstrap.scss";
+
+@include media-breakpoint-down(md) {  
+    .form-control {
+       padding-right: 0;
+    }
+}

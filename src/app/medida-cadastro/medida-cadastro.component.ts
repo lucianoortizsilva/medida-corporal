@@ -32,7 +32,7 @@ export class MedidaCadastroComponent implements OnInit {
   onSubmit(): void {
     if (this.formulario.valid) {
       const body = JSON.stringify(this.formulario.value);
-      this.medidaService.save(body).subscribe( (data: HttpResponseBase) => {
+      this.medidaService.saveMedida(body).subscribe( (data: HttpResponseBase) => {
         this.removeStyleValidacoes();
         this.inicializarFormulario();
       }, (err: HttpErrorResponse) => {

@@ -60,9 +60,21 @@ app.get('/usuarios/:email', (req, res) => {
     buscarUsuarioPorEmail(req, res);    
 });
 
+app.post('/usuarios', (req, res) => {     
+    try {
+        insertUsuario(req, res);
+        res.status(201);
+        res.type('application/json');
+        res.send({'message' : 'Cadastro ok!'});
+    } catch (error) {
+        res.status(500);
+        res.send(error);
+    }
+});
+
 app.post('/medidas', (req, res) => {     
     try {
-        insert(req, res);
+        insertMedida(req, res);
         res.status(201);
         res.type('application/json');
         res.send({'message' : 'Cadastro ok!'});
@@ -122,10 +134,14 @@ async function findAllMedidas(req, res) {
     res.send(medidas);
 }
 
-
-
-async function insert(req, res) {
+async function insertMedida(req, res) {
     await db.collection('Medida').insertOne(
+        req.body
+    );    
+}
+
+async function insertUsuario(req, res) {
+    await db.collection('Usuario').insertOne(
         req.body
     );    
 }

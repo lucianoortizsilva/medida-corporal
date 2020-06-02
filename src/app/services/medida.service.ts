@@ -35,13 +35,24 @@ export class MedidaService {
 
 
 
-  save(body: any) {
+  saveMedida(body: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       })
     };
     const url = environment.medidasAPI;
+    return this.http.post(url, body, httpOptions);
+  }
+
+
+  saveUsuario(body: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    const url = environment.usuariosAPI;
     return this.http.post(url, body, httpOptions);
   }
 

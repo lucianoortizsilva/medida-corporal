@@ -26,7 +26,7 @@ export class PageHomeComponent implements OnInit {
         this.socialUser = data;
         this.autenticado = true;
       }
-    });  
+    });
   }
 
   ngOnInit(): void {}
