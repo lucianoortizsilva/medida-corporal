@@ -45,5 +45,6 @@ export class FiltroMedida {
 export interface Usuario {
     email: string;
     sexo: string;
+    nome: string;
     altura: number;
 }

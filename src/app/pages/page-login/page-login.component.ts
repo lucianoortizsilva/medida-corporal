@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
+import { MedidaService } from '../../@services/medida.service';
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-page-login',
@@ -7,9 +11,48 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageLoginComponent implements OnInit {
 
-  constructor() { }
+  user: SocialUser;
+  
 
-  ngOnInit(): void {
+
+  constructor(private authService: AuthService,
+              private medidaService: MedidaService,
+              private router: Router) {
+  }
+
+
+
+  ngOnInit() {
+    this.authService.authState.subscribe(data => {
+      if (data === null) {
+        this.router.navigate(['/login']);
+      }
+    });  
+  } 
+  
+  
+
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+      this.authService.authState.subscribe((user) => {
+        this.user = user;
+        if(this.user !== null){
+          this.medidaService.getUsuario('lucianoortizsilva@gmail.com').subscribe(
+            data => {
+              if (data !== null) {
+                this.router.navigate(['/home']);
+              }
+            }, 
+            (err = HttpErrorResponse) => {
+              if (err.status === 404) {
+                  this.router.navigate(['/perfil']);
+              } else {
+                  this.router.navigate(['/erro500']);
+              }
+            });
+        }
+      });
   }
 
 }
+

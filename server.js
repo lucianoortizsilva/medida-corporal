@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
  */
 app.use(function (req, res, next) {
     // Add permissão para um determinado domínio acessar esse servidor
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Origin', 'https://localhost:4200');
     // Add metodos permitidos para um determinado domínio acessar nesse servidor
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     // Request headers you wish to allow
@@ -56,7 +56,9 @@ app.get('/medidas/:email/atual', (req, res) => {
     buscarUltimaMedidaRealizada(req, res);    
 });
 
-
+app.get('/usuarios/:email', (req, res) => { 
+    buscarUsuarioPorEmail(req, res);    
+});
 
 app.post('/medidas', (req, res) => {     
     try {
@@ -128,6 +130,33 @@ async function insert(req, res) {
     );    
 }
 
+async function buscarUsuarioPorEmail(req, res) {
+    var email = req.params.email; 
+    console.log('Usuario pesquisado: ', email);
+    db.collection('Usuario')   
+      .find({ 'email' : email})
+      .limit(1)
+      .maxTimeMS(5000)
+      .toArray()
+      .then(usuarios => {
+        const usuario = usuarios[0];
+        if (usuario === undefined) {
+            res.status(404);
+            res.type('application/json');
+            res.send({ message : 'Não encontrado!'});
+        } else {
+            res.status(200);
+            res.type('application/json');
+            res.send(usuario);
+        }
+    })
+      .catch(err => {
+        console.error(err);
+        res.status(500);
+        res.type('application/json');
+        res.send({ message : 'Erro inesperado!'});
+    }); 
+}
 
 
 const server = http.createServer(app);

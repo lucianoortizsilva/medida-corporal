@@ -3,11 +3,11 @@ import { AuthService } from 'angularx-social-login';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-page-perfil',
-  templateUrl: './page-perfil.component.html',
-  styleUrls: ['./page-perfil.component.scss']
+  selector: 'app-page-home',
+  templateUrl: './page-home.component.html',
+  styleUrls: ['./page-home.component.scss']
 })
-export class PagePerfilComponent implements OnInit {
+export class PageHomeComponent implements OnInit {
 
   autenticado = false;
 

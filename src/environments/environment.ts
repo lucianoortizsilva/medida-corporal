@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  medidasAPI: 'http://localhost:3001/medidas'
+  medidasAPI: 'http://localhost:3001/medidas',
+  usuariosAPI: 'http://localhost:3001/usuarios'
 };
 
 /*

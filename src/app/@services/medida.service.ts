@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
-import { Medida } from '../model';
+import { Medida, Usuario } from '../model';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -25,6 +25,13 @@ export class MedidaService {
     return this.http.get<Medida>(url, {responseType: 'json'});
   }
 
+
+
+
+  getUsuario(email: string): Observable<Usuario> {
+    const url = environment.usuariosAPI + '/' + email;
+    return this.http.get<Usuario>(url, {responseType: 'json'});
+  }
 
 
 

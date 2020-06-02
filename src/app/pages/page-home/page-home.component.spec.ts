@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PagePrincipalComponent } from './page-principal.component';
+import { PageHomeComponent } from './page-home.component';
 
-describe('PagePrincipalComponent', () => {
-  let component: PagePrincipalComponent;
-  let fixture: ComponentFixture<PagePrincipalComponent>;
+describe('PageHomeComponent', () => {
+  let component: PageHomeComponent;
+  let fixture: ComponentFixture<PageHomeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PagePrincipalComponent ]
+      declarations: [ PageHomeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PagePrincipalComponent);
+    fixture = TestBed.createComponent(PageHomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
