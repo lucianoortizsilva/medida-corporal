@@ -1,5 +1,5 @@
 import { Component, ElementRef, Renderer2, OnInit } from '@angular/core';
-import { MedidaService } from '../services/medida.service';
+import { MedidaService } from '../../services/medida.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { HttpResponseBase, HttpErrorResponse } from '@angular/common/http';

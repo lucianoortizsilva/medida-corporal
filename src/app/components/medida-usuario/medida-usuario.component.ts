@@ -19,10 +19,11 @@ export class MedidaUsuarioComponent implements OnInit {
   imc: number;
 
 
-  constructor(private medidaService: MedidaService) { }
-
-
-
+  constructor(private medidaService: MedidaService) { 
+  }
+  
+  
+  
   ngOnInit(): void {
     this.medidaService.getUsuario(this.email).subscribe(usuario => {
       this.usuario = usuario;
@@ -46,7 +47,7 @@ export class MedidaUsuarioComponent implements OnInit {
 
 
   private  calcularIMC(peso: number, altura: number): void{
-    this.imc = Number(Number(peso / (altura * altura)).toFixed(2));
+    this.imc = Number((peso / (altura * altura)).toFixed(2));
     if (this.imc < 18.5) {
       this.descricaoIMC = 'Magro';
     } else if(this.imc < 24.9){

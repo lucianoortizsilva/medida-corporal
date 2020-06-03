@@ -1,5 +1,5 @@
 import { Component, OnInit, Renderer2, EventEmitter, Output, ElementRef } from '@angular/core';
-import { Pagina } from '../model';
+import { Pagina } from '../../model';
 
 @Component({
   selector: 'app-menu',

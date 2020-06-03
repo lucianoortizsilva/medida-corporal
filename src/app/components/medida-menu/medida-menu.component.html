@@ -1,30 +1,18 @@
-<!--Navbar-->
 <mdb-navbar SideClass="navbar navbar-dark navbar-9 bg-danger" [containerInside]="false">
-
-    <!-- Navbar brand -->
     <mdb-navbar-brand>
       <a class="navbar-brand" href="#">Menu</a>
     </mdb-navbar-brand>
-  
-    <!-- Collapsible content -->
     <links>
-  
-      <!-- Links -->
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link waves-light" mdbWavesEffect>Home
-            <span class="sr-only">(current)</span>
-          </a>
+        <li class="nav-item">
+          <a (click)="selecionarPagina('medida_cadastro')" class="nav-link waves-light" mdbWavesEffect>CADASTRO NOVO</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link waves-light" mdbWavesEffect>Features</a>
+          <a (click)="selecionarPagina('medida_progresso')" class="nav-link waves-light" mdbWavesEffect>PROGRESSO</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link waves-light" mdbWavesEffect>Pricing</a>
+          <a (click)="selecionarPagina('medida_atual')" class="nav-link waves-light" mdbWavesEffect>ÚLTIMA MEDIDA REALIZADA</a>
         </li>
       </ul>
-      <!-- Links -->
     </links>
-    <!-- Collapsible content -->
-  
-  </mdb-navbar>
+</mdb-navbar>

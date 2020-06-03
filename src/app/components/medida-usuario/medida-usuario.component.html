@@ -1,38 +1,32 @@
 <div class="row">
-
-    <div class="col-12">
-      <!--Card-->
-      <mdb-card cascade="true" narrower="true">
-  
-        <!--Card image-->
-        <div class="view view-cascade overlay waves-light" mdbWavesEffect>
-          <mdb-card-img src="urlFoto"></mdb-card-img>
-          <a>
-            <div class="mask rgba-white-slight"></div>
-          </a>
+  <div class="col-12 text-center">
+    <mdb-card class="testimonial-card">
+      <div class="card-up indigo lighten-1">
+      </div>
+      <div class="avatar mx-auto mt-3">
+        <img src="{{urlFoto}}" class="rounded-circle">
+      </div>
+      <mdb-card-body>
+        <mdb-card-title>
+          <h4>{{nome}}</h4>
+        </mdb-card-title>
+        <hr>
+        <div class="row">
+          <div class="col-12">
+            <label class="mr-1 text-uppercase">Altura: </label>{{ usuario?.altura }}
+          </div>
         </div>
-        <!--/Card image-->
-  
-        <mdb-card-body cascade="true" class="text-center">
-          <!--Card content-->
-          <h5 class="pink-text">
-            <mdb-icon fas icon="utensils"></mdb-icon> Culinary</h5>
-          <!--Title-->
-          <h4 class="card-title">Cheat day inspirations</h4>
-          <!--Text-->
-  
-          <mdb-card-text>
-            Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam rem
-            aperiam.
-          </mdb-card-text>
-  
-          <a mdbBtn color="unique" class="waves-light" mdbWavesEffect>Button</a>
-  
-        </mdb-card-body>
-        <!--/.Card content-->
-  
-      </mdb-card>
-      <!--/.Card-->
-    </div>  
-
+        <div class="row">
+          <div class="col-12">
+            <label class="mr-1 text-uppercase">Gordura corporal: </label>{{ percentualGordura }} %
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <label class="mr-1 text-uppercase">IMC: </label>{{ imc }}
+          </div>
+        </div>
+      </mdb-card-body>
+    </mdb-card>
   </div>
+</div>

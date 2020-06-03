@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { MedidaService } from 'src/app/services/medida.service';
 import { HttpErrorResponse, HttpResponseBase, HttpResponse } from '@angular/common/http';
+import { Usuario } from 'src/app/model';
 
 @Component({
   selector: 'app-page-perfil',
@@ -47,17 +48,16 @@ export class PagePerfilComponent implements OnInit {
 
   save(): void {
     if (this.form.valid) {
-      const body = JSON.stringify(this.form.value);
+      
+      const usuario = new Usuario();
+      usuario.altura = this.form.value.altura / 100;
+      usuario.email = this.form.value.email;
+      usuario.sexo = this.form.value.sexo;
+      const body = JSON.stringify(usuario);
 
-      this.medidaService.saveUsuario(body).subscribe( (httpResponseBase: HttpResponse) => {
-
-        console.log('data.status: ', httpResponseBase);
-        console.log('data.status: ', httpResponseBase.status);
-
-        if (httpResponseBase.status === 201) {
-
+      this.medidaService.saveUsuario(body).subscribe( data => {
+        if (data !== null) {
           this.router.navigate(['/home']);
-          this.changeDetectorRef.detectChanges();
         }
       }, (err: HttpErrorResponse) => {
         /**

@@ -1,8 +1,8 @@
 import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
-import { MedidaService } from '../services/medida.service';
+import { MedidaService } from '../../services/medida.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { Medida } from '../model';
+import { Medida } from '../../model';
 
 @Component({
   selector: 'app-medida-atual',
