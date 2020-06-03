@@ -1,1 +1,12 @@
 @import "~angular-bootstrap-md/assets/scss/bootstrap/bootstrap.scss";
+
+tbody {
+    tr:hover {
+        background-color: #e57373;    
+        td {
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #fff;
+        }
+    }
+}

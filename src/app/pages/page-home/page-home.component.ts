@@ -13,7 +13,7 @@ export class PageHomeComponent implements OnInit {
 
 
 
-  paginaSelecionada = Pagina.medida_cadastro;
+  paginaSelecionada = Pagina.medida_atual;
   autenticado = false;
   socialUser: SocialUser;
   exibirMenu = false;

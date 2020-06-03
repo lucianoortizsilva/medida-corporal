@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2, Input } from '@angular/core';
 import { MedidaService } from '../../services/medida.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DatePipe } from '@angular/common';
@@ -11,23 +11,22 @@ import { Medida } from '../../model';
 })
 export class MedidaAtualComponent implements OnInit {
   
+  @Input() email: string;
+
   formulario: FormGroup;
+  elements = null;
+  headElements = ['Medida', 'Valor'];
 
-
-
-  constructor(private elementRef: ElementRef,
-              private rendered2: Renderer2,
-              private medidaService: MedidaService,
+  constructor(private medidaService: MedidaService,
               private formBuilder: FormBuilder,
               private datepipe: DatePipe) { }
 
 
 
   ngOnInit(): void {
-    this.inicializarFormulario_();
-    this.medidaService.getMedidaAtual('lucianoortizsilva@gmail.com').subscribe(
+    this.medidaService.getMedidaAtual(this.email).subscribe(
       medida => {
-        this.inicializarFormulario(medida);
+        this.inicializarTabela(medida);
     },
       err => {
         console.log('erro encontrado: ', err);
@@ -36,44 +35,24 @@ export class MedidaAtualComponent implements OnInit {
 
 
 
-  inicializarFormulario(medida: Medida): void {
-    this.formulario = this.formBuilder.group({
-      dtCriacao: [this.datepipe.transform(new Date(), 'yyyy-MM-dd')],
-      peso: [medida.peso],
-      pescoco: [medida.pescoco],
-      torax: [medida.torax],
-      cintura: [medida.cintura],
-      quadril: [medida.quadril],
-      bicepsE: [medida.bicepsE],
-      bicepsD: [medida.bicepsD],
-      antebracoE: [medida.antebracoE],
-      antebracoD: [medida.antebracoD],
-      coxaE: [medida.coxaE],
-      coxaD: [medida.coxaD],
-      panturrilhaE: [medida.panturrilhaE],
-      panturrilhaD: [medida.panturrilhaD],
-      usuario: [ {email : medida.usuario.email}]
-    });
+  inicializarTabela(medida: Medida): void {    
+    this.elements = [
+      {dado: 'Data', valor: this.datepipe.transform(medida.dtCriacao, 'dd/MM/yyyy') },
+      {dado: 'Peso', valor: medida.peso },
+      {dado: 'Pescoço', valor: medida.pescoco },
+      {dado: 'Tórax', valor: medida.torax },
+      {dado: 'Cintura', valor: medida.cintura },
+      {dado: 'Quadril', valor: medida.quadril },
+      {dado: 'Bíceps Esquerdo', valor: medida.bicepsE },
+      {dado: 'Bíceps Direito', valor: medida.bicepsD },
+      {dado: 'Antebraço Esquerdo', valor: medida.antebracoE },
+      {dado: 'Antebraço Direito', valor: medida.antebracoD },
+      {dado: 'Coxa Esquerda', valor: medida.coxaE },
+      {dado: 'Coxa Direita', valor: medida.coxaD },
+      {dado: 'Panturrilha Esquerda', valor: medida.panturrilhaE },
+      {dado: 'Panturrilha Direita', valor: medida.panturrilhaD },
+    ];
   }
 
-  inicializarFormulario_(): void {
-    this.formulario = this.formBuilder.group({
-      dtCriacao: [this.datepipe.transform(new Date(), 'yyyy-MM-dd')],
-      peso: [null],
-      pescoco: [null],
-      torax: [null],
-      cintura: [null],
-      quadril: [null],
-      bicepsE: [null],
-      bicepsD: [null],
-      antebracoE: [null],
-      antebracoD: [null],
-      coxaE: [null],
-      coxaD: [null],
-      panturrilhaE: [null],
-      panturrilhaD: [null],
-      usuario: [null],
-    });
-  }
 
 }
