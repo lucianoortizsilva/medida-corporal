@@ -20,8 +20,7 @@ export class PagePerfilComponent implements OnInit {
   constructor(private authService: AuthService,
               private router: Router,
               private formBuilder: FormBuilder,
-              private medidaService: MedidaService,
-              private changeDetectorRef:ChangeDetectorRef) {
+              private medidaService: MedidaService) {
 
     this.authService.authState.subscribe(data => {
       if (data === null) {
@@ -48,7 +47,7 @@ export class PagePerfilComponent implements OnInit {
 
   save(): void {
     if (this.form.valid) {
-      
+
       const usuario = new Usuario();
       usuario.altura = this.form.value.altura / 100;
       usuario.email = this.form.value.email;

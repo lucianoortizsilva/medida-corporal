@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Medida, Usuario } from '../model';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -9,7 +9,17 @@ import { environment } from '../../environments/environment';
 })
 export class MedidaService {
 
+
+  public ultimaMedidaBehaviorSubject = new BehaviorSubject(null);
+
+
   constructor(private http: HttpClient) { }
+
+
+  setUltimaMedida(m: Medida) {
+    this.ultimaMedidaBehaviorSubject.next(m);
+  }
+
 
 
   getMedidas(): Observable<Medida[]> {

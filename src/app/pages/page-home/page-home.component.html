@@ -8,7 +8,7 @@
   </app-medida-usuario>
 
   <div [ngSwitch]="paginaSelecionada">    
-    <app-medida-cadastro  *ngSwitchCase="'medida_cadastro'"></app-medida-cadastro>
+    <app-medida-cadastro  *ngSwitchCase="'medida_cadastro'" [email]="socialUser.email"></app-medida-cadastro>
     <app-medida-progresso *ngSwitchCase="'medida_progresso'"></app-medida-progresso>
     <app-medida-atual *ngSwitchDefault></app-medida-atual>                  
   </div>

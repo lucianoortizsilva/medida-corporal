@@ -11,23 +11,23 @@ import { MedidaService } from 'src/app/services/medida.service';
 })
 export class PageHomeComponent implements OnInit {
 
-  
 
-  paginaSelecionada = Pagina.medida_atual;
+
+  paginaSelecionada = Pagina.medida_cadastro;
   autenticado = false;
   socialUser: SocialUser;
   exibirMenu = false;
-  
-  constructor(private authService: AuthService, 
-              private router: Router, 
-              private elementRef: ElementRef, 
-              private renderer: Renderer2, 
-              private medidaService: MedidaService) { 
+
+  constructor(private authService: AuthService,
+              private router: Router,
+              private elementRef: ElementRef,
+              private renderer: Renderer2,
+              private medidaService: MedidaService) {
 
     this.authService.authState.subscribe(data => {
       if (data === null) {
         this.router.navigate(['/login']);
-      } else {        
+      } else {
         this.medidaService.getUsuario(data.email).subscribe(usuario => {
           if (usuario === null) {
             this.router.navigate(['/login']);
@@ -35,18 +35,19 @@ export class PageHomeComponent implements OnInit {
             this.socialUser = data;
             this.autenticado = true;
           }
-        });      
-      }      
+        });
+      }
     });
   }
+
+
+
+  ngOnInit(): void {}
 
 
 
   setPagina(p: Pagina){
     this.paginaSelecionada = p;
   }
-
-
-  ngOnInit(): void {}
 
 }

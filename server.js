@@ -148,8 +148,7 @@ async function insertUsuario(req, res) {
 
 async function buscarUsuarioPorEmail(req, res) {
     var email = req.params.email; 
-    console.log('Usuario pesquisado: ', email);
-    db.collection('Usuario')   
+    db.collection('Usuario')
       .find({ 'email' : email})
       .limit(1)
       .maxTimeMS(5000)

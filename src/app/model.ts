@@ -19,7 +19,7 @@ export enum MedidaEnum {
     PESCOCO = 13
 }
 
-export interface Medida { 
+export class Medida {
     dtCriacao: Date;
     peso: number;
     pescoco: number;
@@ -37,7 +37,7 @@ export interface Medida {
     usuario: Usuario;
 }
 
-export class FiltroMedida { 
+export class FiltroMedida {
     codigo: number;
     descricao: string;
 }
