@@ -17,7 +17,6 @@ export class MedidaMenuComponent implements OnInit {
   }
 
   selecionarPagina(paginaSelecionada: any): void {
-    console.log('paginaSelecionada: ', paginaSelecionada);
     this.paginaSelecionadaEventEmitter.emit(paginaSelecionada);
     this.setTitulo(paginaSelecionada);
   }

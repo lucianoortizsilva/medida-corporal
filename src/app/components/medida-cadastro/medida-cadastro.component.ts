@@ -33,7 +33,6 @@ export class MedidaCadastroComponent implements OnInit {
     if (this.formulario.valid) {
       const body = JSON.stringify(this.formulario.value);
       this.medidaService.saveMedida(body).subscribe( (data: HttpResponseBase) => {
-        this.removeStyleValidacoes();
         this.inicializarFormulario();
       }, (err: HttpErrorResponse) => {
         /**
@@ -42,7 +41,9 @@ export class MedidaCadastroComponent implements OnInit {
         console.log('Ocorreu um erro no servidor: ', err);
       });
     } else {
-      this.addStyleValidacoes();
+      /**
+         * TODO: Adicionar mensagem de erro p\ usuário
+      */
     }
   }
 
@@ -69,17 +70,5 @@ export class MedidaCadastroComponent implements OnInit {
   }
 
 
-
-  addStyleValidacoes(): void {
-    const elementForm = this.elementRef.nativeElement.querySelector('.needs-validation');
-    this.rendered2.addClass(elementForm, 'was-validated');      
-  }
-
-
-
-  removeStyleValidacoes(): void {
-    const elementForm = this.elementRef.nativeElement.querySelector('.needs-validation');
-    this.rendered2.removeClass(elementForm, 'was-validated'); 
-  }
 
 }

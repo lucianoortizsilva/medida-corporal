@@ -13,7 +13,6 @@ import { MedidaService } from './services/medida.service';
 import { DatePipe, APP_BASE_HREF } from '@angular/common';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { PerfilComponent } from './perfil/perfil.component';
 import { PagePerfilComponent } from './pages/page-perfil/page-perfil.component';
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
 import { Routes, RouterModule } from '@angular/router';
@@ -27,7 +26,7 @@ import { MedidaUsuarioComponent } from './components/medida-usuario/medida-usuar
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider('85887977533-3p5mfjpe2e22a4l01p6b167ggmip9ujv.apps.googleusercontent.com')
+    provider: new GoogleLoginProvider('')
   }
 ]);
 
@@ -59,7 +58,6 @@ const routes: Routes = [
     MedidaAtualComponent,
     BarraTituloComponent,
     GraficoComponent,
-    PerfilComponent,
     PagePerfilComponent,
     PageLoginComponent,
     PageHomeComponent,
