@@ -1,76 +1,65 @@
-<div class="row mt-5">
-    <div class="col-12">
-        <div class="form-header row text-center">
-            <div class="col-12">
-                <h5 class="text-uppercase">Cadastro Novo</h5>
-            </div>
-        </div>
-        <br>  
-        <form [formGroup]="formulario" novalidate>
-            <div class="md-form">
-                <input mdbInput formControlName="dtCriacao" type="date" class="form-control" required>
-                <label>Data</label>
-            </div>
-            <div class="md-form">
-                <input mdbInput formControlName="peso" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" required>
-                <label>Peso (kg)</label>
-            </div>
-            <div class="md-form">
-                <input mdbInput formControlName="pescoco" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" mask="00.0" required>
-                <label>Pescoço (cm)</label>
-            </div>
-            <div class="md-form">
-                <input mdbInput formControlName="torax" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" required>
-                <label>Tórax (cm)</label>
-            </div>
-            <div class="md-form">
-                <input mdbInput formControlName="cintura" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" required>
-                <label>Cintura (cm)</label>
-            </div>
-            <div class="md-form">
-                <input mdbInput formControlName="quadril" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" required>
-                <label>Quadril (cm)</label>
-            </div>
-
-            <div class="md-form">
-                <input mdbInput formControlName="bicepsE" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" mask="00.0" required>
-                <label>Bíceps Esquerdo (cm)</label>
-            </div>
-            <div class="md-form">
-                <input mdbInput formControlName="bicepsD" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" mask="00.0" required>
-                <label>Bíceps Direito (cm)</label>
-            </div>
-            <div class="md-form">
-                <input mdbInput formControlName="antebracoE" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" mask="00.0" required>
-                <label>Antebraço Esquerdo (cm)</label>
-            </div>
-            <div class="md-form">
-                <input mdbInput formControlName="antebracoD" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" mask="00.0" required>
-                <label>Antebraço Direito (cm)</label>
-            </div>
-            <div class="md-form">
-                <input mdbInput formControlName="coxaE" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" mask="00.0" required>
-                <label>Coxa Esquerda (cm)</label>
-            </div>
-            <div class="md-form">
-                <input mdbInput formControlName="coxaD" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" mask="00.0" required>
-                <label>Coxa Direita (cm)</label>
-            </div>
-            <div class="md-form">
-                <input mdbInput formControlName="panturrilhaE" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" mask="00.0" required>
-                <label>Panturrilha Esquerda (cm)</label>
-            </div>
-            <div class="md-form">
-                <input mdbInput formControlName="panturrilhaD" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" mask="00.0" required>
-                <label>Panturrilha Direita (cm)</label>
-            </div>
-            <div class="row mb-5">
-                <div class="col-12">
-                    <button mdbBtn [disabled]="!formulario.valid" class="col-12 float-right" type="submit" color="primary" mdbWavesEffect (click)="onSubmit()">
-                        <i class="far fa-check-circle"></i> salvar
-                    </button>
-                </div>
-            </div>
-        </form>    
+<form [formGroup]="formulario" novalidate>
+    <div class="md-form">
+        <input mdbInput formControlName="dtCriacao" type="date" class="form-control" required>
     </div>
-</div>
+    <div class="md-form">
+        <input mdbInput formControlName="peso" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" required>
+        <label>Peso (kg)</label>
+    </div>
+    <div class="md-form">
+        <input mdbInput formControlName="pescoco" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" mask="00.0" required>
+        <label>Pescoço (cm)</label>
+    </div>
+    <div class="md-form">
+        <input mdbInput formControlName="torax" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" required>
+        <label>Tórax (cm)</label>
+    </div>
+    <div class="md-form">
+        <input mdbInput formControlName="cintura" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" required>
+        <label>Cintura (cm)</label>
+    </div>
+    <div class="md-form">
+        <input mdbInput formControlName="quadril" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" required>
+        <label>Quadril (cm)</label>
+    </div>
+
+    <div class="md-form">
+        <input mdbInput formControlName="bicepsE" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" mask="00.0" required>
+        <label>Bíceps Esquerdo (cm)</label>
+    </div>
+    <div class="md-form">
+        <input mdbInput formControlName="bicepsD" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" mask="00.0" required>
+        <label>Bíceps Direito (cm)</label>
+    </div>
+    <div class="md-form">
+        <input mdbInput formControlName="antebracoE" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" mask="00.0" required>
+        <label>Antebraço Esquerdo (cm)</label>
+    </div>
+    <div class="md-form">
+        <input mdbInput formControlName="antebracoD" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" mask="00.0" required>
+        <label>Antebraço Direito (cm)</label>
+    </div>
+    <div class="md-form">
+        <input mdbInput formControlName="coxaE" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" mask="00.0" required>
+        <label>Coxa Esquerda (cm)</label>
+    </div>
+    <div class="md-form">
+        <input mdbInput formControlName="coxaD" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" mask="00.0" required>
+        <label>Coxa Direita (cm)</label>
+    </div>
+    <div class="md-form">
+        <input mdbInput formControlName="panturrilhaE" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" mask="00.0" required>
+        <label>Panturrilha Esquerda (cm)</label>
+    </div>
+    <div class="md-form">
+        <input mdbInput formControlName="panturrilhaD" type="text" class="form-control" placeholder="Exemplo: 0.00" maxlength="4" mask="00.0" required>
+        <label>Panturrilha Direita (cm)</label>
+    </div>
+    <div class="row mb-5">
+        <div class="col-12">
+            <button mdbBtn [disabled]="!formulario.valid" class="col-12 float-right" type="submit" color="primary" mdbWavesEffect (click)="onSubmit()">
+                <i class="far fa-check-circle"></i> salvar
+            </button>
+        </div>
+    </div>
+</form>
