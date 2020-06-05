@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, OnChanges } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { MedidaEnum, Medida } from '../../model';
 import { MedidaService } from '../../services/medida.service';
 import { DatePipe } from '@angular/common';
 import { isNull } from 'util';
 import { Subscription } from 'rxjs';
-import { of } from 'rxjs';
+import { FiltroService } from 'src/app/services/filtro.service';
 
 /**
  *
@@ -18,11 +18,10 @@ import { of } from 'rxjs';
   styleUrls: ['./medida-progresso.component.scss']
 })
 export class MedidaProgressoComponent implements OnInit, OnDestroy {
+  
+  @Input() email: string;
 
-  form: FormGroup;
-  filtros = [];
-
-  listaPesos = new Array();
+  private listaPesos = new Array();
 
   dadosPeso = new Array<number>();
   dadosTorax = new Array<number>();
@@ -39,23 +38,29 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
   descricoesQuadril = new Array<string>();
   descricoesBiceps = new Array<string>();
 
-  subscriptionMedidas: Subscription;
-
-  qtdDadosParaVisualizar = 99; //TODO: AJUSTAR
+  private subscriptionMedidas: Subscription;
+  private qtdDadosParaVisualizar = 6;
 
   constructor(private datepipe: DatePipe,
               private medidaService: MedidaService,
-              private formBuilder: FormBuilder) { }
+              private filtroService: FiltroService) { }
 
 
 
   ngOnInit(): void {
-    this.loadForm();
-    this.loadFilters();
-    this.onChangeFilter();
     this.loadAllCharts();
-  }
+    
+    this.filtroService.quantidadeRegistrosBehaviorSubject.subscribe(data => {
+      this.qtdDadosParaVisualizar = data;
+      this.clearCharts();
+      this.loadAllCharts();
+    });
 
+    this.filtroService.codigoMedidaBehaviorSubject.subscribe(data => {
+      this.filtrar(data);
+    });
+
+  }
 
 
   ngOnDestroy(): void {
@@ -65,7 +70,7 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
 
 
   private loadAllCharts(): void {
-    this.subscriptionMedidas = this.medidaService.getMedidas().subscribe(medidas => {
+    this.subscriptionMedidas = this.medidaService.getMedidas(this.email).subscribe(medidas => {
       medidas.forEach(m => {
         this.loadPeso(m);
         this.loadTorax(m);
@@ -78,76 +83,41 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
   }
 
 
-
-  private loadForm(): void {
-    this.form = this.formBuilder.group({
-      filtros: [''],
-      opcaoQuantidade: new FormControl('6'),
-    });
-  }
-
-
-
-  loadFilters(): void {
-    // async filtros
-    of (this.getFiltros()).subscribe(filtros => {
-     this.filtros = filtros;
-     this.form.controls.filtros.patchValue(this.filtros[0].id);
-   });
-
-  }
-
-
-
-  getFiltros() {
-    return [
-      { id: 0, name: 'Todos' },
-      { id: MedidaEnum.PESO, name: 'Peso' },
-      { id: MedidaEnum.TORAX, name: 'Tórax' },
-      { id: MedidaEnum.PESCOCO, name: 'Pescoço' },
-      { id: MedidaEnum.CINTURA, name: 'Cintura' },
-      { id: MedidaEnum.QUADRIL, name: 'Quadril' },
-      { id: MedidaEnum.BICEPS, name: 'Bíceps' },
-    ];
-  }
-
-
-
   private filtrar(id: any): void {
     this.clearCharts();
 
     if (MedidaEnum.PESO.toPrecision() === id) {
-      this.medidaService.getMedidas().subscribe(medidas => {
+      this.medidaService.getMedidas(this.email).subscribe(medidas => {
         medidas.forEach(m => {
           this.loadPeso(m);
         });
       });
     } else if (MedidaEnum.TORAX.toPrecision() === id) {
-      this.medidaService.getMedidas().subscribe(medidas => {
+      this.medidaService.getMedidas(this.email).subscribe(medidas => {
         medidas.forEach(m => {
           this.loadTorax(m);
         });
       });
     } else if (MedidaEnum.PESCOCO.toPrecision() === id) {
-      this.medidaService.getMedidas().subscribe(medidas => {
+      this.medidaService.getMedidas(this.email).subscribe(medidas => {
         medidas.forEach(m => {
           this.loadPescoco(m);
         });
       });
     } else if (MedidaEnum.CINTURA.toPrecision() === id) {
-      this.medidaService.getMedidas().subscribe(medidas => {
+      this.medidaService.getMedidas(this.email).subscribe(medidas => {
         medidas.forEach(m => {
           this.loadCintura(m);
         });
       });
     } else if (MedidaEnum.QUADRIL.toPrecision() === id) {
-      this.medidaService.getMedidas().subscribe(medidas => {
+      this.medidaService.getMedidas(this.email).subscribe(medidas => {
         medidas.forEach(m => {
           this.loadQuadril(m);
         });
       });
     } else if (MedidaEnum.BICEPS.toPrecision() === id) {
-      this.medidaService.getMedidas().subscribe(medidas => {
+      this.medidaService.getMedidas(this.email).subscribe(medidas => {
         medidas.forEach(m => {
           this.loadBiceps(m);
         });
@@ -155,21 +125,6 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
     } else {
       this.loadAllCharts();
     }
-  }
-
-
-
-  private onChangeFilter(): void {
-    this.form.controls.opcaoQuantidade.valueChanges.subscribe(data => {
-      this.qtdDadosParaVisualizar = data;
-      this.loadFilters();
-      this.clearCharts();
-      this.loadAllCharts();
-    });
-
-    this.form.controls.filtros.valueChanges.subscribe(data => {
-      this.filtrar(data);
-    });
   }
 
 

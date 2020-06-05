@@ -11,7 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class AppComponent implements OnInit {
   
-  user: SocialUser;
+  userSocial: SocialUser;
   loggedIn: boolean;  
 
   constructor(private authService: AuthService,
@@ -26,19 +26,17 @@ export class AppComponent implements OnInit {
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
       this.authService.authState.subscribe((user) => {
-        this.user = user;
-        if(this.user !== null){
+        this.userSocial = user;
+        if(this.userSocial !== null){
           this.loggedIn = true;
-          this.medidaService.getUsuario('Lucuuu').subscribe(
+          this.medidaService.getUsuario(this.userSocial.email).subscribe(
             data => {
               console.log('retornou da base: ' , data);
             }, 
             (err = HttpErrorResponse) => {
               this.loggedIn = false;
               if (err.status === 404) {
-                  console.log('REDIRECIONANDO.....');
                   this.router.navigate(['/perfil']).then(data => {
-                    console.log('navegacao: ', data);
                     this.changeDetectorRef.detectChanges();
                   });
               }

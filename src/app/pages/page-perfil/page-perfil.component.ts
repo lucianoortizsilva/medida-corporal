@@ -27,8 +27,14 @@ export class PagePerfilComponent implements OnInit {
         this.router.navigate(['/login']);
       } else {
         this.socialUser = data;
-        this.autenticado = true;
-        this.loadForm(this.socialUser.email);
+        this.medidaService.getUsuario(this.socialUser.email).subscribe(data =>{
+          if (data === null){
+            this.autenticado = true;
+            this.loadForm(this.socialUser.email);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        })
       }
     });
   }

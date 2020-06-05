@@ -1,5 +1,6 @@
-import { Component, OnInit, ElementRef, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ElementRef, Input, ChangeDetectorRef, OnChanges } from '@angular/core';
 import { Chart } from 'chart.js';
+import { FiltroService } from 'src/app/services/filtro.service';
 
 
 @Component({
@@ -13,18 +14,30 @@ export class GraficoComponent implements OnInit {
   @Input() descricoes = Array<string>();
   @Input() legenda = Array<string[]>();
   @Input() unidadeMedida: string;
+  isMobile = false;
+  isTablet = false;
+  isDesktop = false;
   grafico = [];
 
 
   constructor(private element: ElementRef,
-              private changeDetectorRef:ChangeDetectorRef) { }
+              private changeDetectorRef:ChangeDetectorRef,
+              private filtroService: FiltroService) { }
 
   ngOnInit(){
-    this.create(this.unidadeMedida);
+    this.filtroService.responsiveBehaviorSubject.subscribe(data => {
+      this.isMobile = data.isMobile;
+      this.isTablet = data.isTablet;
+      this.isDesktop = data.isDesktop;
+      if(data != null && (this.isDesktop || this.isTablet || this.isMobile)){
+        this.create(this.unidadeMedida);
+      }
+    });
   }
   
   create(sufixo: string): void {
-    const ctx = this.element.nativeElement.querySelector('.grafico');
+    const css = this.isMobile ? '.graficoMobile' : '.grafico';
+    const ctx = this.element.nativeElement.querySelector(css);
     this.grafico = new Chart(ctx, {
       type: 'line',
       data: {
@@ -66,6 +79,7 @@ export class GraficoComponent implements OnInit {
             yAxes: [{
               display: true,               
               ticks: {
+                maxTicksLimit: 6,
                 beginAtZero: false,
                 fontColor: '#000',
                 fontSize: 13,

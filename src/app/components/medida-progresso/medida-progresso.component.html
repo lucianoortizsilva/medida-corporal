@@ -1,28 +1,9 @@
-<form [formGroup]="form">
-      <div class="form-check">
-            <input formControlName="opcaoQuantidade" type="radio" class="form-check-input" name="opcaoQuantidade" value="6">
-            <label class="form-check-label ml-2">Trazer no máximo 6 registros</label>
-      </div>
-      <div class="form-check">
-            <input formControlName="opcaoQuantidade" type="radio" class="form-check-input" name="opcaoQuantidade" value="9">
-            <label class="form-check-label ml-2">Trazer no máximo 9 registros</label>
-      </div>
-      <div class="form-check">
-            <input formControlName="opcaoQuantidade" type="radio" class="form-check-input" name="opcaoQuantidade" value="12">
-            <label class="form-check-label ml-2">Trazer no máximo 12 registros</label>
-      </div>
-      <select formControlName="filtros" id="filtros" class="form-control mt-3">
-            <option *ngFor="let filtro of filtros; let i = index" [value]="filtros[i].id">{{filtros[i].name}}</option>
-      </select>
-</form>
-                        
 <app-grafico *ngIf="dadosPeso.length > 0"
             [dados]="[dadosPeso]"
             [descricoes]="descricoesPeso"
             [legenda]="['Peso']"
             [unidadeMedida]="'kg'">
 </app-grafico>
-
 
 <app-grafico *ngIf="dadosPescoco.length > 0"
             [dados]="[dadosPescoco]"

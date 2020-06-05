@@ -1,6 +1,12 @@
 <div class="row mb-5">
     <div class="col-12">
-        <canvas class="grafico" width="300" height="300">
+        <!-- MOBILE -->
+        <canvas [hidden]="isDesktop || isTablet" class="graficoMobile" width="200" height="100">
+            {{ grafico }}
+        </canvas>
+
+        <!-- DESKTOP -->
+        <canvas [hidden]="isMobile" class="grafico" width="300" height="80">
             {{ grafico }}
         </canvas>
     </div>

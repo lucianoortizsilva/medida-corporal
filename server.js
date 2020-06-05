@@ -48,7 +48,7 @@ MongoClient.connect(url, function(err, client) {
 
 app.get('/*', (req, res) => res.sendFile(path.join(__dirname)));
 
-app.get('/medidas', (req, res) => {   
+app.get('/medidas/:email', (req, res) => {   
     findAllMedidas(req, res);    
 });
 
@@ -117,21 +117,29 @@ async function buscarUltimaMedidaRealizada(req, res) {
 
 
 async function findAllMedidas(req, res) {    
-    var collection = db.collection('Medida');
-    var cursor = collection.find({}).sort( { dtCriacao: 1 } );
-    var medidas = new Array();    
-    await cursor.forEach(function(result, err) {
-        if (result === null) {
+    var email = req.params.email;  
+    db.collection('Medida')   
+      .find({ 'usuario.email' : email})
+      .sort({dtCriacao: -1})
+      .maxTimeMS(5000)
+      .toArray()
+      .then(medidas => {
+        if (medidas === undefined) {
             res.status(404);
             res.type('application/json');
             res.send({ message : 'Não encontrado!'});
         } else {
-            medidas.push(result);
+            res.status(200);
+            res.type('application/json');
+            res.send(medidas);
         }
-    });
-    res.status(200);
-    res.type('application/json');
-    res.send(medidas);
+    })
+      .catch(err => {
+        console.error(err);
+        res.status(500);
+        res.type('application/json');
+        res.send({ message : 'Erro inesperado!'});
+    }); 
 }
 
 async function insertMedida(req, res) {

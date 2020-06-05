@@ -1,8 +1,9 @@
-import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2, HostListener } from '@angular/core';
 import { AuthService, SocialUser } from 'angularx-social-login';
 import { Router } from '@angular/router';
 import { Pagina } from 'src/app/model';
 import { MedidaService } from 'src/app/services/medida.service';
+import { FiltroService } from 'src/app/services/filtro.service';
 
 @Component({
   selector: 'app-page-home',
@@ -12,17 +13,26 @@ import { MedidaService } from 'src/app/services/medida.service';
 export class PageHomeComponent implements OnInit {
 
 
+  paginaSelecionadax = 'medida_progresso';
 
-  paginaSelecionada = Pagina.medida_atual;
+  paginaSelecionada = Pagina.medida_progresso;
   autenticado = false;
   socialUser: SocialUser;
   exibirMenu = false;
+
+  isMobile = false;
+  isTablet = false;
+  isDesktop = false;
+
+  private mobileMaxSizeWidth = 425;
+  private tabletMaxSizeWidth = 768;
 
   constructor(private authService: AuthService,
               private router: Router,
               private elementRef: ElementRef,
               private renderer: Renderer2,
-              private medidaService: MedidaService) {
+              private medidaService: MedidaService,
+              private filtroService: FiltroService) {
 
     this.authService.authState.subscribe(data => {
       if (data === null) {
@@ -38,6 +48,8 @@ export class PageHomeComponent implements OnInit {
         });
       }
     });
+
+    this.loadScreenSize();
   }
 
 
@@ -49,5 +61,25 @@ export class PageHomeComponent implements OnInit {
   setPagina(p: Pagina){
     this.paginaSelecionada = p;
   }
+
+
+  @HostListener('window:resize')
+  loadScreenSize() {
+    const scrWidth = window.innerWidth;
+    if (scrWidth <= this.mobileMaxSizeWidth) {
+        this.isMobile = true;
+        this.isTablet = false;
+        this.isDesktop = false;
+      } else if (scrWidth <= this.tabletMaxSizeWidth) {
+        this.isMobile = false;
+        this.isTablet = true;
+        this.isDesktop = false;
+      } else {
+        this.isMobile = false;
+        this.isTablet = false;
+        this.isDesktop = true;
+      }
+      this.filtroService.setResponsive({isMobile: this.isMobile, isTablet: this.isTablet, isDesktop: this.isDesktop});
+    }
 
 }

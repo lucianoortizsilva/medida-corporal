@@ -1,0 +1,25 @@
+<mdb-card class="testimonial-card mt-1">
+    <mdb-card-body>
+        <mdb-card-title>
+            <h5>Filtros</h5>
+        </mdb-card-title>
+        <hr>
+        <form [formGroup]="form" class="m-0">
+            <div class="form-check mb-1 d-none d-sm-block d-md-block">
+                <input formControlName="opcaoQuantidade" type="radio" class="form-check-input" name="opcaoQuantidade" value="6">
+                <label class="form-check-label">Trazer no máximo 06 registros</label>
+            </div>
+            <div class="form-check mb-1 d-none d-sm-block d-md-block">
+                <input formControlName="opcaoQuantidade" type="radio" class="form-check-input" name="opcaoQuantidade" value="9">
+                <label class="form-check-label">Trazer no máximo 09 registros</label>
+            </div>
+            <div class="form-check mb-1 d-none d-sm-block d-md-block">
+                <input formControlName="opcaoQuantidade" type="radio" class="form-check-input" name="opcaoQuantidade" value="12">
+                <label class="form-check-label">Trazer no máximo 12 registros</label>
+            </div>
+            <select formControlName="filtros" id="filtros" class="form-control mt-3">
+                <option *ngFor="let filtro of filtros; let i = index" [value]="filtros[i].id">{{filtros[i].name}}</option>
+            </select>
+        </form>
+    </mdb-card-body>
+</mdb-card>

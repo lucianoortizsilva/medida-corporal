@@ -9,13 +9,19 @@
                             [urlFoto]="socialUser.photoUrl"
                             [email]="socialUser.email">
         </app-medida-usuario>
+        <app-filtro-grafico></app-filtro-grafico>
       </div>      
 
       <div class="col-12 col-lg-8 col-xl-8 text-center" [ngSwitch]="paginaSelecionada">    
         <app-medida-cadastro  *ngSwitchCase="'medida_cadastro'" [email]="socialUser.email"></app-medida-cadastro>
-        <app-medida-progresso *ngSwitchCase="'medida_progresso'"></app-medida-progresso>
+        
         <app-medida-atual *ngSwitchDefault [email]="socialUser.email"></app-medida-atual>                  
+        
+        <app-medida-progresso *ngSwitchCase="'medida_progresso'" 
+                              [email]="socialUser.email">                              
+        </app-medida-progresso>
       </div>
+
     </div>
 
 </div>

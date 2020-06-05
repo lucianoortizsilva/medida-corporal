@@ -22,8 +22,8 @@ export class MedidaService {
 
 
 
-  getMedidas(): Observable<Medida[]> {
-    const url = environment.medidasAPI;
+  getMedidas(email: string): Observable<Medida[]> {
+    const url = environment.medidasAPI + '/' + email;
     return this.http.get<Medida[]>(url, {responseType: 'json'});
   }
 
