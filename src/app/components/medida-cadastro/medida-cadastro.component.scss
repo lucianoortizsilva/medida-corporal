@@ -17,24 +17,6 @@
 @include media-breakpoint-up(lg) {}
 @include media-breakpoint-up(xl) {}
 
-.was-validated .form-control:invalid:focus, .form-control.is-invalid:focus {
-    border-color: unset;
-    box-shadow: unset;
-}
-
-.was-validated .form-control:valid:focus, .form-control.is-valid:focus {
-    border-color: unset;
-    box-shadow: unset;
-}
-
-.was-validated .form-control:invalid, .form-control.is-invalid {
-    padding-right: unset;
-}
-
-.was-validated .form-control:valid, .form-control.is-valid {
-    padding-right: unset;
-}
-
 .md-form label {
     color: #000;
     font-weight: 500;

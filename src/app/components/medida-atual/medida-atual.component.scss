@@ -1,12 +1,60 @@
 @import "~angular-bootstrap-md/assets/scss/bootstrap/bootstrap.scss";
 
+tr {
+    td {
+        text-transform: uppercase;
+    }
+}
+
 tbody {
     tr:hover {
         background-color: #e57373;    
         td {
-            font-weight: 700;
-            text-transform: uppercase;
             color: #fff;
         }
     }
 }
+
+
+@include media-breakpoint-down(sm) { 
+    tr {
+        td {
+            font-size: 0.9rem;
+        }
+    }
+    tbody {
+        tr:hover {
+            td {
+                font-weight: 600;
+            }
+        }
+    }    
+    thead {
+        tr {
+            th {
+                font-size: 0.9rem;
+            }
+        }
+    }
+}
+
+@include media-breakpoint-up(md) { 
+    tr {
+        td {
+            font-size: 1.3rem;
+        }
+    }
+
+
+    thead {
+        tr {
+            th {
+                font-size: 1.3rem;
+            }
+        }
+    }
+}
+
+@include media-breakpoint-down(xs) { }
+@include media-breakpoint-down(lg) { }
+@include media-breakpoint-down(xl) { }

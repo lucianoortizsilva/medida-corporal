@@ -2,21 +2,20 @@
       
     <app-medida-menu (paginaSelecionadaEventEmitter)=setPagina($event)></app-medida-menu>
     
-    <div class="row">
+    <div class="row">      
       
       <div class="col-12 col-lg-4 col-xl-4 text-center">
         <app-medida-usuario [nome]="socialUser.name"
                             [urlFoto]="socialUser.photoUrl"
                             [email]="socialUser.email">
         </app-medida-usuario>
-      </div>
+      </div>      
 
       <div class="col-12 col-lg-8 col-xl-8 text-center" [ngSwitch]="paginaSelecionada">    
         <app-medida-cadastro  *ngSwitchCase="'medida_cadastro'" [email]="socialUser.email"></app-medida-cadastro>
         <app-medida-progresso *ngSwitchCase="'medida_progresso'"></app-medida-progresso>
         <app-medida-atual *ngSwitchDefault [email]="socialUser.email"></app-medida-atual>                  
       </div>
-
     </div>
-     
+
 </div>

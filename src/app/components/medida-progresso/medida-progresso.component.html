@@ -1,81 +1,60 @@
-<div class="row">
-      <div class="col-12">
-            <mdb-card class="testimonial-card">
-                  <div class="card-up indigo lighten-1"></div>
-                  <mdb-card-body>
-                        <mdb-card-title>
-                              <h4>Progresso</h4>
-                        </mdb-card-title>
-                        <hr>
-                        <div class="row mt-3 mb-3">
-                              <div class="col-12">            
-                                    <form [formGroup]="form">
-                                          
-                                          <div class="form-check">
-                                                <input formControlName="opcaoQuantidade" type="radio" class="form-check-input" name="opcaoQuantidade" value="6">
-                                                <label class="form-check-label ml-2">Trazer no máximo 6 registros</label>
-                                          </div>
-                                          <div class="form-check">
-                                                <input formControlName="opcaoQuantidade" type="radio" class="form-check-input" name="opcaoQuantidade" value="9">
-                                                <label class="form-check-label ml-2">Trazer no máximo 9 registros</label>
-                                          </div>
-                                          <div class="form-check">
-                                                <input formControlName="opcaoQuantidade" type="radio" class="form-check-input" name="opcaoQuantidade" value="12">
-                                                <label class="form-check-label ml-2">Trazer no máximo 12 registros</label>
-                                          </div>
-                        
-                                          <select formControlName="filtros" id="filtros" class="form-control mt-3">
-                                                <option *ngFor="let filtro of filtros; let i = index" [value]="filtros[i].id">
-                                                      {{filtros[i].name}}
-                                                </option>
-                                          </select>
-                                    </form>
-                              </div>
-                        </div>
-                        
-                        <app-grafico   *ngIf="dadosPeso.length > 0"
-                                     [dados]="[dadosPeso]"
-                                [descricoes]="descricoesPeso"
-                                   [legenda]="['Peso']"
-                             [unidadeMedida]="'kg'">
-                        </app-grafico>
-                        
-                        
-                        <app-grafico   *ngIf="dadosPescoco.length > 0"
-                                     [dados]="[dadosPescoco]"
-                                [descricoes]="descricoesPescoco"
-                                   [legenda]="['Pescoço']"
-                             [unidadeMedida]="'cm'">
-                        </app-grafico>
-                        
-                        <app-grafico   *ngIf="dadosTorax.length > 0"  
-                                     [dados]="[dadosTorax]"
-                                [descricoes]="descricoesTorax"
-                                   [legenda]="['Tórax']"
-                             [unidadeMedida]="'cm'">
-                        </app-grafico>
-                        
-                        <app-grafico   *ngIf="dadosCintura.length > 0"  
-                                     [dados]="[dadosCintura]"
-                                [descricoes]="descricoesCintura"
-                                   [legenda]="['Cintura']"
-                             [unidadeMedida]="'cm'">
-                        </app-grafico>
-                        
-                        <app-grafico   *ngIf="dadosQuadril.length > 0"  
-                                     [dados]="[dadosQuadril]"
-                                [descricoes]="descricoesQuadril"
-                                   [legenda]="['Quadril']"
-                             [unidadeMedida]="'cm'">
-                        </app-grafico>
-                        
-                        <app-grafico   *ngIf="dadosBicepsE.length > 0 && dadosBicepsD.length > 0"  
-                                     [dados]="[dadosBicepsE, dadosBicepsD]"
-                                [descricoes]="descricoesBiceps"
-                                   [legenda]="['Bíceps Esquerdo', 'Bíceps Direito']"
-                             [unidadeMedida]="'cm'">
-                        </app-grafico>                       
-                  </mdb-card-body>
-            </mdb-card>
+<form [formGroup]="form">
+      <div class="form-check">
+            <input formControlName="opcaoQuantidade" type="radio" class="form-check-input" name="opcaoQuantidade" value="6">
+            <label class="form-check-label ml-2">Trazer no máximo 6 registros</label>
       </div>
-</div>
+      <div class="form-check">
+            <input formControlName="opcaoQuantidade" type="radio" class="form-check-input" name="opcaoQuantidade" value="9">
+            <label class="form-check-label ml-2">Trazer no máximo 9 registros</label>
+      </div>
+      <div class="form-check">
+            <input formControlName="opcaoQuantidade" type="radio" class="form-check-input" name="opcaoQuantidade" value="12">
+            <label class="form-check-label ml-2">Trazer no máximo 12 registros</label>
+      </div>
+      <select formControlName="filtros" id="filtros" class="form-control mt-3">
+            <option *ngFor="let filtro of filtros; let i = index" [value]="filtros[i].id">{{filtros[i].name}}</option>
+      </select>
+</form>
+                        
+<app-grafico *ngIf="dadosPeso.length > 0"
+            [dados]="[dadosPeso]"
+            [descricoes]="descricoesPeso"
+            [legenda]="['Peso']"
+            [unidadeMedida]="'kg'">
+</app-grafico>
+
+
+<app-grafico *ngIf="dadosPescoco.length > 0"
+            [dados]="[dadosPescoco]"
+            [descricoes]="descricoesPescoco"
+            [legenda]="['Pescoço']"
+            [unidadeMedida]="'cm'">
+</app-grafico>
+
+<app-grafico *ngIf="dadosTorax.length > 0"  
+            [dados]="[dadosTorax]"
+            [descricoes]="descricoesTorax"
+            [legenda]="['Tórax']"
+            [unidadeMedida]="'cm'">
+</app-grafico>
+
+<app-grafico *ngIf="dadosCintura.length > 0"  
+            [dados]="[dadosCintura]"
+            [descricoes]="descricoesCintura"
+            [legenda]="['Cintura']"
+            [unidadeMedida]="'cm'">
+</app-grafico>
+
+<app-grafico *ngIf="dadosQuadril.length > 0"  
+            [dados]="[dadosQuadril]"
+            [descricoes]="descricoesQuadril"
+            [legenda]="['Quadril']"
+            [unidadeMedida]="'cm'">
+</app-grafico>
+
+<app-grafico *ngIf="dadosBicepsE.length > 0 && dadosBicepsD.length > 0"  
+            [dados]="[dadosBicepsE, dadosBicepsD]"
+            [descricoes]="descricoesBiceps"
+            [legenda]="['Bíceps Esquerdo', 'Bíceps Direito']"
+            [unidadeMedida]="'cm'">
+</app-grafico>                             

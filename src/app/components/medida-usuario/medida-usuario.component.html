@@ -9,18 +9,18 @@
     <hr>
     <div class="row">
       <div class="col-12">
-        <label class="mr-1 text-uppercase">Altura: </label>{{ usuario?.altura }}
+        <label class="mr-1 text-uppercase">Altura:</label><span>{{ usuario?.altura }}</span> 
       </div>
     </div>
     <div class="row">
       <div class="col-12">
-        <label class="mr-1 text-uppercase">Gordura corporal: </label>{{ percentualGordura }} %
+        <label class="mr-1 text-uppercase">Gordura corporal:</label><span>{{ percentualGordura }} %</span>
         <i class="ml-1 fas fa-info-circle" mdbTooltip="{{ infoGordura }}" placement="top" mdbWavesEffect></i>
       </div>
     </div>
     <div class="row">
       <div class="col-12">
-        <label class="mr-1 text-uppercase">IMC: </label>{{ imc }}
+        <label class="mr-1 text-uppercase">IMC:</label><span>{{ imc }}</span>
         <i class="ml-1 fas fa-info-circle" mdbTooltip="{{ infoIMC }}" placement="top" mdbWavesEffect></i>
       </div>
     </div>
