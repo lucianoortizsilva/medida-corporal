@@ -73,15 +73,7 @@ app.post('/usuarios', (req, res) => {
 });
 
 app.post('/medidas', (req, res) => {     
-    try {
-        insertMedida(req, res);
-        res.status(201);
-        res.type('application/json');
-        res.send({'message' : 'Cadastro ok!'});
-    } catch (error) {
-        res.status(500);
-        res.send(error);
-    }
+    insertMedida(req, res);
 });
 
 
@@ -143,9 +135,27 @@ async function findAllMedidas(req, res) {
 }
 
 async function insertMedida(req, res) {
-    await db.collection('Medida').insertOne(
-        req.body
-    );    
+    const email = req.body.usuario.email;
+    const dtCriacao = req.body.dtCriacao;
+    const query = { $and: [{ 'dtCriacao' : dtCriacao}, { "usuario.email" : email}]};    
+    db.collection('Medida')
+        .findOne(query)
+        .then(result => {
+            if(result) {
+                res.status(409);
+                res.type('application/json');
+                res.send({ 'message' : 'Já existe um cadastro para a data informada!'});
+            } else {
+                db.collection('Medida').insertOne(req.body);    
+                res.status(201);
+                res.type('application/json');
+                res.send({'message' : 'Cadastro ok!'});
+            }
+    }).catch(err => {
+        res.status(500);
+        res.type('application/json');
+        res.send({ message : 'Erro inesperado!'});
+    });    
 }
 
 async function insertUsuario(req, res) {

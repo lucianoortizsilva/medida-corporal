@@ -36,10 +36,9 @@ export class MedidaCadastroComponent implements OnInit {
         this.medidaService.setUltimaMedida(medida);
         this.inicializarFormulario();
       }, (err: HttpErrorResponse) => {
-        /**
-         * TODO: Adicionar mensagem de erro p\ usuário
-         */
-        console.log('Ocorreu um erro no servidor: ', err);
+        if (err.status === 409) {
+            console.log(err);
+        }
       });
     } else {
       /**
