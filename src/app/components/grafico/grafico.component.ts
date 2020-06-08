@@ -13,7 +13,10 @@ export class GraficoComponent implements OnInit {
   @Input() dados = Array<number[]>();
   @Input() descricoes = Array<string>();
   @Input() legenda = Array<string[]>();
+  @Input() backgroundColors = Array<string[]>();
+  @Input() borderColors = Array<string[]>();
   @Input() unidadeMedida: string;
+
   isMobile = false;
   isTablet = false;
   isDesktop = false;
@@ -103,14 +106,13 @@ export class GraficoComponent implements OnInit {
   
   createDatasets(): Array<any> {
     const datasets = new Array<any>();
-
     if(this.dados[0] !== undefined ){
       datasets.push({
         display: true,
         label: this.legenda[0],
         data: this.dados[0],
-        backgroundColor: '#59d99d',
-        borderColor: '#2cc7c0',
+        backgroundColor: this.backgroundColors[0],
+        borderColor: this.borderColors[0],
         borderWidth: 2,
         hoverBackgroundColor:'#58FA58',
         hoverBorderColor: '#04B45F',
@@ -125,8 +127,8 @@ export class GraficoComponent implements OnInit {
         display: true,
         label: this.legenda[1],
         data: this.dados[1],
-        backgroundColor: '#B22222',
-        borderColor: '#FF0000',
+        backgroundColor: this.backgroundColors[1],
+        borderColor: this.borderColors[1],
         borderWidth: 2,
         hoverBackgroundColor:'#58FA58',
         hoverBorderColor: '#04B45F',

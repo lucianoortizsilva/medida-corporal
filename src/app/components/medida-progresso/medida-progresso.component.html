@@ -1,41 +1,54 @@
 <app-grafico *ngIf="dadosPeso.length > 0"
-            [dados]="[dadosPeso]"
-            [descricoes]="descricoesPeso"
-            [legenda]="['Peso']"
-            [unidadeMedida]="'kg'">
+    [dados]="[dadosPeso]"
+    [descricoes]="descricoesPeso"
+    [legenda]="['Peso']"
+    [unidadeMedida]="'kg'"
+    [backgroundColors]="['#1371d2']"
+    [borderColors]="['#1E90FF']">
 </app-grafico>
 
 <app-grafico *ngIf="dadosPescoco.length > 0"
-            [dados]="[dadosPescoco]"
-            [descricoes]="descricoesPescoco"
-            [legenda]="['Pescoço']"
-            [unidadeMedida]="'cm'">
+    [dados]="[dadosPescoco]"
+    [descricoes]="descricoesPescoco"
+    [legenda]="['Pescoço']"
+    [unidadeMedida]="'cm'"
+    [backgroundColors]="['#228B22']"
+    [borderColors]="['#32CD32']">
 </app-grafico>
 
 <app-grafico *ngIf="dadosTorax.length > 0"  
-            [dados]="[dadosTorax]"
-            [descricoes]="descricoesTorax"
-            [legenda]="['Tórax']"
-            [unidadeMedida]="'cm'">
+    [dados]="[dadosTorax]"
+    [descricoes]="descricoesTorax"
+    [legenda]="['Tórax']"
+    [unidadeMedida]="'cm'"    
+    [backgroundColors]="['#1371d2']"
+    [borderColors]="['#1E90FF']">
 </app-grafico>
 
 <app-grafico *ngIf="dadosCintura.length > 0"  
-            [dados]="[dadosCintura]"
-            [descricoes]="descricoesCintura"
-            [legenda]="['Cintura']"
-            [unidadeMedida]="'cm'">
+    [dados]="[dadosCintura]"
+    [descricoes]="descricoesCintura"
+    [legenda]="['Cintura']"
+    [unidadeMedida]="'cm'"
+    [backgroundColors]="['#228B22']"
+    [borderColors]="['#32CD32']">
 </app-grafico>
+        
 
 <app-grafico *ngIf="dadosQuadril.length > 0"  
-            [dados]="[dadosQuadril]"
-            [descricoes]="descricoesQuadril"
-            [legenda]="['Quadril']"
-            [unidadeMedida]="'cm'">
+    [dados]="[dadosQuadril]"
+    [descricoes]="descricoesQuadril"
+    [legenda]="['Quadril']"
+    [unidadeMedida]="'cm'"    
+    [backgroundColors]="['#1371d2']"
+    [borderColors]="['#1E90FF']">
 </app-grafico>
 
 <app-grafico *ngIf="dadosBicepsE.length > 0 && dadosBicepsD.length > 0"  
-            [dados]="[dadosBicepsE, dadosBicepsD]"
-            [descricoes]="descricoesBiceps"
-            [legenda]="['Bíceps Esquerdo', 'Bíceps Direito']"
-            [unidadeMedida]="'cm'">
-</app-grafico>                             
+    [dados]="[dadosBicepsE, dadosBicepsD]"
+    [descricoes]="descricoesBiceps"
+    [legenda]="['Bíceps Esquerdo', 'Bíceps Direito']"
+    [unidadeMedida]="'cm'"
+    [backgroundColors]="['#228B22', '#1371d2']"
+    [borderColors]="['#32CD32', '#1E90FF']">
+</app-grafico>
