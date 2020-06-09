@@ -22,19 +22,23 @@ export class PagePerfilComponent implements OnInit {
               private formBuilder: FormBuilder,
               private medidaService: MedidaService) {
 
+    this.loadForm(null);
+
     this.authService.authState.subscribe(data => {
       if (data === null) {
         this.router.navigate(['/login']);
       } else {
         this.socialUser = data;
-        this.medidaService.getUsuario(this.socialUser.email).subscribe(data =>{
-          if (data === null){
-            this.autenticado = true;
-            this.loadForm(this.socialUser.email);
-          } else {
+        this.medidaService.getUsuario(this.socialUser.email).subscribe(usuario => {
+          if (usuario !== null){
             this.router.navigate(['/login']);
           }
-        })
+        }, err => {
+          if (err.status === 404) {
+              this.loadForm(this.socialUser.email);
+              this.autenticado = true;
+            }
+        });
       }
     });
   }
@@ -44,14 +48,16 @@ export class PagePerfilComponent implements OnInit {
   private loadForm(email: string): void {
     this.form = this.formBuilder.group({
       sexo: new FormControl('M'),
-      email: [email],
       altura: [null],
+      email: [email],
     });
   }
 
 
 
   save(): void {
+    console.log('this.form: ', this.form);
+
     if (this.form.valid) {
 
       const usuario = new Usuario();
