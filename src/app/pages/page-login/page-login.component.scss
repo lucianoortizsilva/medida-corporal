@@ -4,3 +4,16 @@
   color: #fff;
   background-color: #dd4b39 !important;
 }
+
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+.img-medida { 
+  background-image: url('../../../assets/img/medida4.jpg');   
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+}
