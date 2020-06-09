@@ -1,4 +1,4 @@
-<table mdbTable>
+<table [hidden]="!registrosEncontrados" mdbTable>
     <thead class="black white-text">
       <tr>
         <th *ngFor="let head of headElements" class="text-uppercase" scope="col">{{head}} </th>
@@ -11,3 +11,5 @@
       </tr>
     </tbody>
 </table>
+
+<app-sem-registro [hidden]="registrosEncontrados"></app-sem-registro>

@@ -10,12 +10,13 @@ import { Medida } from '../../model';
   styleUrls: ['./medida-atual.component.scss']
 })
 export class MedidaAtualComponent implements OnInit {
-  
+
   @Input() email: string;
 
   formulario: FormGroup;
   elements = null;
   headElements = ['Medida', 'Valor'];
+  registrosEncontrados = false;
 
   constructor(private medidaService: MedidaService,
               private formBuilder: FormBuilder,
@@ -27,15 +28,18 @@ export class MedidaAtualComponent implements OnInit {
     this.medidaService.getMedidaAtual(this.email).subscribe(
       medida => {
         this.inicializarTabela(medida);
+        this.registrosEncontrados = true;
     },
       err => {
-        console.log('erro encontrado: ', err);
+        if (err.status === 404) {
+          this.registrosEncontrados = false;
+        }
     });
   }
 
 
 
-  inicializarTabela(medida: Medida): void {    
+  inicializarTabela(medida: Medida): void {
     this.elements = [
       {dado: 'Data', valor: this.datepipe.transform(medida.dtCriacao, 'dd/MM/yyyy') },
       {dado: 'Peso', valor: medida.peso },
