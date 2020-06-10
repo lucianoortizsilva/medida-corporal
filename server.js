@@ -43,7 +43,7 @@ const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://localhost';
 var db = null;
 MongoClient.connect(url, function(err, client) {
-    db = client.db("db_medida_corporal");
+    db = client.db("medida_corporal");
 });            
 
 app.get('/*', (req, res) => res.sendFile(path.join(__dirname)));
