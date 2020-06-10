@@ -116,10 +116,8 @@ async function findAllMedidas(req, res) {
       .maxTimeMS(5000)
       .toArray()
       .then(medidas => {
-        if (medidas === undefined) {
+        if (medidas === undefined || medidas.length === 0) {
             res.status(404);
-            res.type('application/json');
-            res.send({ message : 'Não encontrado!'});
         } else {
             res.status(200);
             res.type('application/json');

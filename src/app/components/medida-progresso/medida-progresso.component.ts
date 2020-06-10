@@ -18,7 +18,7 @@ import { FiltroService } from 'src/app/services/filtro.service';
   styleUrls: ['./medida-progresso.component.scss']
 })
 export class MedidaProgressoComponent implements OnInit, OnDestroy {
-  
+
   @Input() email: string;
 
   private listaPesos = new Array();
@@ -46,6 +46,8 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
   descricoesAntebraco = new Array<string>();
   descricoesCoxa = new Array<string>();
 
+  registrosEncontrados = false;
+  
   private subscriptionMedidas: Subscription;
   private qtdDadosParaVisualizar = 6;
 
@@ -57,7 +59,7 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadAllCharts();
-    
+
     this.filtroService.quantidadeRegistrosBehaviorSubject.subscribe(data => {
       this.qtdDadosParaVisualizar = data;
       this.clearCharts();
@@ -79,6 +81,7 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
 
   private loadAllCharts(): void {
     this.subscriptionMedidas = this.medidaService.getMedidas(this.email).subscribe(medidas => {
+      this.registrosEncontrados = true;
       medidas.forEach(m => {
         this.loadPeso(m);
         this.loadTorax(m);
@@ -89,6 +92,11 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
         this.loadAntebraco(m);
         this.loadCoxa(m);
       });
+    },
+    err => {
+      if (err.error.status === 404) {
+        this.registrosEncontrados = false;
+      }
     });
   }
 

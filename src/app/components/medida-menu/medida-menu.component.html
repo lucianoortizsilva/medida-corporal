@@ -1,18 +1,13 @@
-<mdb-navbar SideClass="navbar navbar-dark navbar-9 bg-danger mb-1" [containerInside]="false">
-    <mdb-navbar-brand>
-      <a class="navbar-brand" href="#">Menu</a>
-    </mdb-navbar-brand>
-    <links>
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a (click)="selecionarPagina('medida_cadastro')" class="nav-link waves-light" mdbWavesEffect>CADASTRO NOVO</a>
-        </li>
-        <li class="nav-item">
-          <a (click)="selecionarPagina('medida_progresso')" class="nav-link waves-light" mdbWavesEffect>PROGRESSO</a>
-        </li>
-        <li class="nav-item">
-          <a (click)="selecionarPagina('medida_atual')" class="nav-link waves-light" mdbWavesEffect>ÚLTIMA MEDIDA REALIZADA</a>
-        </li>
-      </ul>
-    </links>
-</mdb-navbar>
+<mdb-card class="mb-1"> 
+    <ul class="nav justify-content-center grey lighten-4 py-4">
+      <li class="nav-item">
+        <a (click)="selecionarPagina('medida_cadastro')" class="nav-link">Novo</a>
+      </li>
+      <li class="nav-item">
+        <a (click)="selecionarPagina('medida_progresso')" class="nav-link">Progresso</a>
+      </li>
+      <li class="nav-item">
+        <a (click)="selecionarPagina('medida_atual')" class="nav-link">Atual</a>
+      </li>
+    </ul>      
+</mdb-card>

@@ -12,7 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class PageLoginComponent implements OnInit {
 
   user: SocialUser;
-  
+
 
 
   constructor(private authService: AuthService,
@@ -27,22 +27,23 @@ export class PageLoginComponent implements OnInit {
       if (data === null) {
         this.router.navigate(['/login']);
       }
-    });  
-  } 
-  
-  
+    });
+  }
+
+
 
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-      this.authService.authState.subscribe((user) => {
+
+    this.authService.authState.subscribe((user) => {
         this.user = user;
-        if(this.user !== null){
-          this.medidaService.getUsuario('lucianoortizsilva@gmail.com').subscribe(
+        if (this.user !== null) {
+          this.medidaService.getUsuario(user.email).subscribe(
             data => {
               if (data !== null) {
                 this.router.navigate(['/home']);
               }
-            }, 
+            },
             (err = HttpErrorResponse) => {
               if (err.status === 404) {
                   this.router.navigate(['/perfil']);
@@ -51,6 +52,8 @@ export class PageLoginComponent implements OnInit {
               }
             });
         }
+      }, err => {
+        console.error(err);
       });
   }
 
