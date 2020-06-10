@@ -1,4 +1,11 @@
 <mdb-card class="testimonial-card">
+  <span>
+    <a class="card-title float-right" data-toggle="collapse" href="#perfilUsuario" role="button" aria-expanded="true" aria-controls="perfilUsuario">
+      <i class="fas fa-caret-down m-3">
+      </i>
+    </a>
+  </span>
+  <div class="collapse show" id="perfilUsuario">
     <div class="avatar mx-auto mt-3">
       <img src="{{urlFoto}}" class="rounded-circle">
     </div>
@@ -24,5 +31,6 @@
           <i class="ml-1 fas fa-info-circle" mdbTooltip="{{ infoIMC }}" placement="top" mdbWavesEffect></i>
         </div>
       </div>
-    </mdb-card-body>
-  </mdb-card>
+    </mdb-card-body>  
+  </div>
+</mdb-card>
