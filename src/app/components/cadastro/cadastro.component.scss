@@ -6,9 +6,9 @@
  }
 
 @include media-breakpoint-down(md) {  
-    //.form-control {
-      //// padding: 0 !important;
-    //}
+    .form-control {
+      //padding: 0 !important;
+    }
 }
 
 @include media-breakpoint-up(xs) {}

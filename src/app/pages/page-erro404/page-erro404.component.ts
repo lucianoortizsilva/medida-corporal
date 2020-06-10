@@ -21,7 +21,7 @@ export class PageErro404Component implements OnInit {
     const timer = setInterval(() => {
       if (contador > 0) {
         clearInterval(timer);
-        this.router.navigate(['/login']);
+        this.router.navigate(['']);
       }else{
         contador++;
       }

@@ -26,12 +26,12 @@ export class PagePerfilComponent implements OnInit {
 
     this.authService.authState.subscribe(data => {
       if (data === null) {
-        this.router.navigate(['/login']);
+        this.router.navigate(['']);
       } else {
         this.socialUser = data;
         this.medidaService.getUsuario(this.socialUser.email).subscribe(usuario => {
           if (usuario !== null){
-            this.router.navigate(['/login']);
+            this.router.navigate(['']);
           }
         }, err => {
           if (err.status === 404) {

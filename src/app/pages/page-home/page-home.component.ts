@@ -32,11 +32,11 @@ export class PageHomeComponent implements OnInit {
 
     this.authService.authState.subscribe(data => {
       if (data === null) {
-        this.router.navigate(['/login']);
+        this.router.navigate(['']);
       } else {
         this.medidaService.getUsuario(data.email).subscribe(usuario => {
           if (usuario === null) {
-            this.router.navigate(['/login']);
+            this.router.navigate(['']);
           } else {
             this.socialUser = data;
             this.autenticado = true;

@@ -25,7 +25,7 @@ export class PageLoginComponent implements OnInit {
   ngOnInit() {
     this.authService.authState.subscribe(data => {
       if (data === null) {
-        this.router.navigate(['/login']);
+        this.router.navigate(['']);
       }
     });
   }

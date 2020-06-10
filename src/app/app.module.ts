@@ -46,11 +46,11 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
 };
 
 const routes: Routes = [
-  { path: 'login', component: PageLoginComponent },
+  { path: '', component: PageLoginComponent },
   { path: 'perfil', component: PagePerfilComponent },
   { path: 'home', component: PageHomeComponent },
   { path: '**', component: PageErro404Component },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: '', pathMatch: 'full' },
 ];
 
 
