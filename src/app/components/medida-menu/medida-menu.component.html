@@ -1,13 +1,13 @@
 <mdb-card class="mb-1"> 
     <ul class="nav justify-content-center grey lighten-4 py-4">
       <li class="nav-item">
-        <a (click)="selecionarPagina('medida_cadastro')" class="nav-link">Novo</a>
+        <a id="btnNovo" (click)="selecionarPagina('medida_cadastro', '#btnNovo')" class="nav-link">Novo</a>
       </li>
       <li class="nav-item">
-        <a (click)="selecionarPagina('medida_progresso')" class="nav-link">Progresso</a>
+        <a id="btnProgresso" (click)="selecionarPagina('medida_progresso', '#btnProgresso')" class="nav-link">Progresso</a>
       </li>
       <li class="nav-item">
-        <a (click)="selecionarPagina('medida_atual')" class="nav-link">Atual</a>
+        <a id="btnAtual" (click)="selecionarPagina('medida_atual', '#btnAtual')" class="nav-link">Atual</a>
       </li>
     </ul>      
 </mdb-card>
