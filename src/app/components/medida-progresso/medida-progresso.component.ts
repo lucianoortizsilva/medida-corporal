@@ -71,6 +71,21 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
       this.filtrar(data);
     });
 
+
+    /**
+     * TODO
+     this.filtroService.responsiveBehaviorSubject.subscribe(data => {
+       console.log('data.isMobile: ', data.isMobile);
+       console.log('data.isTablet: ', data.isTablet);
+       console.log('data.isDesktop: ', data.isDesktop);
+       if (data.isMobile) {
+         this.qtdDadosParaVisualizar = 6;
+         this.clearCharts();
+         this.loadAllCharts();
+        }
+      });
+    */
+      
   }
 
 

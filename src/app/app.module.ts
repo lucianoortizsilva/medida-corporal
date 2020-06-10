@@ -22,11 +22,14 @@ import { PageHomeComponent } from './pages/page-home/page-home.component';
 import { PageErro404Component } from './pages/page-erro404/page-erro404.component';
 import { MedidaMenuComponent } from './components/medida-menu/medida-menu.component';
 import { MedidaUsuarioComponent } from './components/medida-usuario/medida-usuario.component';
+import { FiltroGraficoComponent } from './components/filtro-grafico/filtro-grafico.component';
+import { FiltroService } from './services/filtro.service';
+
 
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider('')
+    provider: new GoogleLoginProvider('85887977533-3p5mfjpe2e22a4l01p6b167ggmip9ujv.apps.googleusercontent.com')
   }
 ]);
 
@@ -45,8 +48,8 @@ const routes: Routes = [
   { path: 'perfil', component: PagePerfilComponent },
   { path: 'home', component: PageHomeComponent },
   { path: 'cadastro', component: MedidaCadastroComponent },
-  { path: '**', component: PageErro404Component },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', component: PageErro404Component },
 ];
 
 
@@ -63,7 +66,8 @@ const routes: Routes = [
     PageHomeComponent,
     PageErro404Component,
     MedidaMenuComponent,
-    MedidaUsuarioComponent
+    MedidaUsuarioComponent,
+    FiltroGraficoComponent
   ],
   imports: [
     BrowserModule,
@@ -72,8 +76,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     SocialLoginModule,
     MDBBootstrapModule.forRoot(),
-    NgxMaskModule.forRoot(maskConfigFunction),//https://www.npmjs.com/package/ngx-mask
-    RouterModule.forRoot(routes)
+    NgxMaskModule.forRoot(maskConfigFunction),
+    RouterModule.forRoot(routes),
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [
@@ -81,7 +85,8 @@ const routes: Routes = [
       provide: AuthServiceConfig,
       useFactory: provideConfig
     },
-    MedidaService, 
+    MedidaService,
+    FiltroService, 
     DatePipe,
     AuthService,
     {provide: APP_BASE_HREF, useValue: '/medida-corporal'}
