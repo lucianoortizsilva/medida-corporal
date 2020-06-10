@@ -1,26 +1,21 @@
 <div *ngIf="autenticado" class="container">
     
   <header>
-    <app-medida-menu (paginaSelecionadaEventEmitter)=setPagina($event)></app-medida-menu>
+    <app-menu (paginaSelecionadaEventEmitter)=setPagina($event)></app-menu>
   </header>
-    
 
   <main>
     <div class="row">            
-      
       <div class="col-12 col-lg-4 col-xl-4 text-center">
-        <app-medida-usuario [nome]="socialUser.name" [urlFoto]="socialUser.photoUrl" [email]="socialUser.email"></app-medida-usuario>        
+        <app-usuario [nome]="socialUser.name" [urlFoto]="socialUser.photoUrl" [email]="socialUser.email"></app-usuario>
         <app-filtro-grafico *ngIf="paginaSelecionada === 'medida_progresso'"></app-filtro-grafico>
       </div>      
-
-      <div class="col-12 col-lg-8 col-xl-8 text-center" [ngSwitch]="paginaSelecionada">    
-        <app-medida-cadastro  *ngSwitchCase="'medida_cadastro'" [email]="socialUser.email"></app-medida-cadastro>        
-        <app-medida-atual *ngSwitchDefault [email]="socialUser.email"></app-medida-atual>                          
-        <app-medida-progresso *ngSwitchCase="'medida_progresso'" [email]="socialUser.email">                              
-        </app-medida-progresso>
-      </div>
-      
+      <div class="col-12 col-lg-8 col-xl-8 text-center" [ngSwitch]="paginaSelecionada">
+        <app-cadastro *ngSwitchCase="'medida_cadastro'" [email]="socialUser.email"></app-cadastro>
+        <app-progresso *ngSwitchCase="'medida_progresso'" [email]="socialUser.email"></app-progresso>
+        <app-ultima-medida *ngSwitchDefault [email]="socialUser.email"></app-ultima-medida>
+      </div>      
     </div>
-  </main>
-
+  </main>  
+  
 </div>

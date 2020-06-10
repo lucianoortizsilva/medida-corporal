@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Renderer2, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { AuthService, SocialUser } from 'angularx-social-login';
 import { Router } from '@angular/router';
 import { Pagina } from 'src/app/model';
@@ -27,8 +27,6 @@ export class PageHomeComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private router: Router,
-              private elementRef: ElementRef,
-              private renderer: Renderer2,
               private medidaService: MedidaService,
               private filtroService: FiltroService) {
 

@@ -1,0 +1,15 @@
+<table [hidden]="!registrosEncontrados" mdbTable class="mt-2">
+    <thead class="table-active">
+        <tr>
+            <th *ngFor="let head of headElements" class="text-uppercase" scope="col">{{head}} </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr mdbTableCol *ngFor="let el of elements">
+        <td class="text-left">{{el.dado}}</td>
+        <td>{{el.valor}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<app-sem-dados [hidden]="registrosEncontrados"><app-sem-dados>

@@ -1,0 +1,82 @@
+<app-grafico *ngIf="dadosPeso.length > 0"
+    [dados]="[dadosPeso]"
+    [descricoes]="descricoesPeso"
+    [legenda]="['Peso']"
+    [unidadeMedida]="'kg'"
+    [backgroundColors]="['#1371d2']"
+    [borderColors]="['#1E90FF']">
+</app-grafico>
+
+<app-grafico *ngIf="dadosCintura.length > 0"  
+    [dados]="[dadosCintura]"
+    [descricoes]="descricoesCintura"
+    [legenda]="['Cintura']"
+    [unidadeMedida]="'cm'"
+    [backgroundColors]="['#228B22']"
+    [borderColors]="['#32CD32']">
+</app-grafico>
+
+<app-grafico *ngIf="dadosQuadril.length > 0"  
+    [dados]="[dadosQuadril]"
+    [descricoes]="descricoesQuadril"
+    [legenda]="['Quadril']"
+    [unidadeMedida]="'cm'"    
+    [backgroundColors]="['#1371d2']"
+    [borderColors]="['#1E90FF']">
+</app-grafico>
+
+<app-grafico *ngIf="dadosTorax.length > 0"  
+    [dados]="[dadosTorax]"
+    [descricoes]="descricoesTorax"
+    [legenda]="['Tórax']"
+    [unidadeMedida]="'cm'"    
+    [backgroundColors]="['#228B22']"
+    [borderColors]="['#32CD32']">
+</app-grafico>      
+
+<app-grafico *ngIf="dadosBicepsE.length > 0 && dadosBicepsD.length > 0"  
+    [dados]="[dadosBicepsE, dadosBicepsD]"
+    [descricoes]="descricoesBiceps"
+    [legenda]="['Bíceps E.', 'Bíceps D.']"
+    [unidadeMedida]="'cm'"
+    [backgroundColors]="['#228B22', '#1371d2']"
+    [borderColors]="['#32CD32', '#1E90FF']">
+</app-grafico>
+
+<app-grafico *ngIf="dadosAntebracoE.length > 0 && dadosAntebracoD.length > 0"  
+    [dados]="[dadosAntebracoE, dadosAntebracoD]"
+    [descricoes]="descricoesAntebraco"
+    [legenda]="['Antebraço E.', 'Antebraço D.']"
+    [unidadeMedida]="'cm'"
+    [backgroundColors]="['#228B22', '#1371d2']"
+    [borderColors]="['#32CD32', '#1E90FF']">
+</app-grafico>
+
+<app-grafico *ngIf="dadosCoxaE.length > 0 && dadosCoxaD.length > 0"  
+    [dados]="[dadosCoxaE, dadosCoxaD]"
+    [descricoes]="descricoesCoxa"
+    [legenda]="['Coxa E.', 'Coxa D.']"
+    [unidadeMedida]="'cm'"
+    [backgroundColors]="['#228B22', '#1371d2']"
+    [borderColors]="['#32CD32', '#1E90FF']">
+</app-grafico>
+
+<app-grafico *ngIf="dadosPanturrilhaE.length > 0 && dadosPanturrilhaD.length > 0"  
+    [dados]="[dadosPanturrilhaE, dadosPanturrilhaD]"
+    [descricoes]="descricoesPanturrilha"
+    [legenda]="['Panturrilha E.', 'Panturrilha D.']"
+    [unidadeMedida]="'cm'"
+    [backgroundColors]="['#228B22', '#1371d2']"
+    [borderColors]="['#32CD32', '#1E90FF']">
+</app-grafico>
+
+<app-grafico *ngIf="dadosPescoco.length > 0"
+    [dados]="[dadosPescoco]"
+    [descricoes]="descricoesPescoco"
+    [legenda]="['Pescoço']"
+    [unidadeMedida]="'cm'"
+    [backgroundColors]="['#228B22']"
+    [borderColors]="['#1E90FF']">
+</app-grafico>
+
+<app-sem-dados [hidden]="registrosEncontrados"><app-sem-dados></app-sem-dados>

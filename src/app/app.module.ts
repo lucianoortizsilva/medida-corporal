@@ -3,9 +3,6 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { MedidaCadastroComponent } from './components/medida-cadastro/medida-cadastro.component';
-import { MedidaProgressoComponent } from './components/medida-progresso/medida-progresso.component';
-import { MedidaAtualComponent } from './components/medida-atual/medida-atual.component';
 import { BarraTituloComponent } from './barra-titulo/barra-titulo.component';
 import { GraficoComponent } from './components/grafico/grafico.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,12 +17,15 @@ import { PageLoginComponent } from './pages/page-login/page-login.component';
 import { AuthService } from 'angularx-social-login';
 import { PageHomeComponent } from './pages/page-home/page-home.component';
 import { PageErro404Component } from './pages/page-erro404/page-erro404.component';
-import { MedidaMenuComponent } from './components/medida-menu/medida-menu.component';
-import { MedidaUsuarioComponent } from './components/medida-usuario/medida-usuario.component';
 import { FiltroGraficoComponent } from './components/filtro-grafico/filtro-grafico.component';
 import { FiltroService } from './services/filtro.service';
 import { environment } from 'src/environments/environment';
 import { SemDadosComponent } from './components/sem-dados/sem-dados.component';
+import { UltimaMedidaComponent } from './components/ultima-medida/ultima-medida.component';
+import { ProgressoComponent } from './components/progresso/progresso.component';
+import { CadastroComponent } from './components/cadastro/cadastro.component';
+import { UsuarioComponent } from './components/usuario/usuario.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 
 const config = new AuthServiceConfig([
@@ -49,28 +49,27 @@ const routes: Routes = [
   { path: 'login', component: PageLoginComponent },
   { path: 'perfil', component: PagePerfilComponent },
   { path: 'home', component: PageHomeComponent },
-  { path: 'cadastro', component: MedidaCadastroComponent },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', component: PageErro404Component },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MedidaCadastroComponent,
-    MedidaProgressoComponent,
-    MedidaAtualComponent,
     BarraTituloComponent,
     GraficoComponent,
     PagePerfilComponent,
     PageLoginComponent,
     PageHomeComponent,
     PageErro404Component,
-    MedidaMenuComponent,
-    MedidaUsuarioComponent,
     FiltroGraficoComponent,
-    SemDadosComponent
+    SemDadosComponent,
+    UltimaMedidaComponent,
+    ProgressoComponent,
+    CadastroComponent,
+    UsuarioComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
