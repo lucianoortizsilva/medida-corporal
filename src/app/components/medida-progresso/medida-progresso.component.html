@@ -52,3 +52,21 @@
     [backgroundColors]="['#228B22', '#1371d2']"
     [borderColors]="['#32CD32', '#1E90FF']">
 </app-grafico>
+
+<app-grafico *ngIf="dadosAntebracoE.length > 0 && dadosAntebracoD.length > 0"  
+    [dados]="[dadosAntebracoE, dadosAntebracoD]"
+    [descricoes]="descricoesAntebraco"
+    [legenda]="['Antebraço Esquerdo', 'Antebraço Direito']"
+    [unidadeMedida]="'cm'"
+    [backgroundColors]="['#228B22', '#1371d2']"
+    [borderColors]="['#32CD32', '#1E90FF']">
+</app-grafico>
+
+<app-grafico *ngIf="dadosCoxaE.length > 0 && dadosCoxaD.length > 0"  
+    [dados]="[dadosCoxaE, dadosCoxaD]"
+    [descricoes]="descricoesCoxa"
+    [legenda]="['Coxa Esquerda', 'Coxa Direito']"
+    [unidadeMedida]="'cm'"
+    [backgroundColors]="['#228B22', '#1371d2']"
+    [borderColors]="['#32CD32', '#1E90FF']">
+</app-grafico>

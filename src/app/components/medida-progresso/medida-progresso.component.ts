@@ -30,6 +30,12 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
   dadosQuadril = new Array<number>();
   dadosBicepsE = new Array<number>();
   dadosBicepsD = new Array<number>();
+  dadosAntebracoE = new Array<number>();
+  dadosAntebracoD = new Array<number>();
+  dadosCoxaE = new Array<number>();
+  dadosCoxaD = new Array<number>();
+  dadosPanturrilhaE = new Array<number>();
+  dadosPanturrilhaD = new Array<number>();
 
   descricoesPeso = new Array<string>();
   descricoesTorax = new Array<string>();
@@ -37,6 +43,8 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
   descricoesCintura = new Array<string>();
   descricoesQuadril = new Array<string>();
   descricoesBiceps = new Array<string>();
+  descricoesAntebraco = new Array<string>();
+  descricoesCoxa = new Array<string>();
 
   private subscriptionMedidas: Subscription;
   private qtdDadosParaVisualizar = 6;
@@ -78,6 +86,8 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
         this.loadCintura(m);
         this.loadQuadril(m);
         this.loadBiceps(m);
+        this.loadAntebraco(m);
+        this.loadCoxa(m);
       });
     });
   }
@@ -122,6 +132,18 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
           this.loadBiceps(m);
         });
       });
+    } else if (MedidaEnum.ANTEBRACO.toPrecision() === id) {
+      this.medidaService.getMedidas(this.email).subscribe(medidas => {
+        medidas.forEach(m => {
+          this.loadAntebraco(m);
+        });
+      });  
+    } else if (MedidaEnum.COXA.toPrecision() === id) {
+      this.medidaService.getMedidas(this.email).subscribe(medidas => {
+        medidas.forEach(m => {
+          this.loadCoxa(m);
+        });
+      });    
     } else {
       this.loadAllCharts();
     }
@@ -137,6 +159,10 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
     this.dadosQuadril = new Array();
     this.dadosBicepsE = new Array();
     this.dadosBicepsD = new Array();
+    this.dadosAntebracoE = new Array();
+    this.dadosAntebracoD = new Array();
+    this.dadosCoxaE = new Array();
+    this.dadosCoxaD = new Array();
 
     this.descricoesPeso = new Array();
     this.descricoesPescoco = new Array();
@@ -144,6 +170,8 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
     this.descricoesCintura = new Array();
     this.descricoesQuadril = new Array();
     this.descricoesBiceps = new Array();
+    this.descricoesAntebraco = new Array();
+    this.descricoesCoxa = new Array();
   }
 
 
@@ -162,45 +190,61 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
   }
 
   private loadPeso(m: Medida): void{
-    if(!isNull(m.peso) && this.dadosPeso.length < this.qtdDadosParaVisualizar ){
+    if(this.dadosPeso.length < this.qtdDadosParaVisualizar ){
       this.dadosPeso.push(this.toNumber(m.peso));
       this.descricoesPeso.push(this.toDateFormat(m.dtCriacao));
     }
   }
 
   private loadTorax(m: Medida): void {
-    if (!isNull(m.torax) && this.dadosTorax.length < this.qtdDadosParaVisualizar ){
+    if (this.dadosTorax.length < this.qtdDadosParaVisualizar ){
       this.dadosTorax.push(this.toNumber(m.torax));
       this.descricoesTorax.push(this.toDateFormat(m.dtCriacao));
     }
   }
 
   private loadPescoco(m: Medida): void {
-    if (!isNull(m.pescoco) && this.dadosPescoco.length < this.qtdDadosParaVisualizar ){
+    if (this.dadosPescoco.length < this.qtdDadosParaVisualizar ){
       this.dadosPescoco.push(this.toNumber(m.pescoco));
       this.descricoesPescoco.push(this.toDateFormat(m.dtCriacao));
     }
   }
 
   private loadCintura(m: Medida): void {
-    if (!isNull(m.cintura) && this.dadosCintura.length < this.qtdDadosParaVisualizar ){
+    if (this.dadosCintura.length < this.qtdDadosParaVisualizar ){
       this.dadosCintura.push(this.toNumber(m.cintura));
       this.descricoesCintura.push(this.toDateFormat(m.dtCriacao));
     }
   }
 
   private loadQuadril(m: Medida): void {
-    if (!isNull(m.quadril) && this.dadosQuadril.length < this.qtdDadosParaVisualizar ){
+    if (this.dadosQuadril.length < this.qtdDadosParaVisualizar ){
       this.dadosQuadril.push(this.toNumber(m.quadril));
       this.descricoesQuadril.push(this.toDateFormat(m.dtCriacao));
     }
   }
 
   private loadBiceps(m: Medida): void {
-    if (!isNull(m.bicepsE) && !isNull(m.bicepsD) && this.dadosBicepsE.length < this.qtdDadosParaVisualizar && this.dadosBicepsD.length < this.qtdDadosParaVisualizar ){
+    if (this.dadosBicepsE.length < this.qtdDadosParaVisualizar && this.dadosBicepsD.length < this.qtdDadosParaVisualizar ){
       this.dadosBicepsE.push(this.toNumber(m.bicepsE));
       this.dadosBicepsD.push(this.toNumber(m.bicepsD));
       this.descricoesBiceps.push(this.toDateFormat(m.dtCriacao));
+    }
+  }
+
+  private loadAntebraco(m: Medida): void {
+    if (this.dadosAntebracoE.length < this.qtdDadosParaVisualizar && this.dadosAntebracoD.length < this.qtdDadosParaVisualizar ){
+      this.dadosAntebracoE.push(this.toNumber(m.antebracoE));
+      this.dadosAntebracoD.push(this.toNumber(m.antebracoD));
+      this.descricoesAntebraco.push(this.toDateFormat(m.dtCriacao));
+    }
+  }
+
+  private loadCoxa(m: Medida): void {
+    if (this.dadosCoxaE.length < this.qtdDadosParaVisualizar && this.dadosCoxaD.length < this.qtdDadosParaVisualizar ){
+      this.dadosCoxaE.push(this.toNumber(m.coxaE));
+      this.dadosCoxaD.push(this.toNumber(m.coxaD));
+      this.descricoesCoxa.push(this.toDateFormat(m.dtCriacao));
     }
   }
 
