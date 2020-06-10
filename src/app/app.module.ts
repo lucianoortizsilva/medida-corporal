@@ -26,6 +26,7 @@ import { ProgressoComponent } from './components/progresso/progresso.component';
 import { CadastroComponent } from './components/cadastro/cadastro.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 
 const config = new AuthServiceConfig([
@@ -69,7 +70,8 @@ const routes: Routes = [
     ProgressoComponent,
     CadastroComponent,
     UsuarioComponent,
-    MenuComponent
+    MenuComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
