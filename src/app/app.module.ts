@@ -24,12 +24,13 @@ import { MedidaMenuComponent } from './components/medida-menu/medida-menu.compon
 import { MedidaUsuarioComponent } from './components/medida-usuario/medida-usuario.component';
 import { FiltroGraficoComponent } from './components/filtro-grafico/filtro-grafico.component';
 import { FiltroService } from './services/filtro.service';
+import { environment } from 'src/environments/environment';
 
 
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider('85887977533-3p5mfjpe2e22a4l01p6b167ggmip9ujv.apps.googleusercontent.com')
+    provider: new GoogleLoginProvider(environment.GOOGLE_PROVIDER_ID)
   }
 ]);
 
