@@ -55,6 +55,9 @@ export class FiltroGraficoComponent implements OnInit {
       { id: MedidaEnum.CINTURA, name: 'Cintura' },
       { id: MedidaEnum.QUADRIL, name: 'Quadril' },
       { id: MedidaEnum.BICEPS, name: 'Bíceps' },
+      { id: MedidaEnum.ANTEBRACO, name: 'Antebraço' },
+      { id: MedidaEnum.COXA, name: 'Coxa' },
+      { id: MedidaEnum.PANTURRILHA, name: 'Panturrilha' },
     ];
   }
 

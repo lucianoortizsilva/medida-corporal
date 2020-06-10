@@ -10,11 +10,10 @@ export enum MedidaEnum {
     CINTURA = 3,
     QUADRIL = 4,
     COXA = 5,
-    PANTURRILHA_E = 7,
-    PANTURRILHA_D = 8,
-    BICEPS = 9,
-    ANTEBRACO = 10,
-    PESCOCO = 13
+    PANTURRILHA = 6,
+    BICEPS = 7,
+    ANTEBRACO = 8,
+    PESCOCO = 9
 }
 
 export class Medida {

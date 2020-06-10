@@ -45,6 +45,7 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
   descricoesBiceps = new Array<string>();
   descricoesAntebraco = new Array<string>();
   descricoesCoxa = new Array<string>();
+  descricoesPanturrilha = new Array<string>();
 
   registrosEncontrados = false;
   
@@ -91,6 +92,7 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
         this.loadBiceps(m);
         this.loadAntebraco(m);
         this.loadCoxa(m);
+        this.loadPanturrilha(m);
       });
     },
     err => {
@@ -152,6 +154,12 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
           this.loadCoxa(m);
         });
       });    
+    } else if (MedidaEnum.PANTURRILHA.toPrecision() === id) {
+      this.medidaService.getMedidas(this.email).subscribe(medidas => {
+        medidas.forEach(m => {
+          this.loadPanturrilha(m);
+        });
+      });      
     } else {
       this.loadAllCharts();
     }
@@ -171,6 +179,8 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
     this.dadosAntebracoD = new Array();
     this.dadosCoxaE = new Array();
     this.dadosCoxaD = new Array();
+    this.dadosPanturrilhaD = new Array();
+    this.dadosPanturrilhaE = new Array();
 
     this.descricoesPeso = new Array();
     this.descricoesPescoco = new Array();
@@ -180,6 +190,7 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
     this.descricoesBiceps = new Array();
     this.descricoesAntebraco = new Array();
     this.descricoesCoxa = new Array();
+    this.descricoesPanturrilha = new Array();
   }
 
 
@@ -253,6 +264,14 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
       this.dadosCoxaE.push(this.toNumber(m.coxaE));
       this.dadosCoxaD.push(this.toNumber(m.coxaD));
       this.descricoesCoxa.push(this.toDateFormat(m.dtCriacao));
+    }
+  }
+
+  private loadPanturrilha(m: Medida): void {
+    if (this.dadosPanturrilhaE.length < this.qtdDadosParaVisualizar && this.dadosPanturrilhaD.length < this.qtdDadosParaVisualizar ){
+      this.dadosPanturrilhaE.push(this.toNumber(m.panturrilhaE));
+      this.dadosPanturrilhaD.push(this.toNumber(m.panturrilhaD));
+      this.descricoesPanturrilha.push(this.toDateFormat(m.dtCriacao));
     }
   }
 

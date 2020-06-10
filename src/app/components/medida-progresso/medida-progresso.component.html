@@ -71,4 +71,13 @@
     [borderColors]="['#32CD32', '#1E90FF']">
 </app-grafico>
 
+<app-grafico *ngIf="dadosPanturrilhaE.length > 0 && dadosPanturrilhaD.length > 0"  
+    [dados]="[dadosPanturrilhaE, dadosPanturrilhaD]"
+    [descricoes]="descricoesPanturrilha"
+    [legenda]="['Panturrilha Esquerda', 'Panturrilha Direito']"
+    [unidadeMedida]="'cm'"
+    [backgroundColors]="['#228B22', '#1371d2']"
+    [borderColors]="['#32CD32', '#1E90FF']">
+</app-grafico>
+
 <app-sem-registro [hidden]="registrosEncontrados"></app-sem-registro>
