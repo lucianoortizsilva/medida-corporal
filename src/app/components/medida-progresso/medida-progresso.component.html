@@ -1,3 +1,5 @@
+<app-sem-dados [hidden]="registrosEncontrados"><app-sem-dados>
+
 <app-grafico *ngIf="dadosPeso.length > 0"
     [dados]="[dadosPeso]"
     [descricoes]="descricoesPeso"
@@ -78,5 +80,3 @@
     [backgroundColors]="['#228B22']"
     [borderColors]="['#1E90FF']">
 </app-grafico>
-
-<app-sem-registro [hidden]="registrosEncontrados"></app-sem-registro>

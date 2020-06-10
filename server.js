@@ -2,7 +2,7 @@ const express = require('express');
 const http = require('http');
 const path = require('path');
 const app = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 bodyParser = require('body-parser');
 
 /**
@@ -116,8 +116,10 @@ async function findAllMedidas(req, res) {
       .maxTimeMS(5000)
       .toArray()
       .then(medidas => {
-        if (medidas === undefined || medidas.length === 0) {
+        if (medidas === undefined || medidas === null || medidas.length === 0) {
             res.status(404);
+            res.type('application/json');
+            res.send({ message : 'Não Encontrado!'});
         } else {
             res.status(200);
             res.type('application/json');

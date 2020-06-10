@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
 import { isNull } from 'util';
 import { Subscription } from 'rxjs';
 import { FiltroService } from 'src/app/services/filtro.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 /**
  *
@@ -110,8 +111,8 @@ export class MedidaProgressoComponent implements OnInit, OnDestroy {
         this.loadPanturrilha(m);
       });
     },
-    err => {
-      if (err.error.status === 404) {
+    (err = HttpErrorResponse) => {
+      if (err.status === 404) {
         this.registrosEncontrados = false;
       }
     });

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MedidaProgressoComponent } from './medida-progresso.component';
+import { SemDadosComponent } from './sem-dados.component';
 
-describe('MedidaProgressoComponent', () => {
-  let component: MedidaProgressoComponent;
-  let fixture: ComponentFixture<MedidaProgressoComponent>;
+describe('SemDadosComponent', () => {
+  let component: SemDadosComponent;
+  let fixture: ComponentFixture<SemDadosComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MedidaProgressoComponent ]
+      declarations: [ SemDadosComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MedidaProgressoComponent);
+    fixture = TestBed.createComponent(SemDadosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

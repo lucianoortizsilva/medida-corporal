@@ -25,6 +25,7 @@ import { MedidaUsuarioComponent } from './components/medida-usuario/medida-usuar
 import { FiltroGraficoComponent } from './components/filtro-grafico/filtro-grafico.component';
 import { FiltroService } from './services/filtro.service';
 import { environment } from 'src/environments/environment';
+import { SemDadosComponent } from './components/sem-dados/sem-dados.component';
 
 
 const config = new AuthServiceConfig([
@@ -68,7 +69,8 @@ const routes: Routes = [
     PageErro404Component,
     MedidaMenuComponent,
     MedidaUsuarioComponent,
-    FiltroGraficoComponent
+    FiltroGraficoComponent,
+    SemDadosComponent
   ],
   imports: [
     BrowserModule,
