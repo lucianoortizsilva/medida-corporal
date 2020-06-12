@@ -92,8 +92,7 @@ const routes: Routes = [
     MedidaService,
     FiltroService, 
     DatePipe,
-    AuthService,
-    {provide: APP_BASE_HREF, useValue: '/medida-corporal'}
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
