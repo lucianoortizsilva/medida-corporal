@@ -39,9 +39,30 @@ app.use(function (req, res, next) {
  * https://docs.mongodb.com/guides/server/drivers/
  * 
  */
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/medida_corporal', {useNewUrlParser: true});
-var db = mongoose.connection;
+ var mongoose = require('mongoose');
+
+ const host = process.env.DB_HOST || 'localhost';
+ const port_db = process.env.DB_PORT || 27017;
+ const username = process.env.DB_USERNAME || '';
+ const password = process.env.DB_PASSWORD || '';
+ const db_name = process.env.DB_NAME || 'medida_corporal';
+
+ var uri = null;
+ var db = null;
+ 
+ if (process.env.DB_USERNAME && process.env.DB_PASSWORD) {
+    uri = 'mongodb://' + username + ':' + password + '@' + host + ':' + port_db + '/' + db_name;
+ } else {
+    uri = 'mongodb://' + host + ':' + port_db + '/' + db_name;
+ }
+ 
+mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true})
+    .then(() => {
+        db = mongoose.connection;
+        console.log("Conexão com mongo DB ok!", uri);
+    }).catch((err) => {
+        console.log("ERRO ao se conectar com Mongo DB: ", err);
+});
 
 app.get('/*', (req, res) => res.sendFile(path.join(__dirname)));
 
@@ -73,8 +94,6 @@ app.post('/medidas', (req, res) => {
     insertMedida(req, res);
 });
 
-
-
 async function buscarUltimaMedidaRealizada(req, res) {
     var email = req.params.email;  
     db.collection('Medida')   
@@ -102,8 +121,6 @@ async function buscarUltimaMedidaRealizada(req, res) {
         res.send({ message : 'Erro inesperado!'});
     }); 
 }
-
-
 
 async function findAllMedidas(req, res) {    
     var email = req.params.email;  
@@ -191,4 +208,4 @@ async function buscarUsuarioPorEmail(req, res) {
 
 const server = http.createServer(app);
 
-server.listen(port, ()=> console.log('Rodando... porta: ', port));
+server.listen(port, ()=> console.log('Aplicação rodando na porta: ', port));
