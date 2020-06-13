@@ -59,7 +59,7 @@ app.use(function (req, res, next) {
 mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => {
         db = mongoose.connection;
-        console.log("Conexão com mongo DB ok!", uri);
+        console.log("Conexão com mongo DB ok!");
     }).catch((err) => {
         console.log("ERRO ao se conectar com Mongo DB: ", err);
 });

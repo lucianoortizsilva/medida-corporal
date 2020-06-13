@@ -74,23 +74,31 @@ export class CadastroComponent implements OnInit {
   createMedida(form: FormGroup): Medida{
     const medida = new Medida();
     medida.dtCriacao = form.value.dtCriacao;
-    medida.peso = form.value.peso;
-    medida.pescoco = form.value.pescoco.toString().length > 2 ? form.value.pescoco / 10 : form.value.pescoco;
-    medida.torax = form.value.torax;
-    medida.cintura = form.value.cintura;
-    medida.quadril = form.value.quadril;
-    medida.bicepsE = form.value.bicepsE.toString().length > 2 ? form.value.bicepsE / 10 : form.value.bicepsE;
-    medida.bicepsD = form.value.bicepsD.toString().length > 2 ? form.value.bicepsD / 10 : form.value.bicepsD;
-    medida.antebracoE = form.value.antebracoE.toString().length > 2 ? form.value.antebracoE / 10 : form.value.antebracoE;
-    medida.antebracoD = form.value.antebracoD.toString().length > 2 ? form.value.antebracoD / 10 : form.value.antebracoD;
-    medida.coxaE = form.value.coxaE.toString().length > 2 ? form.value.coxaE / 10 : form.value.coxaE;
-    medida.coxaD = form.value.coxaD.toString().length > 2 ? form.value.coxaD / 10 : form.value.coxaD;
-    medida.panturrilhaE = form.value.panturrilhaE.toString().length > 2 ? form.value.panturrilhaE / 10 : form.value.panturrilhaE;
-    medida.panturrilhaD = form.value.panturrilhaD.toString().length > 2 ? form.value.panturrilhaD / 10 : form.value.panturrilhaD;
+    medida.peso = this.convertValue(form.value.peso);
+    medida.pescoco = this.convertValue(form.value.pescoco);
+    medida.torax = this.convertValue(form.value.torax);
+    medida.cintura = this.convertValue(form.value.cintura);
+    medida.quadril = this.convertValue(form.value.quadril);
+    medida.bicepsE = this.convertValue(form.value.bicepsE);
+    medida.bicepsD = this.convertValue(form.value.bicepsD);
+    medida.antebracoE = this.convertValue(form.value.antebracoE);
+    medida.antebracoD = this.convertValue(form.value.antebracoD);
+    medida.coxaE = this.convertValue(form.value.coxaE);
+    medida.coxaD = this.convertValue(form.value.coxaD);
+    medida.panturrilhaE = this.convertValue(form.value.panturrilhaE);
+    medida.panturrilhaD = this.convertValue(form.value.panturrilhaD);
     medida.usuario = new Usuario();
     medida.usuario.email = this.email;
     return medida;
   }
 
+
+  convertValue(value: number): number {
+    if (value.toString().length >= 3) {
+      return value / 10;
+    } else {
+      return value;
+    }
+  }
 
 }
