@@ -45,7 +45,7 @@ app.use(function (req, res, next) {
  const port_db = process.env.DB_PORT || 27017;
  const username = process.env.DB_USERNAME || '';
  const password = process.env.DB_PASSWORD || '';
- const db_name = process.env.DB_NAME || 'medida_corporal';
+ const db_name = process.env.DB_NAME || 'db_lucianoortiz';
 
  var uri = null;
  var db = null;
@@ -96,7 +96,7 @@ app.post('/medidas', (req, res) => {
 
 async function buscarUltimaMedidaRealizada(req, res) {
     var email = req.params.email;  
-    db.collection('Medida')   
+    db.collection('medida-corporal_Medida')   
       .find({ 'usuario.email' : email})
       .sort({dtCriacao: -1})
       .limit(1)
@@ -124,7 +124,7 @@ async function buscarUltimaMedidaRealizada(req, res) {
 
 async function findAllMedidas(req, res) {    
     var email = req.params.email;  
-    db.collection('Medida')   
+    db.collection('medida-corporal_Medida')   
       .find({ 'usuario.email' : email})
       .sort({dtCriacao: -1})
       .maxTimeMS(5000)
@@ -153,7 +153,7 @@ async function insertMedida(req, res) {
     const email = req.body.usuario.email;
     const dtCriacao = req.body.dtCriacao;
     const query = { $and: [{ 'dtCriacao' : dtCriacao}, { "usuario.email" : email}]};    
-    db.collection('Medida')
+    db.collection('medida-corporal_Medida')
         .findOne(query)
         .then(result => {
             if(result) {
@@ -161,7 +161,7 @@ async function insertMedida(req, res) {
                 res.type('application/json');
                 res.send({ 'message' : 'Data Duplicada!'});
             } else {
-                db.collection('Medida').insertOne(req.body);    
+                db.collection('medida-corporal_Medida').insertOne(req.body);    
                 res.status(201);
                 res.type('application/json');
                 res.send({'message' : 'Cadastro ok!'});
@@ -174,14 +174,14 @@ async function insertMedida(req, res) {
 }
 
 async function insertUsuario(req, res) {
-    await db.collection('Usuario').insertOne(
+    await db.collection('medida-corporal_Usuario').insertOne(
         req.body
     );    
 }
 
 async function buscarUsuarioPorEmail(req, res) {
     var email = req.params.email; 
-    db.collection('Usuario')
+    db.collection('medida-corporal_Usuario')
       .find({ 'email' : email})
       .limit(1)
       .maxTimeMS(5000)
