@@ -1,0 +1,9 @@
+<div [hidden]="tipo !== 'danger'" class="row alert alert-danger m-1" role="alert">
+    <p class="text-right col-12"><i class="fas fa-times" (click)="fechar()" mdbWavesEffect></i></p>
+    <p class="text-left col-12 mt-0"><mdb-icon fas icon="exclamation-circle mr-1"></mdb-icon>{{mensagem}}</p>
+</div>
+
+<div [hidden]="tipo !== 'success'" class="row alert alert-success m-1" role="alert">
+    <p class="text-right col-12"><i class="fas fa-times" (click)="fechar()" mdbWavesEffect></i></p>
+    <p class="text-left col-12 mt-0"><mdb-icon fas icon="fas fa-check mr-1"></mdb-icon>{{mensagem}}</p>
+</div>

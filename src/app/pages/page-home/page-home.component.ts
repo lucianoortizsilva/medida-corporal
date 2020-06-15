@@ -13,7 +13,7 @@ import { FiltroService } from 'src/app/services/filtro.service';
 export class PageHomeComponent implements OnInit {
 
 
-  paginaSelecionada = Pagina.medida_progresso;
+  paginaSelecionada = Pagina.medida_cadastro;
   autenticado = false;
   socialUser: SocialUser;
   exibirMenu = false;

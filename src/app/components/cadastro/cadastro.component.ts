@@ -12,21 +12,20 @@ import { Medida, Usuario } from 'src/app/model';
 })
 export class CadastroComponent implements OnInit {
 
-  formulario: FormGroup;
   @Input() email: string;
+
+  formulario: FormGroup;
+  mensagem: string;
+  tipoMensagem: string;
 
 
   constructor(private medidaService: MedidaService,
               private formBuilder: FormBuilder,
               private datepipe: DatePipe) { }
 
-
-
   ngOnInit() {
     this.inicializarFormulario();
   }
-
-
 
   onSubmit(): void {
     if (this.formulario.valid) {
@@ -35,19 +34,17 @@ export class CadastroComponent implements OnInit {
       this.medidaService.saveMedida(body).subscribe( (data: HttpResponseBase) => {
         this.medidaService.setUltimaMedida(medida);
         this.inicializarFormulario();
+        this.mensagemSucesso();
       }, (err: HttpErrorResponse) => {
-        if (err.status === 409) {
-            console.log(err);
+        if (err.status === 409 || err.status === 500) {
+          this.mensagem = err.error.message;
         }
+        this.tipoMensagem = 'danger';
       });
     } else {
-      /**
-         * TODO: Adicionar mensagem de erro p\ usuário
-      */
+      this.mensagemCampoObrigatorio();
     }
   }
-
-
 
   inicializarFormulario(): void {
     this.formulario = this.formBuilder.group({
@@ -68,8 +65,6 @@ export class CadastroComponent implements OnInit {
       usuario: [{email : 'lucianoortizasilva@gmail.com'}]
     });
   }
-
-
 
   createMedida(form: FormGroup): Medida{
     const medida = new Medida();
@@ -92,12 +87,28 @@ export class CadastroComponent implements OnInit {
     return medida;
   }
 
-
   convertValue(value: number): number {
     if (value.toString().length >= 3) {
       return value / 10;
     } else {
       return value;
+    }
+  }
+
+  private mensagemCampoObrigatorio(): void {
+    this.mensagem = "Preencha todos campos!";
+    this.tipoMensagem = 'danger';
+  }
+
+  private mensagemSucesso(): void {
+    this.mensagem = "Cadastro Ok!";
+    this.tipoMensagem = 'success';
+  }
+
+  fecharNotificacao(value: any){
+    if (value) {
+      this.mensagem = null;
+      this.tipoMensagem = null;
     }
   }
 

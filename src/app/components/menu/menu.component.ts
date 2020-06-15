@@ -28,7 +28,7 @@ export class MenuComponent implements OnInit {
 
 
   loadStyleButton(): void{
-    const btnElement = this.elementRef.nativeElement.querySelector('#btnProgresso');
+    const btnElement = this.elementRef.nativeElement.querySelector('#btnNovo');
     this.rendered2.addClass(btnElement, 'btn-selecionado');
   };
 

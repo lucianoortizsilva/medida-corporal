@@ -149,6 +149,7 @@ async function findAllMedidas(req, res) {
 }
 
 async function insertMedida(req, res) {
+
     const email = req.body.usuario.email;
     const dtCriacao = req.body.dtCriacao;
     const query = { $and: [{ 'dtCriacao' : dtCriacao}, { "usuario.email" : email}]};    
@@ -158,7 +159,7 @@ async function insertMedida(req, res) {
             if(result) {
                 res.status(409);
                 res.type('application/json');
-                res.send({ 'message' : 'Já existe um cadastro para a data informada!'});
+                res.send({ 'message' : 'Data Duplicada!'});
             } else {
                 db.collection('Medida').insertOne(req.body);    
                 res.status(201);
