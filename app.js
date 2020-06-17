@@ -40,6 +40,7 @@ app.use(function (req, res, next) {
  * 
  */
  var mongoose = require('mongoose');
+const { ObjectID } = require('mongodb');
 
  const host = process.env.DB_HOST || 'localhost';
  const port_db = process.env.DB_PORT || 27017;
@@ -66,19 +67,23 @@ mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true})
 
 app.get('/*', (req, res) => res.sendFile(path.join(__dirname)));
 
-app.get('/medidas/:email', (req, res) => {   
+app.get('/medida-corporal/medidas/:email', (req, res) => {   
     findAllMedidas(req, res);    
 });
 
-app.get('/medidas/:email/atual', (req, res) => { 
+app.get('/medida-corporal/medidas/:email/atual', (req, res) => { 
     buscarUltimaMedidaRealizada(req, res);    
 });
 
-app.get('/usuarios/:email', (req, res) => { 
+app.get('/medida-corporal/usuarios/:email', (req, res) => { 
     buscarUsuarioPorEmail(req, res);    
 });
 
-app.post('/usuarios', (req, res) => {     
+app.delete('/medida-corporal/medidas/:id', (req, res) => {   
+    deleteMedida(req, res);    
+});
+
+app.post('/medida-corporal/usuarios', (req, res) => {     
     try {
         insertUsuario(req, res);
         res.status(201);
@@ -90,7 +95,7 @@ app.post('/usuarios', (req, res) => {
     }
 });
 
-app.post('/medidas', (req, res) => {     
+app.post('/medida-corporal/medidas', (req, res) => {     
     insertMedida(req, res);
 });
 
@@ -177,6 +182,28 @@ async function insertUsuario(req, res) {
     await db.collection('medida-corporal_Usuario').insertOne(
         req.body
     );    
+}
+
+async function deleteMedida(req, res) {
+        const id = req.params.id;
+        db.collection('medida-corporal_Medida').deleteOne({ '_id': ObjectID(id) })
+            .then(result => {
+                console.log('result: ', result);
+                console.log('result.deletedCount: ', result.deletedCount);
+                if(result.deletedCount === 1) {
+                    res.status(200);
+                    res.type('application/json');
+                    res.send({ message : 'Excluído!'});
+                } else {
+                    res.type('application/json');
+                    res.send({ message : 'Não Encontrado!'});
+                    res.status(404);
+                }
+        }).catch(err => {
+            res.status(500);
+            res.type('application/json');
+            res.send({ message : 'Erro inesperado!'});
+        });    
 }
 
 async function buscarUsuarioPorEmail(req, res) {

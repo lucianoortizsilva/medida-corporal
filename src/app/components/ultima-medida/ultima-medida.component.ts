@@ -12,9 +12,12 @@ export class UltimaMedidaComponent implements OnInit {
 
   @Input() email: string;
 
+  id: string;
   elements = null;
-  headElements = ['Medida', 'Valor'];
+  headElements = null;
   registrosEncontrados = false;
+  mensagem: string;
+  tipoMensagem: string;
 
   constructor(private medidaService: MedidaService,
               private datepipe: DatePipe) {}
@@ -22,21 +25,11 @@ export class UltimaMedidaComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.medidaService.getMedidaAtual(this.email).subscribe(
-      medida => {
-        this.inicializarTabela(medida);
-        this.registrosEncontrados = true;
-    },
-      err => {
-        if (err.status === 404) {
-          this.registrosEncontrados = false;
-        }
-    });
+    this.loadUltimaMedida();
   }
 
-
-
   inicializarTabela(medida: Medida): void {
+    this.headElements = ['Medida', 'Valor'];
     this.elements = [
       {dado: 'Data', valor: this.datepipe.transform(medida.dtCriacao, 'dd/MM/yyyy') },
       {dado: 'Peso', valor: medida.peso },
@@ -54,6 +47,41 @@ export class UltimaMedidaComponent implements OnInit {
       {dado: 'Panturrilha Direita', valor: medida.panturrilhaD },
     ];
   }
+  
+  deletar(): void{
+    this.medidaService.deletarMedida(this.id).subscribe(data => {
+      this.headElements = null;
+      this.elements = null;
+      this.mensagem = data['message'];
+      this.tipoMensagem = 'success';
+      this.registrosEncontrados = false;
+      this.medidaService.setUltimaMedida(null);
+      this.loadUltimaMedida();      
+    });
+  }
 
+  fecharNotificacao(value: any){
+    if (value) {
+      this.mensagem = null;
+      this.tipoMensagem = null;
+    }
+  }
 
+  loadUltimaMedida(): void {
+    this.medidaService.getMedidaAtual(this.email).subscribe(
+      medida => {
+        this.id = medida._id;
+        this.inicializarTabela(medida);
+        this.registrosEncontrados = true;
+        this.medidaService.setUltimaMedida(medida);
+    },
+      err => {
+        if(err.error.status === 500){
+          this.mensagem = err.error.message;
+          this.tipoMensagem = 'danger';
+          this.registrosEncontrados = false;
+        }
+    });
+  }
+  
 }

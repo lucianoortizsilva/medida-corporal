@@ -56,6 +56,7 @@ export class MedidaService {
   }
 
 
+
   saveUsuario(body: any) {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -64,6 +65,13 @@ export class MedidaService {
     };
     const url = environment.usuariosAPI;
     return this.http.post(url, body, httpOptions);
+  }
+
+
+
+  deletarMedida(id: string) {
+    const url = environment.medidasAPI + '/' + id;
+    return this.http.delete(url, {responseType: 'json'});
   }
 
 }

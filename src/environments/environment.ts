@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  medidasAPI: 'http://localhost:3000/medidas',
-  usuariosAPI: 'http://localhost:3000/usuarios',
+  medidasAPI: 'http://localhost:3000/medida-corporal/medidas',
+  usuariosAPI: 'http://localhost:3000/medida-corporal/usuarios',
   GOOGLE_PROVIDER_ID: '<<informe>>'
 };

@@ -17,6 +17,7 @@ export enum MedidaEnum {
 }
 
 export class Medida {
+    _id: string;
     dtCriacao: Date;
     peso: number;
     pescoco: number;

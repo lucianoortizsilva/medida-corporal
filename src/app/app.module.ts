@@ -3,7 +3,6 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { BarraTituloComponent } from './barra-titulo/barra-titulo.component';
 import { GraficoComponent } from './components/grafico/grafico.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MedidaService } from './services/medida.service';
@@ -59,7 +58,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    BarraTituloComponent,
     GraficoComponent,
     PagePerfilComponent,
     PageLoginComponent,

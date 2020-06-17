@@ -34,6 +34,8 @@ export class UsuarioComponent implements OnInit {
 
     this.medidaService.ultimaMedidaBehaviorSubject.subscribe(medida => {
       if (medida === null) {
+        this.imc = null;
+        this.percentualGordura = null;
         this.infoGordura = 'Aguardando 1ª medida';
         this.infoIMC = 'Aguardando 1ª medida';
       } else {

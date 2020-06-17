@@ -55,6 +55,10 @@ tbody {
     }
 }
 
+a {
+    color: red !important;
+}
+
 @include media-breakpoint-down(xs) { }
 @include media-breakpoint-down(lg) { }
 @include media-breakpoint-down(xl) { }

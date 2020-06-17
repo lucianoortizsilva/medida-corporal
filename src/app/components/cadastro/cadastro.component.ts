@@ -36,9 +36,7 @@ export class CadastroComponent implements OnInit {
         this.inicializarFormulario();
         this.mensagemSucesso();
       }, (err: HttpErrorResponse) => {
-        if (err.status === 409 || err.status === 500) {
-          this.mensagem = err.error.message;
-        }
+        this.mensagem = err.error.message;
         this.tipoMensagem = 'danger';
       });
     } else {

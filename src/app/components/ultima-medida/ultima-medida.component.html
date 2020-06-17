@@ -1,3 +1,16 @@
+<app-notificacao [mensagem]="mensagem" 
+                 [tipo]="tipoMensagem"
+                 (fecharMensagemEventEmitter)="fecharNotificacao($event)">
+</app-notificacao>
+
+<div [hidden]="!registrosEncontrados" class="row mb-5">
+    <div class="col-12">
+        <a class="col-12 col-md-3 col-lg-3 col-xl-3 float-right mt-5" type="submit" mdbWavesEffect (click)="deletar()">
+            <i class="fas fa-trash-alt"></i> Deletar
+        </a>
+    </div>
+</div>
+
 <table [hidden]="!registrosEncontrados" mdbTable>
     <tbody>
         <tr mdbTableCol *ngFor="let el of elements">
