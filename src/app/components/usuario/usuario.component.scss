@@ -8,6 +8,10 @@ i {
     color: #1371d2;
 }
 
+.fa-user {
+    color: #000;
+}
+
 @include media-breakpoint-up(xs) {}
 @include media-breakpoint-up(sm) {}
 @include media-breakpoint-up(md) {}
