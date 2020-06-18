@@ -18,6 +18,7 @@ export class UltimaMedidaComponent implements OnInit {
   registrosEncontrados = false;
   mensagem: string;
   tipoMensagem: string;
+  desejaDeletar = false;
 
   constructor(private medidaService: MedidaService,
               private datepipe: DatePipe) {}
@@ -49,6 +50,11 @@ export class UltimaMedidaComponent implements OnInit {
   }
   
   deletar(): void{
+    this.desejaDeletar = true;
+  }
+  
+  excluir(): void{
+    this.desejaDeletar = false;
     this.medidaService.deletarMedida(this.id).subscribe(data => {
       this.headElements = null;
       this.elements = null;
@@ -58,6 +64,10 @@ export class UltimaMedidaComponent implements OnInit {
       this.medidaService.setUltimaMedida(null);
       this.loadUltimaMedida();      
     });
+  }
+
+  cancelar(): void{
+    this.desejaDeletar = false;
   }
 
   fecharNotificacao(value: any){

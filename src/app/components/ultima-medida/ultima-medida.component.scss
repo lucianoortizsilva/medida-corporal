@@ -55,8 +55,16 @@ tbody {
     }
 }
 
-a {
+.btn-deletar {
     color: red !important;
+}
+
+.btn-cancelar {
+    color: red !important;
+}
+
+.btn-excluir {
+    color: #28a745 !important;
 }
 
 @include media-breakpoint-down(xs) { }
