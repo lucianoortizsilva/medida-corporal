@@ -11,32 +11,57 @@
     </div>
     <div class="collapse show" id="filtro">
         <mdb-card-body>
-            <form [formGroup]="form" class="m-0">
+            <form [formGroup]="formulario" class="m-0">
+
+                <!-- FILTRO POR QUANTIDADE -->
                 <div class="row d-none d-sm-block d-md-block">
                     <h6 class="col-12 text-center">Quantidade máxima de registros:</h6>
                 </div>
                 <div class="row">
                     <div class="col-4 d-none d-sm-block d-md-block">
-                        <input formControlName="opcaoQuantidade" type="radio" class="form-check-input" name="opcaoQuantidade" value="6">
+                        <input formControlName="opcaoQuantidadeRegistros" type="radio" class="form-check-input" name="opcaoQuantidadeRegistros" value="6">
                         <label class="form-check-label">06</label>
                     </div>
                     <div class="col-4 d-none d-sm-block d-md-block">
-                        <input formControlName="opcaoQuantidade" type="radio" class="form-check-input" name="opcaoQuantidade" value="9">
+                        <input formControlName="opcaoQuantidadeRegistros" type="radio" class="form-check-input" name="opcaoQuantidadeRegistros" value="9">
                         <label class="form-check-label">09</label>
                     </div>
                     <div class="col-4 d-none d-sm-block d-md-block">
-                        <input formControlName="opcaoQuantidade" type="radio" class="form-check-input" name="opcaoQuantidade" value="12">
+                        <input formControlName="opcaoQuantidadeRegistros" type="radio" class="form-check-input" name="opcaoQuantidadeRegistros" value="12">
                         <label class="form-check-label">12</label>
                     </div>
                 </div>          
+
+                <hr class="d-none d-sm-block d-md-block"> 
+
+                <!-- FILTRO POR CRITÉRIO ESPECÍFICO -->
+                <div class="row d-none d-sm-block d-md-block">
+                    <h6 class="col-12 text-center">Filtrar por:</h6>
+                </div>
+                <div class="row text-left">
+                    <div class="col-12 d-none d-sm-block d-md-block ml-5">
+                        <input formControlName="opcaoPeriodoLancamento" type="radio" class="form-check-input" name="opcaoPeriodoLancamento" value="0">
+                        <label class="form-check-label">últimos registros</label>
+                    </div>
+                    <div class="col-12 d-none d-sm-block d-md-block ml-5">
+                        <input formControlName="opcaoPeriodoLancamento" type="radio" class="form-check-input" name="opcaoPeriodoLancamento" value="1">
+                        <label class="form-check-label">1º registro de cada mês</label>
+                    </div>
+                    <div class="col-12 d-none d-sm-block d-md-block ml-5">
+                        <input formControlName="opcaoPeriodoLancamento" type="radio" class="form-check-input" name="opcaoPeriodoLancamento" value="2">
+                        <label class="form-check-label">último registro de cada mês</label>
+                    </div>
+                </div>          
+
+                <!-- FILTRO POR MEDIDA -->
                 <hr class="d-none d-sm-block d-md-block">      
                 <div class="row">
                     <h6 class="col-12 text-center">Medida:</h6>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-10">
-                        <select formControlName="filtros" id="filtros" class="form-control">
-                            <option *ngFor="let filtro of filtros; let i = index" [value]="filtros[i].id">{{filtros[i].name}}</option>
+                        <select formControlName="opcaoMedidas" id="opcaoMedidas" class="form-control">
+                            <option *ngFor="let filtro of opcaoMedidas; let i = index" [value]="opcaoMedidas[i].id">{{opcaoMedidas[i].name}}</option>
                         </select>
                     </div>
                 </div>    

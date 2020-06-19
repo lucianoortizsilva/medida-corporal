@@ -45,3 +45,17 @@ export class Usuario {
     sexo: string;
     altura: number;
 }
+
+export class FiltroGrafico {
+    opcaoQuantidadeRegistros: number;
+    opcaoMedidaSelecionada: number;
+
+    /**
+        * 
+        * 0 - últimos registros;
+        * 1 - 1º registro de cada mês;
+        * 2 - último registro de cada mês;
+        * 
+    */
+    opcaoPeriodoLancamento: number;
+}

@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { MedidaEnum, Medida } from '../../model';
+import { Component, OnInit, Input, ɵConsole, OnDestroy } from '@angular/core';
+import { MedidaEnum, Medida, FiltroGrafico } from '../../model';
 import { MedidaService } from '../../services/medida.service';
 import { DatePipe } from '@angular/common';
 import { isNull } from 'util';
@@ -12,12 +12,12 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './progresso.component.html',
   styleUrls: ['./progresso.component.scss']
 })
-export class ProgressoComponent implements OnInit {
+export class ProgressoComponent implements OnInit, OnDestroy {
 
   @Input() email: string;
-
-  private listaPesos = new Array();
-
+  
+  dadosCoxaE = new Array<number>();
+  dadosCoxaD = new Array<number>();
   dadosPeso = new Array<number>();
   dadosTorax = new Array<number>();
   dadosPescoco = new Array<number>();
@@ -27,83 +27,70 @@ export class ProgressoComponent implements OnInit {
   dadosBicepsD = new Array<number>();
   dadosAntebracoE = new Array<number>();
   dadosAntebracoD = new Array<number>();
-  dadosCoxaE = new Array<number>();
-  dadosCoxaD = new Array<number>();
   dadosPanturrilhaE = new Array<number>();
   dadosPanturrilhaD = new Array<number>();
-
+  
+  descricoesCoxa = new Array<string>();
   descricoesPeso = new Array<string>();
   descricoesTorax = new Array<string>();
+  descricoesBiceps = new Array<string>();
   descricoesPescoco = new Array<string>();
   descricoesCintura = new Array<string>();
   descricoesQuadril = new Array<string>();
-  descricoesBiceps = new Array<string>();
   descricoesAntebraco = new Array<string>();
-  descricoesCoxa = new Array<string>();
   descricoesPanturrilha = new Array<string>();
-
+  
   registrosEncontrados = false;
   
-  private subscriptionMedidas: Subscription;
-  private qtdDadosParaVisualizar = 6;
-
+  private subscriptionFiltro: Subscription;
+  
   constructor(private datepipe: DatePipe,
               private medidaService: MedidaService,
               private filtroService: FiltroService) { }
 
-
-
   ngOnInit(): void {
-    this.loadAllCharts();
-
-    this.filtroService.quantidadeRegistrosBehaviorSubject.subscribe(data => {
-      this.qtdDadosParaVisualizar = data;
-      this.clearCharts();
-      this.loadAllCharts();
+    this.subscriptionFiltro = this.filtroService.filtroGraficoBehaviorSubject.subscribe(filtroGrafico => {
+      this.limparGraficos();
+      this.loadAllCharts(filtroGrafico);
     });
-
-    this.filtroService.codigoMedidaBehaviorSubject.subscribe(data => {
-      this.filtrar(data);
-    });
-
-
-    /**
-     * TODO
-     this.filtroService.responsiveBehaviorSubject.subscribe(data => {
-       console.log('data.isMobile: ', data.isMobile);
-       console.log('data.isTablet: ', data.isTablet);
-       console.log('data.isDesktop: ', data.isDesktop);
-       if (data.isMobile) {
-         this.qtdDadosParaVisualizar = 6;
-         this.clearCharts();
-         this.loadAllCharts();
-        }
-      });
-    */
-      
   }
-
 
   ngOnDestroy(): void {
-    this.subscriptionMedidas.unsubscribe();
+    this.subscriptionFiltro.unsubscribe();
   }
 
-
-
-  private loadAllCharts(): void {
-    this.subscriptionMedidas = this.medidaService.getMedidas(this.email).subscribe(medidas => {
+  private loadAllCharts(filtro: FiltroGrafico): void {
+    
+    this.subscriptionFiltro = this.medidaService.getMedidas(this.email).subscribe(medidas => {
       this.registrosEncontrados = true;
+      
+      var mesCriacaoAtual = null;
+      var mesCriacaoAnterior = null;
+      var medidaAnterior = null;
+      
       medidas.forEach(m => {
-        this.loadPeso(m);
-        this.loadTorax(m);
-        this.loadPescoco(m);
-        this.loadCintura(m);
-        this.loadQuadril(m);
-        this.loadBiceps(m);
-        this.loadAntebraco(m);
-        this.loadCoxa(m);
-        this.loadPanturrilha(m);
+        mesCriacaoAtual = new Date(m.dtCriacao).getMonth();
+        if (filtro.opcaoPeriodoLancamento == 0) {
+          this.carregarTodasMedidas(m, filtro);
+        } else if (filtro.opcaoPeriodoLancamento == 1) {
+            if (mesCriacaoAnterior == null) {
+              this.carregarTodasMedidas(m, filtro);
+              mesCriacaoAnterior = mesCriacaoAtual;
+            } else if (mesCriacaoAtual != mesCriacaoAnterior) {
+                this.carregarTodasMedidas(m, filtro);
+                mesCriacaoAnterior = mesCriacaoAtual;
+            }
+        } else if (filtro.opcaoPeriodoLancamento == 2) {
+            if (mesCriacaoAnterior != null && mesCriacaoAnterior != mesCriacaoAtual) {
+              this.carregarTodasMedidas(medidaAnterior, filtro);
+            }  
+            medidaAnterior = m;
+            mesCriacaoAnterior = mesCriacaoAtual;
+        } 
       });
+      if (filtro.opcaoPeriodoLancamento == 2) {
+        this.carregarTodasMedidas(medidaAnterior, filtro);
+      }
     },
     (err = HttpErrorResponse) => {
       if (err.status === 404) {
@@ -111,73 +98,40 @@ export class ProgressoComponent implements OnInit {
       }
     });
   }
-
-
-  private filtrar(id: any): void {
-    this.clearCharts();
-
-    if (MedidaEnum.PESO.toPrecision() === id) {
-      this.medidaService.getMedidas(this.email).subscribe(medidas => {
-        medidas.forEach(m => {
-          this.loadPeso(m);
-        });
-      });
-    } else if (MedidaEnum.TORAX.toPrecision() === id) {
-      this.medidaService.getMedidas(this.email).subscribe(medidas => {
-        medidas.forEach(m => {
-          this.loadTorax(m);
-        });
-      });
-    } else if (MedidaEnum.PESCOCO.toPrecision() === id) {
-      this.medidaService.getMedidas(this.email).subscribe(medidas => {
-        medidas.forEach(m => {
-          this.loadPescoco(m);
-        });
-      });
-    } else if (MedidaEnum.CINTURA.toPrecision() === id) {
-      this.medidaService.getMedidas(this.email).subscribe(medidas => {
-        medidas.forEach(m => {
-          this.loadCintura(m);
-        });
-      });
-    } else if (MedidaEnum.QUADRIL.toPrecision() === id) {
-      this.medidaService.getMedidas(this.email).subscribe(medidas => {
-        medidas.forEach(m => {
-          this.loadQuadril(m);
-        });
-      });
-    } else if (MedidaEnum.BICEPS.toPrecision() === id) {
-      this.medidaService.getMedidas(this.email).subscribe(medidas => {
-        medidas.forEach(m => {
-          this.loadBiceps(m);
-        });
-      });
-    } else if (MedidaEnum.ANTEBRACO.toPrecision() === id) {
-      this.medidaService.getMedidas(this.email).subscribe(medidas => {
-        medidas.forEach(m => {
-          this.loadAntebraco(m);
-        });
-      });  
-    } else if (MedidaEnum.COXA.toPrecision() === id) {
-      this.medidaService.getMedidas(this.email).subscribe(medidas => {
-        medidas.forEach(m => {
-          this.loadCoxa(m);
-        });
-      });    
-    } else if (MedidaEnum.PANTURRILHA.toPrecision() === id) {
-      this.medidaService.getMedidas(this.email).subscribe(medidas => {
-        medidas.forEach(m => {
-          this.loadPanturrilha(m);
-        });
-      });      
-    } else {
-      this.loadAllCharts();
+  
+  private carregarTodasMedidas(m: Medida, filtro: FiltroGrafico) {
+    if (filtro.opcaoMedidaSelecionada == 0) {
+      this.carregarPeso(m,filtro);
+      this.carregarTorax(m,filtro);
+      this.carregarPescoco(m,filtro);
+      this.carregarCintura(m,filtro);
+      this.carregarQuadril(m,filtro);
+      this.carregarBiceps(m,filtro);
+      this.carregarAntebraco(m,filtro);
+      this.carregarCoxa(m,filtro);
+      this.carregarPanturrilha(m,filtro);
+    } else if (Number(MedidaEnum.PESO.toPrecision()) == filtro.opcaoMedidaSelecionada) {
+      this.carregarPeso(m,filtro);
+    } else if (Number(MedidaEnum.TORAX.toPrecision()) == filtro.opcaoMedidaSelecionada) {
+        this.carregarTorax(m,filtro);
+    } else if (Number(MedidaEnum.PESCOCO.toPrecision()) == filtro.opcaoMedidaSelecionada) {
+        this.carregarPescoco(m,filtro);
+    } else if (Number(MedidaEnum.CINTURA.toPrecision()) == filtro.opcaoMedidaSelecionada) {
+        this.carregarCintura(m,filtro);
+    } else if (Number(MedidaEnum.QUADRIL.toPrecision()) == filtro.opcaoMedidaSelecionada) {
+        this.carregarQuadril(m,filtro);
+    } else if (Number(MedidaEnum.BICEPS.toPrecision()) == filtro.opcaoMedidaSelecionada) {
+        this.carregarBiceps(m,filtro);
+    } else if (Number(MedidaEnum.ANTEBRACO.toPrecision()) == filtro.opcaoMedidaSelecionada) {
+        this.carregarAntebraco(m,filtro);
+    } else if (Number(MedidaEnum.COXA.toPrecision()) == filtro.opcaoMedidaSelecionada) {
+        this.carregarCoxa(m,filtro);
+    } else if (Number(MedidaEnum.PANTURRILHA.toPrecision()) == filtro.opcaoMedidaSelecionada) {
+        this.carregarPanturrilha(m,filtro);
     }
   }
 
-
-
-  private clearCharts(): void {
+  private limparGraficos(): void {
     this.dadosPeso = new Array();
     this.dadosPescoco = new Array();
     this.dadosTorax = new Array();
@@ -203,13 +157,9 @@ export class ProgressoComponent implements OnInit {
     this.descricoesPanturrilha = new Array();
   }
 
-
-
   private toDateFormat(dt: Date): string {
     return this.datepipe.transform(dt, 'dd/MM/yyyy');
   }
-
-
 
   private toNumber(value: any): number {
     if (!isNull(value)  && value.typeof === undefined) {
@@ -218,67 +168,67 @@ export class ProgressoComponent implements OnInit {
     return 0.0;
   }
 
-  private loadPeso(m: Medida): void{
-    if(this.dadosPeso.length < this.qtdDadosParaVisualizar ){
+  private carregarPeso(m: Medida, filtro: FiltroGrafico): void{
+    if (this.dadosPeso.length < filtro.opcaoQuantidadeRegistros) {
       this.dadosPeso.push(this.toNumber(m.peso));
       this.descricoesPeso.push(this.toDateFormat(m.dtCriacao));
     }
   }
 
-  private loadTorax(m: Medida): void {
-    if (this.dadosTorax.length < this.qtdDadosParaVisualizar ){
+  private carregarTorax(m: Medida, filtro: FiltroGrafico): void{
+    if (this.dadosTorax.length < filtro.opcaoQuantidadeRegistros) {
       this.dadosTorax.push(this.toNumber(m.torax));
       this.descricoesTorax.push(this.toDateFormat(m.dtCriacao));
     }
   }
 
-  private loadPescoco(m: Medida): void {
-    if (this.dadosPescoco.length < this.qtdDadosParaVisualizar ){
+  private carregarPescoco(m: Medida, filtro: FiltroGrafico): void{
+    if (this.dadosPescoco.length < filtro.opcaoQuantidadeRegistros) {
       this.dadosPescoco.push(this.toNumber(m.pescoco));
       this.descricoesPescoco.push(this.toDateFormat(m.dtCriacao));
     }
   }
 
-  private loadCintura(m: Medida): void {
-    if (this.dadosCintura.length < this.qtdDadosParaVisualizar ){
+  private carregarCintura(m: Medida, filtro: FiltroGrafico): void{
+    if (this.dadosCintura.length < filtro.opcaoQuantidadeRegistros) {
       this.dadosCintura.push(this.toNumber(m.cintura));
       this.descricoesCintura.push(this.toDateFormat(m.dtCriacao));
     }
   }
 
-  private loadQuadril(m: Medida): void {
-    if (this.dadosQuadril.length < this.qtdDadosParaVisualizar ){
+  private carregarQuadril(m: Medida, filtro: FiltroGrafico): void{
+    if (this.dadosQuadril.length < filtro.opcaoQuantidadeRegistros) {
       this.dadosQuadril.push(this.toNumber(m.quadril));
       this.descricoesQuadril.push(this.toDateFormat(m.dtCriacao));
     }
   }
 
-  private loadBiceps(m: Medida): void {
-    if (this.dadosBicepsE.length < this.qtdDadosParaVisualizar && this.dadosBicepsD.length < this.qtdDadosParaVisualizar ){
+  private carregarBiceps(m: Medida, filtro: FiltroGrafico): void{
+    if (this.dadosBicepsE.length < filtro.opcaoQuantidadeRegistros && this.dadosBicepsD.length < filtro.opcaoQuantidadeRegistros) {
       this.dadosBicepsE.push(this.toNumber(m.bicepsE));
       this.dadosBicepsD.push(this.toNumber(m.bicepsD));
       this.descricoesBiceps.push(this.toDateFormat(m.dtCriacao));
     }
   }
 
-  private loadAntebraco(m: Medida): void {
-    if (this.dadosAntebracoE.length < this.qtdDadosParaVisualizar && this.dadosAntebracoD.length < this.qtdDadosParaVisualizar ){
+  private carregarAntebraco(m: Medida, filtro: FiltroGrafico): void{
+    if (this.dadosAntebracoE.length < filtro.opcaoQuantidadeRegistros && this.dadosAntebracoD.length < filtro.opcaoQuantidadeRegistros) {
       this.dadosAntebracoE.push(this.toNumber(m.antebracoE));
       this.dadosAntebracoD.push(this.toNumber(m.antebracoD));
       this.descricoesAntebraco.push(this.toDateFormat(m.dtCriacao));
     }
   }
 
-  private loadCoxa(m: Medida): void {
-    if (this.dadosCoxaE.length < this.qtdDadosParaVisualizar && this.dadosCoxaD.length < this.qtdDadosParaVisualizar ){
+  private carregarCoxa(m: Medida, filtro: FiltroGrafico): void{
+    if (this.dadosCoxaE.length < filtro.opcaoQuantidadeRegistros && this.dadosCoxaD.length < filtro.opcaoQuantidadeRegistros) {
       this.dadosCoxaE.push(this.toNumber(m.coxaE));
       this.dadosCoxaD.push(this.toNumber(m.coxaD));
       this.descricoesCoxa.push(this.toDateFormat(m.dtCriacao));
     }
   }
 
-  private loadPanturrilha(m: Medida): void {
-    if (this.dadosPanturrilhaE.length < this.qtdDadosParaVisualizar && this.dadosPanturrilhaD.length < this.qtdDadosParaVisualizar ){
+  private carregarPanturrilha(m: Medida, filtro: FiltroGrafico): void{
+    if (this.dadosPanturrilhaE.length < filtro.opcaoQuantidadeRegistros && this.dadosPanturrilhaD.length < filtro.opcaoQuantidadeRegistros) {
       this.dadosPanturrilhaE.push(this.toNumber(m.panturrilhaE));
       this.dadosPanturrilhaD.push(this.toNumber(m.panturrilhaD));
       this.descricoesPanturrilha.push(this.toDateFormat(m.dtCriacao));
