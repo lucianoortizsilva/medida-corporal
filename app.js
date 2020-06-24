@@ -131,7 +131,7 @@ async function findAllMedidas(req, res) {
     var email = req.params.email;  
     db.collection('medida-corporal_Medida')   
       .find({ 'usuario.email' : email})
-      .sort({dtCriacao: 1})
+      .sort({dtCriacao: -1})
       .maxTimeMS(5000)
       .toArray()
       .then(medidas => {

@@ -1,6 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { of } from 'rxjs';
 import { MedidaEnum, FiltroGrafico } from 'src/app/model';
 import { FiltroService } from 'src/app/services/filtro.service';
 
@@ -26,14 +25,12 @@ export class FiltroGraficoComponent implements OnInit {
   private inicializarFormulario(): void {
     this.formulario = this.formBuilder.group({
       opcaoMedidas: new FormControl('0'),
-      opcaoQuantidadeRegistros: new FormControl('6'),
-      opcaoPeriodoLancamento: new FormControl('0')
+      opcaoQuantidadeRegistros: new FormControl('6')
     });
     this.inicializarComboMedidas();
 
     this.filtro.opcaoQuantidadeRegistros = 6;
     this.filtro.opcaoMedidaSelecionada = 0;
-    this.filtro.opcaoPeriodoLancamento = 0;
     this.filtroService.setFiltroGrafico(this.filtro);
   }
 
@@ -63,12 +60,6 @@ export class FiltroGraficoComponent implements OnInit {
   private inicializarOnChangeFiltros(): void {
     this.formulario.controls.opcaoQuantidadeRegistros.valueChanges.subscribe(data => {
       this.filtro.opcaoQuantidadeRegistros = data;
-      this.filtro.opcaoMedidaSelecionada = 0;
-      this.limparMedidaSelecionada();
-    });
-
-    this.formulario.controls.opcaoPeriodoLancamento.valueChanges.subscribe(data => {
-      this.filtro.opcaoPeriodoLancamento = data;
       this.filtro.opcaoMedidaSelecionada = 0;
       this.limparMedidaSelecionada();
     });
