@@ -1,15 +1,19 @@
 # MedidaCorporal
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.4.
+- Tela de login \
+![login](https://github.com/lucianoortizsilva/medida-corporal/blob/master/src/github/login.jpg) 
 
-## Development server
+- Tela de perfil \
+![perfil](https://github.com/lucianoortizsilva/medida-corporal/blob/master/src/github/perfil.jpg) 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Tela de cadastro novo \
+![novo](https://github.com/lucianoortizsilva/medida-corporal/blob/master/src/github/novo.jpg) 
 
-## Code scaffolding
+- Tela de progresso \
+![progresso](https://github.com/lucianoortizsilva/medida-corporal/blob/master/src/github/progresso.jpg) 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Tela de medida atual \
+![atual](https://github.com/lucianoortizsilva/medida-corporal/blob/master/src/github/atual.jpg) 
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+- Tela de confirmação para deletar \
+![deletar](https://github.com/lucianoortizsilva/medida-corporal/blob/master/src/github/deletar.jpg) 
