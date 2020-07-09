@@ -46,7 +46,7 @@ const { ObjectID } = require('mongodb');
  const port_db = process.env.DB_PORT || 27017;
  const username = process.env.DB_USERNAME || '';
  const password = process.env.DB_PASSWORD || '';
- const db_name = process.env.DB_NAME || 'db_lucianoortiz';
+ const db_name = process.env.DB_NAME || 'db_medida_corporal';
 
  var uri = null;
  var db = null;
@@ -101,7 +101,7 @@ app.post('/medida-corporal/medidas', (req, res) => {
 
 async function buscarUltimaMedidaRealizada(req, res) {
     var email = req.params.email;  
-    db.collection('medida-corporal_Medida')   
+    db.collection('Medida')   
       .find({ 'usuario.email' : email})
       .sort({dtCriacao: -1})
       .limit(1)
@@ -129,7 +129,7 @@ async function buscarUltimaMedidaRealizada(req, res) {
 
 async function findAllMedidas(req, res) {    
     var email = req.params.email;  
-    db.collection('medida-corporal_Medida')   
+    db.collection('Medida')   
       .find({ 'usuario.email' : email})
       .sort({dtCriacao: -1})
       .maxTimeMS(5000)
@@ -158,7 +158,7 @@ async function insertMedida(req, res) {
     const email = req.body.usuario.email;
     const dtCriacao = req.body.dtCriacao;
     const query = { $and: [{ 'dtCriacao' : dtCriacao}, { "usuario.email" : email}]};    
-    db.collection('medida-corporal_Medida')
+    db.collection('Medida')
         .findOne(query)
         .then(result => {
             if(result) {
@@ -166,7 +166,7 @@ async function insertMedida(req, res) {
                 res.type('application/json');
                 res.send({ 'message' : 'Data Duplicada!'});
             } else {
-                db.collection('medida-corporal_Medida').insertOne(req.body);    
+                db.collection('Medida').insertOne(req.body);    
                 res.status(201);
                 res.type('application/json');
                 res.send({'message' : 'Cadastro ok!'});
@@ -179,14 +179,14 @@ async function insertMedida(req, res) {
 }
 
 async function insertUsuario(req, res) {
-    await db.collection('medida-corporal_Usuario').insertOne(
+    await db.collection('Usuario').insertOne(
         req.body
     );    
 }
 
 async function deleteMedida(req, res) {
         const id = req.params.id;
-        db.collection('medida-corporal_Medida').deleteOne({ '_id': ObjectID(id) })
+        db.collection('Medida').deleteOne({ '_id': ObjectID(id) })
             .then(result => {
                 console.log('result: ', result);
                 console.log('result.deletedCount: ', result.deletedCount);
@@ -208,7 +208,7 @@ async function deleteMedida(req, res) {
 
 async function buscarUsuarioPorEmail(req, res) {
     var email = req.params.email; 
-    db.collection('medida-corporal_Usuario')
+    db.collection('Usuario')
       .find({ 'email' : email})
       .limit(1)
       .maxTimeMS(5000)
