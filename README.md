@@ -1,5 +1,9 @@
 # MedidaCorporal
 
+- Projeto que armazena, remove, e exibe a evolução de medidas corporais 
+- Possui comunicação entre componentes Angular; Biblioteca de Gráficos; NoSQL com MongoDB; Login com rede social Google. 
+- Angular,Node JS,Chart JS,Mongo DB 
+                    
 - Tela de login \
 ![login](https://github.com/lucianoortizsilva/medida-corporal/blob/master/src/github/login.jpg) 
 
